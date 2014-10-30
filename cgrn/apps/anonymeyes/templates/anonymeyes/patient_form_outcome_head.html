@@ -1,0 +1,6 @@
+<th class="required"><span>{{ formset.form.date.label }}</span></th>
+<th class="required"><span>IOP</span></th>
+<th class="required"><span>Visual Acuity</span></th>
+{% if formset.can_delete %}
+<th>Delete?</th>
+{% endif %}

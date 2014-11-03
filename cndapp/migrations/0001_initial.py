@@ -2,10 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import jsonfield.fields
 import django.db.models.deletion
 from django.conf import settings
+import uuidfield.fields
 import django.core.validators
-import uuid
 
 
 class Migration(migrations.Migration):
@@ -15,6 +16,42 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='AdditionalProcedure',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AnaestheticType',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Complication',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
         migrations.CreateModel(
             name='Country',
             fields=[
@@ -29,10 +66,99 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='First',
+            name='DifficultyFactor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Eye',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=5)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='FollowUp',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField()),
+                ('left_refraction', jsonfield.fields.JSONField()),
+                ('right_refraction', jsonfield.fields.JSONField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Gender',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=5)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='IolPosition',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='KeratomyUnit',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='OcularCopathology',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='OpNote',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField()),
+                ('age', models.IntegerField()),
+                ('first_eye', models.BooleanField()),
+                ('lens_inserted', models.BooleanField()),
+                ('eyedraw', jsonfield.fields.JSONField()),
+                ('additional_procedures', models.ManyToManyField(to='cndapp.AdditionalProcedure')),
+                ('anaesthetic', models.ManyToManyField(to='cndapp.AnaestheticType')),
+                ('complications', models.ManyToManyField(to='cndapp.Complication')),
+                ('difficulty_factors', models.ManyToManyField(to='cndapp.DifficultyFactor')),
+                ('iol_position', models.ForeignKey(to='cndapp.IolPosition')),
             ],
             options={
             },
@@ -41,13 +167,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Patient',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('uuid', models.CharField(default=uuid.uuid4, unique=True, max_length=64, editable=False, blank=True)),
+                ('uuid', uuidfield.fields.UUIDField(primary_key=True, serialize=False, editable=False, max_length=32, blank=True, unique=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('sex', models.IntegerField(choices=[(0, b'Male'), (1, b'Female')])),
-                ('dob_year', models.IntegerField(validators=[django.core.validators.MaxValueValidator(2014), django.core.validators.MinValueValidator(1984)])),
+                ('postcode', models.CharField(max_length=4)),
                 ('created_by', models.ForeignKey(related_name='patient_created_set', on_delete=django.db.models.deletion.SET_NULL, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('gender', models.ForeignKey(to='cndapp.Gender')),
+                ('treated_eye', models.ForeignKey(to='cndapp.Eye')),
                 ('updated_by', models.ForeignKey(related_name='patient_updated_set', on_delete=django.db.models.deletion.SET_NULL, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
@@ -66,31 +192,149 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Second',
+            name='PostOpComplication',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=64)),
-                ('patient', models.ForeignKey(to='cndapp.Patient')),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='PreOpAsssessment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField()),
+                ('morphology', jsonfield.fields.JSONField()),
+                ('diabetes', models.BooleanField()),
+                ('alpha_blockers', models.BooleanField()),
+                ('able_to_cooperate', models.BooleanField()),
+                ('able_to_lie_flat', models.BooleanField()),
+                ('guarded_prognosis', models.BooleanField()),
+                ('k1', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('k2', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('axis_k1', models.DecimalField(max_digits=4, decimal_places=1, validators=[django.core.validators.MinValueValidator(0.5), django.core.validators.MaxValueValidator(180)])),
+                ('axial_length', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('desired_refraction', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('predicted_refraction', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('iol_power', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('keratomy_unit', models.ForeignKey(to='cndapp.KeratomyUnit')),
+                ('ocular_copathology', models.ManyToManyField(to='cndapp.OcularCopathology')),
+                ('patient', models.ForeignKey(to='cndapp.Patient', unique=True)),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Third',
+            name='SurgeonGrade',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=64)),
-                ('patient', models.ForeignKey(to='cndapp.Patient')),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SurgeryReason',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='VisualAcuityCorrection',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='VisualAcuityReading',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('value', models.DecimalField(max_digits=3, decimal_places=2)),
+                ('correction', models.ForeignKey(to='cndapp.VisualAcuityCorrection')),
+                ('eye', models.ForeignKey(to='cndapp.Eye')),
             ],
             options={
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='VisualAcuityScale',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
+            },
+            bases=(models.Model,),
+        ),
         migrations.AddField(
-            model_name='first',
+            model_name='visualacuityreading',
+            name='scale',
+            field=models.ForeignKey(to='cndapp.VisualAcuityScale'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='preopasssessment',
+            name='visual_acuity',
+            field=models.ManyToManyField(to='cndapp.VisualAcuityReading'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='opnote',
             name='patient',
-            field=models.ForeignKey(to='cndapp.Patient'),
+            field=models.ForeignKey(to='cndapp.Patient', unique=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='opnote',
+            name='primary_reason',
+            field=models.ForeignKey(to='cndapp.SurgeryReason'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='opnote',
+            name='surgeon_grade',
+            field=models.ForeignKey(to='cndapp.SurgeonGrade'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followup',
+            name='complications',
+            field=models.ManyToManyField(to='cndapp.PostOpComplication'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followup',
+            name='patient',
+            field=models.ForeignKey(to='cndapp.Patient', unique=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followup',
+            name='visual_acuity',
+            field=models.ManyToManyField(to='cndapp.VisualAcuityReading'),
             preserve_default=True,
         ),
         migrations.AddField(

@@ -1,10 +1,9 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
-from uuid import uuid4
-from datetime import date
-
 from django.core.urlresolvers import reverse
+from django.db import models
+from jsonfield import JSONField
+from uuidfield import UUIDField
 
 class PostcodeValidator(models.Model):
     pattern = models.CharField(max_length=64)
@@ -12,7 +11,6 @@ class PostcodeValidator(models.Model):
 
     def __unicode__(self):
         return self.pattern
-
 
 class Country(models.Model):
     class Meta:
@@ -26,23 +24,160 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
+# Lookup tables
+
+class AdditionalProcedure(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class AnaestheticType(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class Complication(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class DifficultyFactor(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class Eye(models.Model):
+    name = models.CharField(max_length = 5)
+
+    def __unicode__(self):
+        return self.name
+
+class Gender(models.Model):
+    name = models.CharField(max_length = 5)
+
+    def __unicode__(self):
+        return self.name
+
+class IolPosition(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class KeratomyUnit(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class OcularCopathology(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class PostOpComplication(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class SurgeonGrade(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class SurgeryReason(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class VisualAcuityCorrection(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class VisualAcuityScale(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+# Form data
+
+class VisualAcuityReading(models.Model):
+    eye = models.ForeignKey(Eye)
+    scale = models.ForeignKey(VisualAcuityScale)
+    correction = models.ForeignKey(VisualAcuityCorrection)
+    value = models.DecimalField(max_digits = 3, decimal_places = 2)
+
+    def __unicode__(self):
+        return self.pk
+
 class Patient(models.Model):
-    uuid = models.CharField(unique=True, max_length=64, editable=False, blank=True, default=uuid4)
+    uuid = UUIDField(auto = True, primary_key = True)
     created_by = models.ForeignKey(User, related_name='patient_created_set', blank=True, null=True, on_delete=models.SET_NULL)
     updated_by = models.ForeignKey(User, related_name='patient_updated_set', blank=True, null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    MALE = 0
-    FEMALE = 1
-    SEX_CHOICES = (
-                   (MALE, 'Male'),
-                   (FEMALE, 'Female'),
-    )
-    sex = models.IntegerField(choices=SEX_CHOICES)
-    dob_year = models.IntegerField(validators=[
-                                               validators.MaxValueValidator(date.today().year),
-                                               validators.MinValueValidator(date.today().year - 30)
-                                               ])
+    gender = models.ForeignKey(Gender)
+    postcode = models.CharField(max_length = 4)  # TODO validation
+    treated_eye = models.ForeignKey(Eye)
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
@@ -50,33 +185,74 @@ class Patient(models.Model):
     def __unicode__(self):
         return self.uuid
 
-class First(models.Model):
-    name = models.CharField(max_length=64)
-    patient = models.ForeignKey(Patient)
+class PreOpAsssessment(models.Model):
+    patient = models.ForeignKey(Patient, unique = True)
+
+    date = models.DateField()
+
+    visual_acuity = models.ManyToManyField(VisualAcuityReading)
+    morphology = JSONField()
+    diabetes = models.BooleanField()
+    alpha_blockers = models.BooleanField()
+    able_to_cooperate = models.BooleanField()
+    able_to_lie_flat = models.BooleanField()
+    ocular_copathology = models.ManyToManyField(OcularCopathology)
+    guarded_prognosis = models.BooleanField()
+
+    # Biometry
+    keratomy_unit = models.ForeignKey(KeratomyUnit)
+    k1 = models.DecimalField(max_digits = 4, decimal_places = 2)
+    k2 = models.DecimalField(max_digits = 4, decimal_places = 2)
+    axis_k1 = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+    axial_length = models.DecimalField(max_digits = 4, decimal_places = 2)
+    desired_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
+    predicted_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
+    iol_power = models.DecimalField(max_digits = 4, decimal_places = 2)
 
     def get_absolute_url(self):
         return reverse('list')
 
     def __unicode__(self):
-        return self.name
+        return self.pk
 
-class Second(models.Model):
-    name = models.CharField(max_length=64)
-    patient = models.ForeignKey(Patient)
+class OpNote(models.Model):
+    patient = models.ForeignKey(Patient, unique = True)
+
+    date = models.DateField()
+    age = models.IntegerField()
+
+    anaesthetic = models.ManyToManyField(AnaestheticType)
+    surgeon_grade = models.ForeignKey(SurgeonGrade)
+    first_eye = models.BooleanField()
+    primary_reason = models.ForeignKey(SurgeryReason)
+    lens_inserted = models.BooleanField()
+
+    # The cut-down dataset doesn't require this but Bill thinks we should include it because it looks cool
+    eyedraw = JSONField()
+
+    difficulty_factors = models.ManyToManyField(DifficultyFactor)
+    iol_position = models.ForeignKey(IolPosition)
+    additional_procedures = models.ManyToManyField(AdditionalProcedure)
+    complications = models.ManyToManyField(Complication)
 
     def get_absolute_url(self):
         return reverse('list')
 
     def __unicode__(self):
-        return self.name
+        return self.pk
 
-class Third(models.Model):
-    name = models.CharField(max_length=64)
-    patient = models.ForeignKey(Patient)
+class FollowUp(models.Model):
+    patient = models.ForeignKey(Patient, unique = True)
+
+    date = models.DateField()
+
+    visual_acuity = models.ManyToManyField(VisualAcuityReading)
+    left_refraction = JSONField()
+    right_refraction = JSONField()
+    complications = models.ManyToManyField(PostOpComplication)
 
     def get_absolute_url(self):
         return reverse('list')
 
     def __unicode__(self):
-        return self.name
-
+        return self.pk

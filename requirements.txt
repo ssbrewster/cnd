@@ -1,4 +1,6 @@
 Django>=1.7.1
+django-uuidfield
+jsonfield
 MySQL-python
 PyYAML
 django-compressor

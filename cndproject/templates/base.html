@@ -39,8 +39,8 @@
 					{% block nav-about %}<!-- <li><a href="{% url 'about' %}">About</a></li> -->{% endblock %}
 					{% block nav-contact %}<li><a href="{% url 'contact' %}">Contact</a></li>{% endblock %}
 					{% if user.is_authenticated %}
-					{% block nav-list %}<li><a href="#"><strong>Manage</strong> Datasets</a></li>{% endblock %}
-					{% block nav-create %}<li><a href="#"><strong>Create</strong> Dataset</a></li>{% endblock %}
+					{% block nav-list %}<li><a href="{% url 'list' %}"><strong>Manage</strong> Datasets</a></li>{% endblock %}
+					{% block nav-create %}<li><a href="{% url 'create' %}"><strong>Create</strong> Dataset</a></li>{% endblock %}
 					{% if user.is_staff %}
 					<li><a href="/admin/">Admin</a></li>
 					{% endif %}

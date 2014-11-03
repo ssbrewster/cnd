@@ -9,12 +9,12 @@
 cataract surgery data.</p>
 {% if user.is_authenticated %}
 <h2>Instructions</h2>
-<p><a href="#"><strong>Create</strong> Dataset</a> brings up
+<p><a href="{% url 'create' %}"><strong>Create</strong> Dataset</a> brings up
 	a form to submit a new dataset. This action generates a unique number (UUID)
 	which can be saved in the notes (by printing the form) to allow you to
 	identify the patient when entering additional data on a subsequent occasion.
 </p>
-<p><a href="#"><strong>Manage</strong> Datasets</a> displays a
+<p><a href="{% url 'list' %}"><strong>Manage</strong> Datasets</a> displays a
 	searchable table of your previously entered datasets. This allows you to
 	review and augment data on previous sets.
 </p>

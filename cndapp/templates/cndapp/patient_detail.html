@@ -4,8 +4,8 @@
 	<h1>View Dataset</h1>
 	<div class="actions clearfix">
 		<ul>
-			<li><a href="{% url update patient.id %}">Update</a></li>
-			<li><a href="{% url delete patient.id %}">Delete</a>
+			<li><a href="#">Update</a></li>
+			<li><a href="#">Delete</a>
 			<li><a href="#" class="print_page">Print</a>
 		</ul>
 	</div>
@@ -21,152 +21,13 @@
 			<dt>Sex:</dt>
 			<dd>{{ patient.get_sex_display }}</dd>
 			<dt>DOB:</dt>
-			<dd>{{ patient.dob }}</dd>
-			<dt>Country of Residence:</dt>
-			<dd>{{ patient.country }}</dd>
-			<dt>Post / Zip Code:</dt>
-			<dd>{{ patient.postcode }}</dd>
-			<dt>Healthcare Coverage:</dt>
-			<dd>{{ patient.health_care }}</dd>
-			<dt>Ethnic Group / Race:</dt>
-			<dd>{{ patient.ethnic_group }}{% if patient.ethnic_group_comment %} ({{ patient.ethnic_group_comment }}){% endif %}</dd>
-			<dt>Consanguinity:</dt>
-			<dd>{{ patient.get_consanguinity_display }}</dd>
-			<dt>Family History of Childhood Onset Glaucoma:</dt>
-			<dd>{{ patient.get_history_display }}{% if patient.history_comment %} ({{ patient.history_comment }}){% endif %}</dd>
+			<dd>{{ patient.dob_year }}</dd>
 		</dl>
-	</div>
-	<div class="data-section">
-		<h2>Baseline Assessment</h2>
-		<dl>
-			<dt>Date:</dt>
-			<dd>{{ patient.visual_acuity_date }}</dd>
-			<dt>Right Diagnosis:</dt>
-			<dd>{{ patient.diagnosis_right.description }}{% if patient.diagnosis_right_comment %} ({{ patient.diagnosis_right_comment }}){% endif %}</dd>
-			<dt>Left Diagnosis:</dt>
-			<dd>{{ patient.diagnosis_left.description }}{% if patient.diagnosis_left_comment %} ({{ patient.diagnosis_left_comment }}){% endif %}</dd>
-			<dt>Comments:</dt>
-			<dd>{{ patient.comments }}</dd>
-			<dt>Visual Acuity Method:</dt>
-			<dd>{{ patient.visual_acuity_method }}{% if patient.visual_acuity_method.scales.count > 1 %} ({{ patient.visual_acuity_scale }}){% endif %}</dd>
-			<dt>RVA:</dt>
-			<dd>{{ patient.visual_acuity_right }} {% if patient.visual_acuity_correction_right %}({{ patient.visual_acuity_correction_right }}){% endif %}</dd>
-			<dt>LVA:</dt>
-			<dd>{{ patient.visual_acuity_left }} {% if patient.visual_acuity_correction_left %}({{ patient.visual_acuity_correction_left }}){% endif %}</dd>
-			<dt>Both Eyes Open:</dt>
-			<dd>{{ patient.visual_acuity_both }} {% if patient.visual_acuity_correction_both %}({{ patient.visual_acuity_correction_both }}){% endif %}</dd>
-			{% if patient.visual_acuity_fixation_preference %}
-			<dt>Fixation Preference:</dt>
-			<dd>{{ patient.get_visual_acuity_fixation_preference_display }}</dd>
-			{% endif %}
-			<dt>Right IOP:</dt>
-			<dd>{{ patient.iop_right }}</dd>
-			<dt>Right Agents:</dt>
-			<dd>{% for iop_agent in patient.iop_agents_right.all %}{{ iop_agent }}{% if not forloop.last %}, {% endif %}{% endfor %}</dd>
-			<dt>Left IOP:</dt>
-			<dd>{{ patient.iop_left }}</dd>
-			<dt>Left Agents:</dt>
-			<dd>{% for iop_agent in patient.iop_agents_left.all %}{{ iop_agent }}{% if not forloop.last %}, {% endif %}{% endfor %}</dd>
-			<dt>Tonometry:</dt>
-			<dd>{{ patient.tonometry }}</dd>
-			<dt>EUA:</dt>
-			<dd>{{ patient.eua }}</dd>
-			<dt>Right Lens Status:</dt>
-			<dd>{{ patient.lens_status_right }}
-			{% if patient.lens_extraction_date_right %}
-			(extracted {{ patient.lens_extraction_date_right }})
-			{% endif %}</dd>
-			<dt>Left Lens Status:</dt>
-			<dd>{{ patient.lens_status_left }}
-			{% if patient.lens_extraction_date_left %}
-			(extracted {{ patient.lens_extraction_date_left }})
-			{% endif %}</dd>
-		</dl>
-	</div>
-	<div class="data-section">
-		<h2>Management</h2>
-		{% if patient.management_set.all %}
-		<table>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Type</th>
-					<th>Eye</th>
-					<th colspan="2">Detail</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for management in patient.management_set.all %}
-				<tr>
-					<td>{{ management.date }}</td>
-					<td>{{ management.type }}</td>
-					<td>{{ management.eye }}</td>
-					<td>
-						{% if management.surgery %}{{ management.surgery }}
-						{% if management.surgery_meta %}
-						({{ management.surgery_meta }})
-						{% endif %}
-						{% endif %}
-						{% if management.complication %}{{ management.complication }}{% endif %}
-						{% for iop_agent in management.agents.all %}{{ iop_agent }}{% if not forloop.last %}, {% endif %}{% endfor %}
-					</td>
-					<td>{{ management.comments }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		{% else %}
-		<p>No management recorded</p>
-		{% endif %}
-	</div>
-	<div class="data-section">
-		<h2>Outcome</h2>
-		{% if patient.outcome_set.all %}
-		<table>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>IOP</th>
-					<th>Visual Acuity</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for outcome in patient.outcome_set.all %}
-				<tr>
-					<td>{{ outcome.date }}</td>
-					<td>
-						<ul>
-							<li>Right: {{ outcome.iop_right }} mmHg, {{ outcome.get_iop_control_right_display }}
-								({% for iop_agent in outcome.iop_agents_right.all %}{{ iop_agent }}{% if not forloop.last %}, {% endif %}{% endfor %})</li>
-							<li>Left: {{ outcome.iop_left }} mmHg, {{ outcome.get_iop_control_left_display }}
-								({% for iop_agent in outcome.iop_agents_left.all %}{{ iop_agent }}{% if not forloop.last %}, {% endif %}{% endfor %})</li>
-							<li>Tonometry: {{ outcome.tonometry }}</li>
-							<li>EUA: {{ outcome.eua }}</li>
-						</ul>
-					</td>
-					<td>
-						<ul>
-							<li>Method: {{ outcome.visual_acuity_method }}{% if outcome.visual_acuity_method.scales.count > 1 %} ({{ outcome.visual_acuity_scale }}){% endif %}</li>
-							<li>RVA: {{ outcome.visual_acuity_right }} {% if patient.visual_acuity_correction_right %}({{ outcome.visual_acuity_correction_right }}){% endif %}</li>
-							<li>LVA: {{ outcome.visual_acuity_left }} {% if patient.visual_acuity_correction_left %}({{ outcome.visual_acuity_correction_left }}){% endif %}</li>
-							<li>Both Eyes Open: {{ outcome.visual_acuity_both }} {% if patient.visual_acuity_correction_both %}({{ outcome.visual_acuity_correction_both }}){% endif %}</li>
-							{% if outcome.visual_acuity_fixation_preference %}
-							<li>Fixation Preference: {{ outcome.get_visual_acuity_fixation_preference_display }}</li>
-							{% endif %}
-						</ul>
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		{% else %}
-		<p>No outcomes recorded</p>
-		{% endif %}
 	</div>
 	<div class="actions clearfix">
 		<ul>
-			<li><a href="{% url update patient.id %}">Update</a></li>
-			<li><a href="{% url delete patient.id %}">Delete</a>
+			<li><a href="#">Update</a></li>
+			<li><a href="#">Delete</a>
 			<li><a href="#" class="print_page">Print</a>
 		</ul>
 	</div>

@@ -4,3 +4,4 @@ PyYAML
 django-compressor
 django-recaptcha
 python-dateutil
+django-form-utils

@@ -5,6 +5,7 @@ from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
 
+
 class ContactForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()

@@ -7,4 +7,7 @@ urlpatterns = patterns('cndapp.views',
                        url(r'^thanks/$', ThanksView.as_view(), name='thanks'),
                        url(r'^about/$', AboutView.as_view(), name='about'),
                        url(r'^help/$', HelpView.as_view(), name='help'),
+                       url(r'list/$', PatientListView.as_view(), name='list'),
+                       url(r'detail/(?P<pk>\d+)/$', PatientDetailView.as_view(), name='detail'),
+                       url(r'create/$', PatientCreateView.as_view(), name='create'),
 )

@@ -74,7 +74,6 @@ $(document).ready(function() {
 		            null,
 		            null,
                 { "sType": "title-numeric" },
-		            null,
                 { "sType": "title-numeric" },
                 { "sType": "title-numeric" },
 		            { "bSortable": false }

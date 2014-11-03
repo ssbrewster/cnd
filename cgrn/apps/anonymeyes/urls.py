@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from apps.anonymeyes.views import *
 
-urlpatterns = patterns('apps.anonymeyes.views',
+urlpatterns = patterns('apps.cndapp.views',
                        url(r'^$', IndexView.as_view(), name='index'),
                        url(r'^contact/$', ContactView.as_view(), name='contact'),
                        url(r'^thanks/$', ThanksView.as_view(), name='thanks'),

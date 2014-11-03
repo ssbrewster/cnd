@@ -19,7 +19,7 @@ from apps.anonymeyes.forms import *
 from apps.anonymeyes.models import Patient, Management, VisualAcuityReading, VisualAcuityScale
 
 class ProfileDetailView(DetailView):
-    template_name = 'anonymeyes/profile_detail.html'
+    template_name = 'cndapp/profile_detail.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -29,8 +29,8 @@ class ProfileDetailView(DetailView):
         return self.request.user.get_profile()
 
 class ProfileUpdateView(UpdateView):
-    template_name = 'anonymeyes/profile_form.html'
-    success_url = '/anonymeyes/profile/'
+    template_name = 'cndapp/profile_form.html'
+    success_url = '/cndapp/profile/'
     form_class = ProfileForm
     
     @method_decorator(login_required)
@@ -50,17 +50,17 @@ class DiagnosesView(BaseDetailView):
         return HttpResponse(data, content_type='application/json')
 
 class IndexView(TemplateView):
-    template_name = 'anonymeyes/index.html'
+    template_name = 'cndapp/index.html'
 
 class AboutView(TemplateView):
-    template_name = 'anonymeyes/about.html'
+    template_name = 'cndapp/about.html'
 
 class HelpView(TemplateView):
-    template_name = 'anonymeyes/help.html'
+    template_name = 'cndapp/help.html'
 
 class ContactView(FormView):
-    template_name = 'anonymeyes/contact.html'
-    success_url = '/anonymeyes/thanks/'
+    template_name = 'cndapp/contact.html'
+    success_url = '/cndapp/thanks/'
 
     def get_form_class(self):
         if self.request.user.is_authenticated():
@@ -73,7 +73,7 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 
 class ThanksView(TemplateView):
-    template_name = 'anonymeyes/thanks.html'
+    template_name = 'cndapp/thanks.html'
 
 class PatientWizard(NamedUrlSessionWizardView):
     def done(self, form_list, **kwargs):
@@ -214,7 +214,7 @@ class PatientUpdateView(UpdateView):
         return context
 
 class VisualAcuityReadingsView(TemplateView):
-    template_name = 'anonymeyes/visual_acuity_readings.html'
+    template_name = 'cndapp/visual_acuity_readings.html'
     
     def get_context_data(self, **kwargs):
         context = super(VisualAcuityReadingsView, self).get_context_data(**kwargs)
@@ -223,7 +223,7 @@ class VisualAcuityReadingsView(TemplateView):
         return context
 
 class VisualAcuityScalesView(TemplateView):
-    template_name = 'anonymeyes/visual_acuity_scales.html'
+    template_name = 'cndapp/visual_acuity_scales.html'
     
     def get_context_data(self, **kwargs):
         context = super(VisualAcuityScalesView, self).get_context_data(**kwargs)
@@ -248,7 +248,7 @@ class PatientDetailView(DetailView):
      
     def get_context_data(self, **kwargs):
         context = super(PatientDetailView, self).get_context_data(**kwargs)
-        context['patient_url'] = 'http://' + get_current_site(self.request).domain + '/anonymeyes/uuid/' + self.get_object().uuid.lower()
+        context['patient_url'] = 'http://' + get_current_site(self.request).domain + '/cndapp/uuid/' + self.get_object().uuid.lower()
         return context
 
     @method_decorator(login_required)
@@ -257,7 +257,7 @@ class PatientDetailView(DetailView):
 
 class PatientDeleteView(DeleteView):
     context_object_name = 'patient'
-    success_url = '/anonymeyes/list/'
+    success_url = '/cndapp/list/'
      
     def get_queryset(self):
         return Patient.objects.filter(created_by=self.request.user)
@@ -270,7 +270,7 @@ class PatientUUIDView(RedirectView):
     def get_redirect_url(self, **kwargs):
         try:
             patient = Patient.objects.get(uuid=kwargs['uuid'])
-            return '/anonymeyes/detail/' + str(patient.pk)
+            return '/cndapp/detail/' + str(patient.pk)
         except:
             raise Http404
 

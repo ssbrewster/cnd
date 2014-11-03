@@ -196,7 +196,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'apps.anonymeyes',
+    'apps.cndapp',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -254,7 +254,7 @@ WSGI_APPLICATION = 'wsgi.application'
 #]
 ########## END COMPRESSION CONFIGURATION
 
-AUTH_PROFILE_MODULE = 'anonymeyes.UserProfile'
+AUTH_PROFILE_MODULE = 'cndapp.UserProfile'
 
 SITE_BANNER = ''
 

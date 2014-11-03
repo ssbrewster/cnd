@@ -62,11 +62,11 @@ class Command(BaseCommand):
                                     reminder['message'],
                                     patient.created_by.email
                                 ))
-                                body = get_template('anonymeyes/reminders/' + reminder['message'] + '.txt')
+                                body = get_template('cndapp/reminders/' + reminder['message'] + '.txt')
                                 d = Context({
                                     'month': window,
                                     'patient': patient,
-                                    'patient_url': 'http://' + Site.objects.get_current().domain + '/anonymeyes/uuid/' + patient.uuid.lower(),
+                                    'patient_url': 'http://' + Site.objects.get_current().domain + '/cndapp/uuid/' + patient.uuid.lower(),
                                     'start_date': patient.visual_acuity_date + relativedelta.relativedelta(months=window-1),
                                     'end_date': patient.visual_acuity_date + relativedelta.relativedelta(months=window+1),
                                 })

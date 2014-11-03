@@ -15,15 +15,15 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['DOBPrecision'])
+        db.send_create_signal('cndapp', ['DOBPrecision'])
 
         # Adding model 'UserProfile'
         db.create_table('anonymeyes_userprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('dob_precision', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['anonymeyes.DOBPrecision'])),
+            ('dob_precision', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['cndapp.DOBPrecision'])),
         ))
-        db.send_create_signal('anonymeyes', ['UserProfile'])
+        db.send_create_signal('cndapp', ['UserProfile'])
 
         # Adding model 'EthnicGroup'
         db.create_table('anonymeyes_ethnicgroup', (
@@ -31,7 +31,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['EthnicGroup'])
+        db.send_create_signal('cndapp', ['EthnicGroup'])
 
         # Adding model 'Eye'
         db.create_table('anonymeyes_eye', (
@@ -40,7 +40,7 @@ class Migration(SchemaMigration):
             ('single', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Eye'])
+        db.send_create_signal('cndapp', ['Eye'])
 
         # Adding model 'DiagnosisGroup'
         db.create_table('anonymeyes_diagnosisgroup', (
@@ -48,16 +48,16 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['DiagnosisGroup'])
+        db.send_create_signal('cndapp', ['DiagnosisGroup'])
 
         # Adding model 'Diagnosis'
         db.create_table('anonymeyes_diagnosis', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.DiagnosisGroup'])),
+            ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.DiagnosisGroup'])),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Diagnosis'])
+        db.send_create_signal('cndapp', ['Diagnosis'])
 
         # Adding model 'HealthCare'
         db.create_table('anonymeyes_healthcare', (
@@ -65,7 +65,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['HealthCare'])
+        db.send_create_signal('cndapp', ['HealthCare'])
 
         # Adding model 'Anaesthesia'
         db.create_table('anonymeyes_anaesthesia', (
@@ -73,14 +73,14 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Anaesthesia'])
+        db.send_create_signal('cndapp', ['Anaesthesia'])
 
         # Adding model 'LensStatus'
         db.create_table('anonymeyes_lensstatus', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
         ))
-        db.send_create_signal('anonymeyes', ['LensStatus'])
+        db.send_create_signal('cndapp', ['LensStatus'])
 
         # Adding model 'VisualAcuityScale'
         db.create_table('anonymeyes_visualacuityscale', (
@@ -88,16 +88,16 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['VisualAcuityScale'])
+        db.send_create_signal('cndapp', ['VisualAcuityScale'])
 
         # Adding model 'VisualAcuityMethod'
         db.create_table('anonymeyes_visualacuitymethod', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
-            ('scale', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.VisualAcuityScale'])),
+            ('scale', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.VisualAcuityScale'])),
         ))
-        db.send_create_signal('anonymeyes', ['VisualAcuityMethod'])
+        db.send_create_signal('cndapp', ['VisualAcuityMethod'])
 
         # Adding model 'VisualAcuityReading'
         db.create_table('anonymeyes_visualacuityreading', (
@@ -105,9 +105,9 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('value', self.gf('django.db.models.fields.IntegerField')()),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
-            ('scale', self.gf('django.db.models.fields.related.ForeignKey')(related_name='readings', to=orm['anonymeyes.VisualAcuityScale'])),
+            ('scale', self.gf('django.db.models.fields.related.ForeignKey')(related_name='readings', to=orm['cndapp.VisualAcuityScale'])),
         ))
-        db.send_create_signal('anonymeyes', ['VisualAcuityReading'])
+        db.send_create_signal('cndapp', ['VisualAcuityReading'])
 
         # Adding model 'VisualAcuityCorrection'
         db.create_table('anonymeyes_visualacuitycorrection', (
@@ -115,7 +115,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['VisualAcuityCorrection'])
+        db.send_create_signal('cndapp', ['VisualAcuityCorrection'])
 
         # Adding model 'Tonometry'
         db.create_table('anonymeyes_tonometry', (
@@ -123,7 +123,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Tonometry'])
+        db.send_create_signal('cndapp', ['Tonometry'])
 
         # Adding model 'Patient'
         db.create_table('anonymeyes_patient', (
@@ -138,30 +138,30 @@ class Migration(SchemaMigration):
             ('dob_month', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
             ('dob_year', self.gf('django.db.models.fields.IntegerField')()),
             ('postcode', self.gf('django.db.models.fields.CharField')(max_length=4)),
-            ('health_care', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.HealthCare'])),
-            ('ethnic_group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.EthnicGroup'])),
+            ('health_care', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.HealthCare'])),
+            ('ethnic_group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.EthnicGroup'])),
             ('consanguinity', self.gf('django.db.models.fields.IntegerField')()),
-            ('diagnosis_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['anonymeyes.Diagnosis'])),
-            ('diagnosis_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['anonymeyes.Diagnosis'])),
-            ('lens_status_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['anonymeyes.LensStatus'])),
-            ('lens_status_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['anonymeyes.LensStatus'])),
+            ('diagnosis_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['cndapp.Diagnosis'])),
+            ('diagnosis_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['cndapp.Diagnosis'])),
+            ('lens_status_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['cndapp.LensStatus'])),
+            ('lens_status_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='+', to=orm['cndapp.LensStatus'])),
             ('lens_extraction_date_right', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('lens_extraction_date_left', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('visual_acuity_date', self.gf('django.db.models.fields.DateField')()),
-            ('visual_acuity_method', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.VisualAcuityMethod'])),
-            ('visual_acuity_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_rva', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_lva', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_beo', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_correction_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_rva_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
-            ('visual_acuity_correction_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_lva_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
-            ('visual_acuity_correction_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_beo_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
+            ('visual_acuity_method', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.VisualAcuityMethod'])),
+            ('visual_acuity_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_rva', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_lva', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_beo', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_correction_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_rva_correction', to=orm['cndapp.VisualAcuityCorrection'])),
+            ('visual_acuity_correction_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_lva_correction', to=orm['cndapp.VisualAcuityCorrection'])),
+            ('visual_acuity_correction_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='patient_beo_correction', to=orm['cndapp.VisualAcuityCorrection'])),
             ('iop_right', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
             ('iop_left', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('tonometry', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Tonometry'])),
+            ('tonometry', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Tonometry'])),
             ('eua', self.gf('django.db.models.fields.IntegerField')()),
-            ('anaesthesia', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Anaesthesia'], null=True, blank=True)),
+            ('anaesthesia', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Anaesthesia'], null=True, blank=True)),
         ))
-        db.send_create_signal('anonymeyes', ['Patient'])
+        db.send_create_signal('cndapp', ['Patient'])
 
         # Adding model 'Complication'
         db.create_table('anonymeyes_complication', (
@@ -169,7 +169,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Complication'])
+        db.send_create_signal('cndapp', ['Complication'])
 
         # Adding model 'Surgery'
         db.create_table('anonymeyes_surgery', (
@@ -179,7 +179,7 @@ class Migration(SchemaMigration):
             ('stage', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Surgery'])
+        db.send_create_signal('cndapp', ['Surgery'])
 
         # Adding model 'Adjuvant'
         db.create_table('anonymeyes_adjuvant', (
@@ -187,7 +187,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['Adjuvant'])
+        db.send_create_signal('cndapp', ['Adjuvant'])
 
         # Adding model 'SurgeryStage'
         db.create_table('anonymeyes_surgerystage', (
@@ -195,7 +195,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['SurgeryStage'])
+        db.send_create_signal('cndapp', ['SurgeryStage'])
 
         # Adding model 'ManagementType'
         db.create_table('anonymeyes_managementtype', (
@@ -203,7 +203,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('sort', self.gf('django.db.models.fields.IntegerField')(default=10)),
         ))
-        db.send_create_signal('anonymeyes', ['ManagementType'])
+        db.send_create_signal('cndapp', ['ManagementType'])
 
         # Adding model 'Management'
         db.create_table('anonymeyes_management', (
@@ -213,16 +213,16 @@ class Migration(SchemaMigration):
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('date', self.gf('django.db.models.fields.DateField')()),
-            ('eye', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Eye'], null=True, blank=True)),
-            ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.ManagementType'])),
-            ('surgery', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Surgery'], null=True, blank=True)),
-            ('complication', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Complication'], null=True, blank=True)),
-            ('adjuvant', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Adjuvant'], null=True, blank=True)),
-            ('surgery_stage', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.SurgeryStage'], null=True, blank=True)),
+            ('eye', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Eye'], null=True, blank=True)),
+            ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.ManagementType'])),
+            ('surgery', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Surgery'], null=True, blank=True)),
+            ('complication', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Complication'], null=True, blank=True)),
+            ('adjuvant', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Adjuvant'], null=True, blank=True)),
+            ('surgery_stage', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.SurgeryStage'], null=True, blank=True)),
             ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('patient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Patient'])),
+            ('patient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Patient'])),
         ))
-        db.send_create_signal('anonymeyes', ['Management'])
+        db.send_create_signal('cndapp', ['Management'])
 
         # Adding model 'Outcome'
         db.create_table('anonymeyes_outcome', (
@@ -232,19 +232,19 @@ class Migration(SchemaMigration):
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('date', self.gf('django.db.models.fields.DateField')()),
-            ('eye', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Eye'])),
+            ('eye', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Eye'])),
             ('iop_control', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('iop_agents', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('visual_acuity_method', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.VisualAcuityMethod'])),
-            ('visual_acuity_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_rva', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_lva', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_beo', to=orm['anonymeyes.VisualAcuityReading'])),
-            ('visual_acuity_correction_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_rva_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
-            ('visual_acuity_correction_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_lva_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
-            ('visual_acuity_correction_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_beo_correction', to=orm['anonymeyes.VisualAcuityCorrection'])),
-            ('patient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['anonymeyes.Patient'])),
+            ('visual_acuity_method', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.VisualAcuityMethod'])),
+            ('visual_acuity_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_rva', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_lva', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_beo', to=orm['cndapp.VisualAcuityReading'])),
+            ('visual_acuity_correction_right', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_rva_correction', to=orm['cndapp.VisualAcuityCorrection'])),
+            ('visual_acuity_correction_left', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_lva_correction', to=orm['cndapp.VisualAcuityCorrection'])),
+            ('visual_acuity_correction_both', self.gf('django.db.models.fields.related.ForeignKey')(related_name='outcome_beo_correction', to=orm['cndapp.VisualAcuityCorrection'])),
+            ('patient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cndapp.Patient'])),
         ))
-        db.send_create_signal('anonymeyes', ['Outcome'])
+        db.send_create_signal('cndapp', ['Outcome'])
 
 
     def backwards(self, orm):
@@ -316,147 +316,147 @@ class Migration(SchemaMigration):
 
 
     models = {
-        'anonymeyes.adjuvant': {
+        'cndapp.adjuvant': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Adjuvant'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.anaesthesia': {
+        'cndapp.anaesthesia': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Anaesthesia'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.complication': {
+        'cndapp.complication': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Complication'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.diagnosis': {
+        'cndapp.diagnosis': {
             'Meta': {'ordering': "['group__sort', 'sort', 'name']", 'object_name': 'Diagnosis'},
-            'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.DiagnosisGroup']"}),
+            'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.DiagnosisGroup']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.diagnosisgroup': {
+        'cndapp.diagnosisgroup': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'DiagnosisGroup'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.dobprecision': {
+        'cndapp.dobprecision': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'DOBPrecision'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.ethnicgroup': {
+        'cndapp.ethnicgroup': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'EthnicGroup'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.eye': {
+        'cndapp.eye': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Eye'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'single': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.healthcare': {
+        'cndapp.healthcare': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'HealthCare'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.lensstatus': {
+        'cndapp.lensstatus': {
             'Meta': {'object_name': 'LensStatus'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'})
         },
-        'anonymeyes.management': {
+        'cndapp.management': {
             'Meta': {'object_name': 'Management'},
-            'adjuvant': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Adjuvant']", 'null': 'True', 'blank': 'True'}),
+            'adjuvant': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Adjuvant']", 'null': 'True', 'blank': 'True'}),
             'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'complication': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Complication']", 'null': 'True', 'blank': 'True'}),
+            'complication': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Complication']", 'null': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'management_created_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"}),
             'date': ('django.db.models.fields.DateField', [], {}),
-            'eye': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Eye']", 'null': 'True', 'blank': 'True'}),
+            'eye': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Eye']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'patient': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Patient']"}),
-            'surgery': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Surgery']", 'null': 'True', 'blank': 'True'}),
-            'surgery_stage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.SurgeryStage']", 'null': 'True', 'blank': 'True'}),
-            'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.ManagementType']"}),
+            'patient': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Patient']"}),
+            'surgery': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Surgery']", 'null': 'True', 'blank': 'True'}),
+            'surgery_stage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.SurgeryStage']", 'null': 'True', 'blank': 'True'}),
+            'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.ManagementType']"}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'management_updated_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"})
         },
-        'anonymeyes.managementtype': {
+        'cndapp.managementtype': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'ManagementType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.outcome': {
+        'cndapp.outcome': {
             'Meta': {'object_name': 'Outcome'},
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'outcome_created_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"}),
             'date': ('django.db.models.fields.DateField', [], {}),
-            'eye': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Eye']"}),
+            'eye': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Eye']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'iop_agents': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'iop_control': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'patient': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Patient']"}),
+            'patient': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Patient']"}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'outcome_updated_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"}),
-            'visual_acuity_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_beo'", 'to': "orm['anonymeyes.VisualAcuityReading']"}),
-            'visual_acuity_correction_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_beo_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
-            'visual_acuity_correction_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_lva_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
-            'visual_acuity_correction_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_rva_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
-            'visual_acuity_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_lva'", 'to': "orm['anonymeyes.VisualAcuityReading']"}),
-            'visual_acuity_method': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.VisualAcuityMethod']"}),
-            'visual_acuity_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_rva'", 'to': "orm['anonymeyes.VisualAcuityReading']"})
+            'visual_acuity_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_beo'", 'to': "orm['cndapp.VisualAcuityReading']"}),
+            'visual_acuity_correction_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_beo_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
+            'visual_acuity_correction_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_lva_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
+            'visual_acuity_correction_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_rva_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
+            'visual_acuity_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_lva'", 'to': "orm['cndapp.VisualAcuityReading']"}),
+            'visual_acuity_method': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.VisualAcuityMethod']"}),
+            'visual_acuity_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'outcome_rva'", 'to': "orm['cndapp.VisualAcuityReading']"})
         },
-        'anonymeyes.patient': {
+        'cndapp.patient': {
             'Meta': {'ordering': "['-updated_at']", 'object_name': 'Patient'},
-            'anaesthesia': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Anaesthesia']", 'null': 'True', 'blank': 'True'}),
+            'anaesthesia': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Anaesthesia']", 'null': 'True', 'blank': 'True'}),
             'consanguinity': ('django.db.models.fields.IntegerField', [], {}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'patient_created_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"}),
-            'diagnosis_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['anonymeyes.Diagnosis']"}),
-            'diagnosis_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['anonymeyes.Diagnosis']"}),
+            'diagnosis_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['cndapp.Diagnosis']"}),
+            'diagnosis_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['cndapp.Diagnosis']"}),
             'dob_day': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'dob_month': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'dob_year': ('django.db.models.fields.IntegerField', [], {}),
-            'ethnic_group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.EthnicGroup']"}),
+            'ethnic_group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.EthnicGroup']"}),
             'eua': ('django.db.models.fields.IntegerField', [], {}),
-            'health_care': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.HealthCare']"}),
+            'health_care': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.HealthCare']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'iop_left': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'iop_right': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'lens_extraction_date_left': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'lens_extraction_date_right': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'lens_status_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['anonymeyes.LensStatus']"}),
-            'lens_status_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['anonymeyes.LensStatus']"}),
+            'lens_status_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['cndapp.LensStatus']"}),
+            'lens_status_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['cndapp.LensStatus']"}),
             'postcode': ('django.db.models.fields.CharField', [], {'max_length': '4'}),
             'sex': ('django.db.models.fields.IntegerField', [], {}),
-            'tonometry': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.Tonometry']"}),
+            'tonometry': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.Tonometry']"}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'patient_updated_set'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['auth.User']"}),
             'uuid': ('django.db.models.fields.CharField', [], {'default': "UUID('66f07409-2c08-43a8-9552-3be7b7bcd8f6')", 'unique': 'True', 'max_length': '64', 'blank': 'True'}),
-            'visual_acuity_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_beo'", 'to': "orm['anonymeyes.VisualAcuityReading']"}),
-            'visual_acuity_correction_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_beo_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
-            'visual_acuity_correction_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_lva_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
-            'visual_acuity_correction_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_rva_correction'", 'to': "orm['anonymeyes.VisualAcuityCorrection']"}),
+            'visual_acuity_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_beo'", 'to': "orm['cndapp.VisualAcuityReading']"}),
+            'visual_acuity_correction_both': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_beo_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
+            'visual_acuity_correction_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_lva_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
+            'visual_acuity_correction_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_rva_correction'", 'to': "orm['cndapp.VisualAcuityCorrection']"}),
             'visual_acuity_date': ('django.db.models.fields.DateField', [], {}),
-            'visual_acuity_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_lva'", 'to': "orm['anonymeyes.VisualAcuityReading']"}),
-            'visual_acuity_method': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.VisualAcuityMethod']"}),
-            'visual_acuity_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_rva'", 'to': "orm['anonymeyes.VisualAcuityReading']"})
+            'visual_acuity_left': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_lva'", 'to': "orm['cndapp.VisualAcuityReading']"}),
+            'visual_acuity_method': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.VisualAcuityMethod']"}),
+            'visual_acuity_right': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'patient_rva'", 'to': "orm['cndapp.VisualAcuityReading']"})
         },
-        'anonymeyes.surgery': {
+        'cndapp.surgery': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Surgery'},
             'adjuvant': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -464,46 +464,46 @@ class Migration(SchemaMigration):
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
             'stage': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        'anonymeyes.surgerystage': {
+        'cndapp.surgerystage': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'SurgeryStage'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.tonometry': {
+        'cndapp.tonometry': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'Tonometry'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.userprofile': {
+        'cndapp.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
-            'dob_precision': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['anonymeyes.DOBPrecision']"}),
+            'dob_precision': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['cndapp.DOBPrecision']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
         },
-        'anonymeyes.visualacuitycorrection': {
+        'cndapp.visualacuitycorrection': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'VisualAcuityCorrection'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.visualacuitymethod': {
+        'cndapp.visualacuitymethod': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'VisualAcuityMethod'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'scale': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['anonymeyes.VisualAcuityScale']"}),
+            'scale': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cndapp.VisualAcuityScale']"}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
-        'anonymeyes.visualacuityreading': {
+        'cndapp.visualacuityreading': {
             'Meta': {'ordering': "['scale__name', 'sort', 'name']", 'object_name': 'VisualAcuityReading'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'scale': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'readings'", 'to': "orm['anonymeyes.VisualAcuityScale']"}),
+            'scale': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'readings'", 'to': "orm['cndapp.VisualAcuityScale']"}),
             'sort': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
             'value': ('django.db.models.fields.IntegerField', [], {})
         },
-        'anonymeyes.visualacuityscale': {
+        'cndapp.visualacuityscale': {
             'Meta': {'ordering': "['sort', 'name']", 'object_name': 'VisualAcuityScale'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
@@ -547,4 +547,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['anonymeyes']
+    complete_apps = ['cndapp']

@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% block nav-create %}
+<li{% if not patient.uuid %} class="active"{% endif %}><a href="{% url create %}"><strong>Create</strong> Dataset</a></li>
+{% endblock %}
+{% block title %}{% if patient.uuid %}Update Dataset {{ patient.uuid }}{% else %}Create Dataset{% endif %}{% endblock %}
+{% block content %}
+	<h1>{% if patient.uuid %}
+	Update Dataset
+	{% else %}
+	Create Dataset
+	{% endif %}
+	</h1>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="actions clearfix">
+			<ul>
+				<li><input type="submit" value="Save" /></li>
+				<li><a href="{% if patient.uuid %}{% url detail patient.id %}{% else %}{% url list %}{% endif %}">Cancel</a></li>
+			</ul>
+		</div>
+		<p>Please note that required fields are denoted by an *</p>
+		{% if form.errors or formsets_invalid %}
+		<ul class="messages">
+			{% if form.non_field_errors %}
+			{% for error in form.non_field_errors %}
+			<li class="error">{{ error }}</li>
+			{% endfor %}
+			{% else %}
+			<li class="error">Please correct errors marked below</li>
+			{% endif %}
+		</ul>
+		{% endif %}
+		<fieldset>
+			<legend>Patient</legend>
+			<ul>
+				{% if patient.uuid %}
+				<li>
+					<div class="label">
+						<span class="help"><span><strong>U</strong>niversally <strong>U</strong>nique <strong>ID</strong>entifier for this dataset. When
+						printed and kept with patient notes, it allows the dataset to be
+						matched up if followup data is entered.</span></span>
+						UUID:
+					</div>
+					<div class="data read-only">{{ patient.uuid }}</div>
+				</li>
+				{% endif %}
+				<li {{ form.sex.row_attrs }}>
+					<label for="{{ form.sex.auto_id }}"{% if form.sex.errors %} class="error"{% endif %} ><span>{{ form.sex.label }}</span>:</label>
+					{{ form.sex }} <span>{{ form.sex.errors }}</span>
+				</li>
+				<li class="required dob precision-{{ request.user.get_profile.dob_precision.css_class }}">
+					<label{% if form.dob_day.errors or form.dob_month.errors or form.dob_year.errors %} class="error"{% endif %} ><span>DOB</span>:</label>
+					<span class="field_wrapper" id="dob_year_wrapper">{{ form.dob_year }}</span><span>{{ form.dob_year.errors }}</span>
+					<span class="field_wrapper" id="dob_month_wrapper"> - {{ form.dob_month }}</span><span>{{ form.dob_month.errors }}</span>
+					<span class="field_wrapper" id="dob_day_wrapper"> - {{ form.dob_day }}</span><span>{{ form.dob_day.errors }}</span>
+				</li>
+				<li {{ form.country.row_attrs }}>
+					<label for="{{ form.country.auto_id }}"{% if form.country.errors %} class="error"{% endif %} ><span>{{ form.country.label }}</span>:</label>
+					{{ form.country }} <span>{{ form.country.errors }}</span>
+				</li>
+				<li {{ form.postcode.row_attrs }}>
+					<label for="{{ form.postcode.auto_id }}"{% if form.postcode.errors %} class="error"{% endif %} ><span>{{ form.postcode.label }}</span>:</label>
+					{{ form.postcode }} <span>{{ form.postcode.errors }}</span>
+				</li>
+				<li {{ form.health_care.row_attrs }}>
+					<label for="{{ form.health_care.auto_id }}"{% if form.health_care.errors %} class="error"{% endif %} ><span>{{ form.health_care.label }}</span>:</label>
+					{{ form.health_care }} <span>{{ form.health_care.errors }}</span>
+				</li>
+				<li {{ form.ethnic_group.row_attrs }}>
+					<label for="{{ form.ethnic_group.auto_id }}"{% if form.ethnic_group.errors or form.ethnic_group_comment.errors %} class="error"{% endif %} >
+					<span>{{ form.ethnic_group.label }}</span>:</label>
+					{{ form.ethnic_group }}
+					{{ form.ethnic_group_comment }}
+					<span>{{ form.ethnic_group.errors }} {{ form.ethnic_group_comment.errors }}</span>
+				</li>
+				<li {{ form.consanguinity.row_attrs }}>
+					<label for="{{ form.consanguinity.auto_id }}"{% if form.consanguinity.errors %} class="error"{% endif %} ><span>{{ form.consanguinity.label }}</span>:</label>
+					{{ form.consanguinity }} <span>{{ form.consanguinity.errors }}</span>
+				</li>
+				<li {{ form.history.row_attrs }}>
+					<label for="{{ form.history.auto_id }}"{% if form.history.errors or form.history_comment.errors %} class="error"{% endif %} >
+						<span>{{ form.history.label }}</span>:</label>
+					{{ form.history }}
+					{{ form.history_comment }}
+					<span>{{ form.history.errors }} {{ form.history_comment.errors }}</span>
+				</li>
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Baseline Assessment</legend>
+			<fieldset>
+				<ul>
+					<li {{ form.visual_acuity_date.row_attrs }}>
+						<label for="{{ form.visual_acuity_date.auto_id }}"{% if form.visual_acuity_date.errors %} class="error"{% endif %}>
+						<span>{{ form.visual_acuity_date.label }}</span>:</label>
+						{{ form.visual_acuity_date }} <span>{{ form.visual_acuity_date.errors }}</span>
+					</li>
+					<li {{ form.diagnosis_right.row_attrs }}>
+						<label for="{{ form.diagnosis_right.auto_id }}"{% if form.diagnosis_right.errors or form.diagnosis_right_comment.errors %} class="error"{% endif %}>
+						<span>{{ form.diagnosis_right.label }}</span>:</label>
+						{{ form.diagnosis_group_right }}
+						{{ form.diagnosis_right }}
+						<span>{{ form.diagnosis_group_right.errors }} {{ form.diagnosis_right.errors }} {{ form.diagnosis_right_comment.errors }}</span>
+						{{ form.diagnosis_right_comment }}
+					</li>
+					<li {{ form.diagnosis_left.row_attrs }}>
+						<label for="{{ form.diagnosis_left.auto_id }}"{% if form.diagnosis_left.errors or form.diagnosis_left_comment.errors %} class="error"{% endif %}>
+						<span>{{ form.diagnosis_left.label }}</span>:</label>
+						{{ form.diagnosis_group_left }}
+						{{ form.diagnosis_left }}
+						<span>{{ form.diagnosis_group_left.errors }} {{ form.diagnosis_left.errors }} {{ form.diagnosis_left_comment.errors }}</span>
+						{{ form.diagnosis_left_comment }}
+					</li>
+                    <li {{ form.comments.row_attrs }}>
+					    <label for="{{ form.comments.auto_id }}"{% if form.comments.errors %} class="error"{% endif %} ><span>{{ form.comments.label }}</span>:</label>
+					    {{ form.comments }} <span>{{ form.comments.errors }}</span>
+				    </li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+				<legend>Visual Acuity (best corrected including pinhole)</legend>
+				<ul>
+					<li {{ form.visual_acuity_method.row_attrs }}>
+						<label for="{{ form.visual_acuity_method.auto_id }}"{% if form.visual_acuity_method.errors %} class="error"{% endif %}>
+						<span>{{ form.visual_acuity_method.label }}</span>:</label>
+						{{ form.visual_acuity_method }} <span>{{ form.visual_acuity_method.errors }}</span>
+						<span class="visualacuityscalewrapper">
+							<label for="{{ form.visual_acuity_scale.auto_id }}" class="inline{% if form.visual_acuity_scale.errors %} error{% endif %}">
+							<span>{{ form.visual_acuity_scale.label }}</span>:</label>
+							{{ form.visual_acuity_scale }} <span>{{ form.visual_acuity_scale.errors }}</span>
+						</span>
+					</li>
+					<li {{ form.visual_acuity_right.row_attrs }}>
+						<label for="{{ form.visual_acuity_right.auto_id }}"{% if form.visual_acuity_right.errors %} class="error"{% endif %}>
+						<span>{{ form.visual_acuity_right.label }}</span>:</label>
+						{{ form.visual_acuity_right }}
+						<span>{{ form.visual_acuity_right.errors }}</span>
+						<span class="correctionwrapper">
+							<label for="{{ form.visual_acuity_correction_right.auto_id }}" class="inline{% if form.visual_acuity_correction_right.errors %} error{% endif %}">
+							<span>Correction</span>:</label>
+							{{ form.visual_acuity_correction_right }}
+							<span>{{ form.visual_acuity_correction_right.errors }}</span>
+						</span>
+					</li>
+					<li {{ form.visual_acuity_left.row_attrs }}>
+						<label for="{{ form.visual_acuity_left.auto_id }}"{% if form.visual_acuity_left.errors %} class="error"{% endif %}>
+						<span>{{ form.visual_acuity_left.label }}</span>:</label>
+						{{ form.visual_acuity_left }}
+						<span>{{ form.visual_acuity_left.errors }}</span>
+						<span class="correctionwrapper">
+							<label for="{{ form.visual_acuity_correction_left.auto_id }}" class="inline{% if form.visual_acuity_correction_left.errors %} error{% endif %}">
+							<span>Correction</span>:</label>
+							{{ form.visual_acuity_correction_left }}
+							<span>{{ form.visual_acuity_correction_left.errors }}</span>
+						</span>
+					</li>
+					<li {{ form.visual_acuity_both.row_attrs }}>
+						<label for="{{ form.visual_acuity_both.auto_id }}"{% if form.visual_acuity_both.errors %} class="error"{% endif %}>
+						<span>{{ form.visual_acuity_both.label }}</span>:</label>
+						{{ form.visual_acuity_both }}
+						<span>{{ form.visual_acuity_both.errors }}</span>
+						<span class="correctionwrapper both">
+							<label for="{{ form.visual_acuity_correction_both.auto_id }}" class="inline{% if form.visual_acuity_correction_both.errors %} error{% endif %}">
+							<span>Correction</span>:</label>
+							{{ form.visual_acuity_correction_both }}
+							<span>{{ form.visual_acuity_correction_both.errors }}</span>
+						</span>
+					</li>
+					<li {{ form.visual_acuity_fixation_preference.row_attrs }}>
+						<span class="fixationwrapper">
+							<label for="{{ form.visual_acuity_fixation_preference.auto_id }}"{% if form.visual_acuity_fixation_preference.errors %} class="error"{% endif %}>
+							<span class="required">Fixation Preference</span>:</label>
+							{{ form.visual_acuity_fixation_preference }}
+							<span>{{ form.visual_acuity_fixation_preference.errors }}</span>
+						</span>
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+				<legend>Intraocular Pressure</legend>
+				<ul>
+					<li {{ form.iop_right.row_attrs }}>
+						<label for="{{ form.iop_right.auto_id }}"{% if form.iop_right.errors %} class="error"{% endif %}>
+							<span>{{ form.iop_right.label }}</span>:</label>
+						{{ form.iop_right }} mmHg
+						<span>{{ form.iop_right.errors }}</span>
+					</li>
+					<li {{ form.iop_agents_right.row_attrs }}>
+						<label for="{{ form.iop_agents_right.auto_id }}"{% if form.iop_agents_right.errors %} class="error"{% endif %}>
+							<span>{{ form.iop_agents_right.label }}</span>:</label>
+						<div class="iopagents">{{ form.iop_agents_right }}</div>
+						<span>{{ form.iop_agents_right.errors }}</span>
+					</li>
+					<li {{ form.iop_left.row_attrs }}>
+						<label for="{{ form.iop_left.auto_id }}"{% if form.iop_left.errors %} class="error"{% endif %}>
+							<span>{{ form.iop_left.label }}</span>:</label>
+							{{ form.iop_left }} mmHg
+							<span>{{ form.iop_left.errors }}</span>
+					</li>
+					<li {{ form.iop_left.row_attrs }}>
+						<label for="{{ form.iop_agents_left.auto_id }}"{% if form.iop_agents_left.errors %} class="error"{% endif %}>
+							<span>{{ form.iop_agents_left.label }}</span>:</label>
+						<div class="iopagents">{{ form.iop_agents_left }}</div>
+						<span>{{ form.iop_agents_left.errors }}</span>
+					</li>
+					<li {{ form.tonometry.row_attrs }}>
+						<label for="{{ form.tonometry.auto_id }}"{% if form.tonometry.errors %} class="error"{% endif %}>
+						<span>{{ form.tonometry.label }}</span>:</label>
+						{{ form.tonometry }}
+						<span>{{ form.tonometry.errors }}</span>
+					</li>
+					<li {{ form.eua.row_attrs }}>
+						<label for="{{ form.eua.auto_id }}"{% if form.eua.errors %} class="error"{% endif %}>
+						<span>{{ form.eua.label }}</span>:</label>
+						{{ form.eua }}
+						<span>{{ form.eua.errors }}</span>
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+				<legend>Lens Status</legend>
+				<ul>
+	 				{% for field in form.fieldsets.lens %}
+					<li {{ field.row_attrs }}>
+						<label for="{{ field.auto_id }}"{% if field.errors %} class="error"{% endif %} ><span>{{ field.label }}</span>:</label>
+						{{ field }} <span>{{ field.errors }}</span>
+					</li>
+					{% endfor %}
+				</ul>
+			</fieldset>
+
+		</fieldset>
+		
+		{% for formset_name, formset in formsets.items %}
+		<fieldset>
+			<legend>{{ formset_name }}</legend>
+			{{ formset.management_form }}
+			<table class="inline_form">
+				<thead>
+					<tr>
+						{% with "anonymeyes/patient_form_"|add:formset_name|add:"_head.html"|lower as template %}
+						{% include template %}
+						{% endwith %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for inlineform in formset %}
+					<tr>
+						{% with "anonymeyes/patient_form_"|add:formset_name|add:".html"|lower as template %}
+						{% include template %}
+						{% endwith %}
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</fieldset>
+		{% endfor %}
+
+		<div class="actions clearfix">
+			<ul>
+				<li><input type="submit" value="Save" /></li>
+				<li><a href="{% if patient.uuid %}{% url detail patient.id %}{% else %}{% url list %}{% endif %}">Cancel</a></li>
+			</ul>
+		</div>
+		
+	</form>
+{% endblock %}
+{% block body-end %}
+<script type="text/javascript">
+// Try to prevent click away from form
+$(document).ready(function() {
+	$('body').delegate('input, textarea, select', 'change', function() {
+		window.onbeforeunload = function() {
+			return "WARNING, you will lose all unsaved changes to this form by navigating away.";
+		};
+	});
+	$('form').on('submit', function() {
+		window.onbeforeunload = null;
+	});
+});
+</script>
+{% endblock %}

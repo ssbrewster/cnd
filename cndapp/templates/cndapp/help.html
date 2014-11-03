@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block nav-help %}
+<li class="active"><a href="{% url 'help' %}"><strong>Help</strong></a></li>
+{% endblock %}
+{% block title %}Help{% endblock %}
+{% block content %}
+<h1>Help</h1>
+<p>If you need assistance, please use the <a href="{% url 'contact' %}">contact form</a> to send us an email.</p>
+{% endblock %}

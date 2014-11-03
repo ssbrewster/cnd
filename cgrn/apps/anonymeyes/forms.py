@@ -71,7 +71,7 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
     
     def send_email(self):
-        message = get_template('anonymeyes/message.txt')
+        message = get_template('cndapp/message.txt')
         d = Context(self.cleaned_data)
         send_mail('Message from CGRN contact form', message.render(d), settings.CONTACT_SENDER,
                   settings.CONTACT_RECIPIENTS)

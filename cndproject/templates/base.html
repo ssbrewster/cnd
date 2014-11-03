@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>{% block title %}{% endblock %} - IPSOCG</title>
+<title>{% block title %}{% endblock %} - CND</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 {% load compress %}
@@ -32,7 +32,7 @@
 	
 	<div class="header-container">
 		<header class="wrapper clearfix">
-			<div class="logo"><a href="{% url 'index' %}">CGRN – International Pilot Survey of Childhood Glaucoma (IPSOCG)</a></div>
+			<div class="logo"><a href="{% url 'index' %}">Cataract National Dataset (CND)</a></div>
 			<nav>
 				<ul class="clearfix">
 					{% block nav-index %}<li><a href="{% url 'index' %}">Home</a></li>{% endblock %}
@@ -51,9 +51,9 @@
 			<div class="user">
 					{% if user.is_authenticated %}
 					Logged in as <strong><a href="#">{{ user.username }}</a></strong>
-					(<a href="#">Log Out</a>)
+					(<a href="{% url 'accounts_logout' %}">Log Out</a>)
 					{% else %}
-					<a href="#?next=/anonymeyes/">Log In</a>
+					<a href="{% url 'accounts_login' %}?next=/">Log In</a>
 					{% endif %}
 			</div>
 		</header>
@@ -69,7 +69,7 @@
 
 	<div class="footer-container">
 		<footer class="wrapper">
-			<h3>&copy; 2013, The OpenEyes Foundation</h3>
+			<h3>&copy; 2014, The OpenEyes Foundation</h3>
 			<p>All Rights Reserved.</p>
 		</footer>
 	</div>

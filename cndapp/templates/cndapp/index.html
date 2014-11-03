@@ -4,9 +4,9 @@
 {% endblock %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Welcome to IPSOCG</h1>
+<h1>Welcome to CND</h1>
 <p>This is an online web application for the collection, review, and analysis of
-anonymised paediatric glaucoma data.</p>
+cataract surgery data.</p>
 {% if user.is_authenticated %}
 <h2>Instructions</h2>
 <p><a href="#"><strong>Create</strong> Dataset</a> brings up
@@ -19,6 +19,6 @@ anonymised paediatric glaucoma data.</p>
 	review and augment data on previous sets.
 </p>
 {% else %}
-<p>Please <a href="/accounts/login/?next=/anonymeyes/">log in</a> to add or review datasets</p>
+<p>Please <a href="/accounts/login/?next=/">log in</a> to add or review datasets</p>
 {% endif %}
 {% endblock %}

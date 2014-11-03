@@ -4,7 +4,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'cgrn',                      # Or path to database file if using sqlite3.
+        'NAME': 'cnd',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -12,18 +12,27 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = 'REPLACE ME'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = ''
 
-RECAPTCHA_PUBLIC_KEY = 'REPLACE ME'
-RECAPTCHA_PRIVATE_KEY = 'REPLACE ME'
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
 
 ADMINS = (
-    ('Admin User', 'admin.user@example.com'),
+    ('Admin', 'admin@example.com'),
 )
+
 MANAGERS = ADMINS
 
-CONTACT_SENDER = 'www@example.com'
+DEFAULT_FROM_EMAIL = 'admin@example.com'
+
+CONTACT_SENDER = 'admin@example.com'
 
 CONTACT_RECIPIENTS = [
-    'admin.user@example.com',
+    'admin@example.com',
 ]
+
+SITE_BANNER = 'This is a demonstration site. DO NOT ENTER REAL DATA.'
+
+LANGUAGE_CODE = 'en-gb'
+TIME_ZONE = 'Europe/London'

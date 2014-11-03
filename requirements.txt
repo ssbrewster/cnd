@@ -1,0 +1,8 @@
+Django>=1.7.1
+MySQL-python
+PyYAML
+#django-compressor
+#django-csvimport
+#django-form-utils
+#django-recaptcha
+python-dateutil

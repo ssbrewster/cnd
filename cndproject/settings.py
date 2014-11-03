@@ -1,5 +1,5 @@
 """
-Django settings for cnd project.
+Django settings for cndproject project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -16,11 +16,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -34,6 +33,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cndapp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,9 +46,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'cnd.urls'
+ROOT_URLCONF = 'cndproject.urls'
 
-WSGI_APPLICATION = 'cnd.wsgi.application'
+WSGI_APPLICATION = 'cndproject.wsgi.application'
 
 
 # Database

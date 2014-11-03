@@ -1,28 +1,5 @@
 from django.db import models
 
-class Eye(models.Model):
-    class Meta:
-        ordering = ['sort', 'name']
-
-    name = models.CharField(max_length=10)
-    single = models.BooleanField()
-    sort = models.IntegerField(default=10)
-
-    def __unicode__(self):
-        return self.name
-
-
-class VisualAcuityScale(models.Model):
-    class Meta:
-        ordering = ['sort', 'name']
-
-    name = models.CharField(max_length=64)
-    sort = models.IntegerField(default=10)
-
-    def __unicode__(self):
-        return self.name
-
-
 class PostcodeValidator(models.Model):
     pattern = models.CharField(max_length=64)
     error = models.CharField(max_length=255)

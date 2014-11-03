@@ -24,19 +24,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Eye',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=10)),
-                ('single', models.BooleanField()),
-                ('sort', models.IntegerField(default=10)),
-            ],
-            options={
-                'ordering': ['sort', 'name'],
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='PostcodeValidator',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -44,18 +31,6 @@ class Migration(migrations.Migration):
                 ('error', models.CharField(max_length=255)),
             ],
             options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='VisualAcuityScale',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=64)),
-                ('sort', models.IntegerField(default=10)),
-            ],
-            options={
-                'ordering': ['sort', 'name'],
             },
             bases=(models.Model,),
         ),

@@ -5,7 +5,7 @@
 	<div class="actions clearfix">
 		<ul>
 			<li><a href="#">Update</a></li>
-			<li><a href="#">Delete</a>
+			<li><a href="{% url 'delete' patient.id %}">Delete</a>
 			<li><a href="#" class="print_page">Print</a>
 		</ul>
 	</div>
@@ -19,15 +19,17 @@
 						matched up if followup data is entered.</span></span>UUID:</dt>
 			<dd class="uuid">{{ patient.uuid }}</dd>
 			<dt>Sex:</dt>
-			<dd>{{ patient.get_sex_display }}</dd>
-			<dt>DOB:</dt>
-			<dd>{{ patient.dob_year }}</dd>
+			<dd>{{ patient.gender }}</dd>
+			<dt>Postcode:</dt>
+			<dd>{{ patient.postcode }}</dd>
+			<dt>Treated Eye:</dt>
+			<dd>{{ patient.treated_eye }}</dd>
 		</dl>
 	</div>
 	<div class="actions clearfix">
 		<ul>
 			<li><a href="#">Update</a></li>
-			<li><a href="#">Delete</a>
+			<li><a href="{% url 'delete' patient.id %}">Delete</a>
 			<li><a href="#" class="print_page">Print</a>
 		</ul>
 	</div>

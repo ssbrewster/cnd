@@ -73,9 +73,9 @@ $(document).ready(function() {
 		aoColumns: [
 		            null,
 		            null,
-                { "sType": "title-numeric" },
-                { "sType": "title-numeric" },
-                { "sType": "title-numeric" },
+		            null,
+                    { "sType": "title-numeric" },
+                    { "sType": "title-numeric" },
 		            { "bSortable": false }
 		            ]
 	});

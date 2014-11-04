@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.sites.models import get_current_site
 from cndapp.forms import *
@@ -49,7 +49,7 @@ class PatientDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PatientDetailView, self).get_context_data(**kwargs)
-        context['patient_url'] = 'http://' + get_current_site(self.request).domain + '/cndapp/uuid/' + self.get_object().uuid.lower()
+        context['patient_url'] = 'test' #'http://' + get_current_site(self.request).domain + '/cndapp/uuid/' + self.get_object().uuid
         return context
 
     @method_decorator(login_required)
@@ -58,10 +58,26 @@ class PatientDetailView(DetailView):
 
 class PatientCreateView(CreateView):
     model = Patient
-    fields = ['sex', 'dob_year']
+    fields = ['gender', 'postcode', 'treated_eye']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         form.instance.updated_by = self.request.user
         response = super(PatientCreateView, self).form_valid(form)
         return response
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PatientCreateView, self).dispatch(request, *args, **kwargs)
+
+class PatientDeleteView(DeleteView):
+    context_object_name = 'patient'
+    success_url = '/cndapp/list/'
+
+    def get_queryset(self):
+        return Patient.objects.filter(created_by=self.request.user)
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PatientDeleteView, self).dispatch(request, *args, **kwargs)
+

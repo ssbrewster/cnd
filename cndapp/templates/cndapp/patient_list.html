@@ -9,8 +9,8 @@
 	<thead>
 		<tr>
 			<th><abbr title="Universally Unique IDentifier">UUID</abbr></th>
-			<th>Sex</th>
-			<th>DOB</th>
+			<th>Gender</th>
+			<th>Postcode</th>
 			<th>Created</th>
 			<th>Last Updated</th>
 			<th></th>
@@ -20,9 +20,9 @@
 		{% for patient in patients %}
 		<tr>
 			<td><a href="{% url 'detail' patient.id %}">{{ patient.uuid }}</a></td>
-			<td>{{ patient.get_sex_display }}</td>
-			<td><span title="{{ patient.dob_year|date:'U' }}">{{ patient.dob_year }}</span></td>
-			<td><span title="{{ patient.created_at|date:'U' }}">{{ patient.created_at }}</span></td>
+			<td>{{ patient.gender }}</span></td>
+			<td>{{ patient.postcode }}</td>
+			<td><span title="{{ patient.created_at|date:'U' }}">{{ patient.created_at }}</td>
 			<td><span title="{{ patient.updated_at|date:'U' }}">{{ patient.updated_at }}</span></td>
 			<td class="row_actions">
 				<a href="#" class="update" title="Update"><span>Update</span></a>
@@ -34,8 +34,8 @@
 	<tfoot>
 		<tr>
 			<th><input type="text" class="search_uuid search_init" name="search_uuid" value="" /></th>
-			<th><input type="text" class="search_sex search_init" name="search_sex" value="" /></th>
-			<th><input type="text" class="search_dob search_init" name="search_dob" value="" /></th>
+			<th><input type="text" class="search_gender search_init" name="search_gender" value="" /></th>
+			<th><input type="text" class="search_postcode search_init" name="search_postcode" value="" /></th>
 			<th></th>
 			<th></th>
 			<th></th>

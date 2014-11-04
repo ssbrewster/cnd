@@ -73,7 +73,7 @@ class Eye(models.Model):
         return self.name
 
 class Gender(models.Model):
-    name = models.CharField(max_length = 5)
+    name = models.CharField(max_length = 12)
 
     def __unicode__(self):
         return self.name
@@ -170,7 +170,7 @@ class VisualAcuityReading(models.Model):
         return self.pk
 
 class Patient(models.Model):
-    uuid = UUIDField(auto = True, primary_key = True)
+    uuid = UUIDField(auto = True, unique = True)
     created_by = models.ForeignKey(User, related_name='patient_created_set', blank=True, null=True, on_delete=models.SET_NULL)
     updated_by = models.ForeignKey(User, related_name='patient_updated_set', blank=True, null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)

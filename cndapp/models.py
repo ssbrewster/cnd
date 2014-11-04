@@ -30,7 +30,7 @@ class AdditionalProcedure(models.Model):
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
+    name = models.CharField(max_length = 85)
     sort = models.IntegerField()
 
     def __unicode__(self):
@@ -60,7 +60,7 @@ class DifficultyFactor(models.Model):
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
+    name = models.CharField(max_length = 85)
     sort = models.IntegerField()
 
     def __unicode__(self):

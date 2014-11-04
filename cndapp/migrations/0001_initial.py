@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='AdditionalProcedure',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=64)),
+                ('name', models.CharField(max_length=85)),
                 ('sort', models.IntegerField()),
             ],
             options={
@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
             name='DifficultyFactor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=64)),
+                ('name', models.CharField(max_length=85)),
                 ('sort', models.IntegerField()),
             ],
             options={

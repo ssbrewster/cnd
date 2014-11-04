@@ -12,5 +12,5 @@ urlpatterns = patterns('cndapp.views',
                        url(r'detail/(?P<pk>\d+)/$', PatientDetailView.as_view(), name='detail'),
                        url(r'^uuid/(?P<uuid>.+)/$', PatientUUIDView.as_view()),
                        url(r'delete/(?P<pk>\d+)/$', PatientDeleteView.as_view(), name='delete'),
-                       url(r'create/preop$', PreOpAssessmentCreateView.as_view(), name='create_preop'),
+                       url(r'create/preop/(?P<patient>\d+)$', PreOpAssessmentCreateView.as_view(), name='create_preop'),
 )

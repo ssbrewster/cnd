@@ -4,9 +4,6 @@ from models import *
 
 admin.site.register(Country)
 admin.site.register(Patient)
-admin.site.register(PreOpAssessment)
-admin.site.register(OpNote)
-admin.site.register(FollowUp)
 admin.site.register(AdditionalProcedure)
 admin.site.register(AnaestheticType)
 admin.site.register(Complication)
@@ -21,3 +18,13 @@ admin.site.register(SurgeonGrade)
 admin.site.register(SurgeryReason)
 admin.site.register(VisualAcuityCorrection)
 admin.site.register(VisualAcuityScale)
+
+class PreOpAssessmentVisualAcuityReadingInline(admin.TabularInline):
+    model = PreOpAssessmentVisualAcuityReading
+
+class PreOpAssessmentAdmin(admin.ModelAdmin):
+    inlines = [
+        PreOpAssessmentVisualAcuityReadingInline,
+    ]
+
+admin.site.register(PreOpAssessment, PreOpAssessmentAdmin)

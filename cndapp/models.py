@@ -203,7 +203,7 @@ class PreOpAssessment(models.Model):
         return reverse('list')
 
     def __unicode__(self):
-        return self.pk
+        return str(self.patient)
 
 class PreOpAssessmentVisualAcuityReading(models.Model):
     preopassessment = models.ForeignKey(PreOpAssessment)
@@ -213,7 +213,7 @@ class PreOpAssessmentVisualAcuityReading(models.Model):
     value = models.DecimalField(max_digits = 3, decimal_places = 2)
 
     def __unicode__(self):
-        return self.value
+        return str(self.eye) + " " + str(self.scale) + " " + str(self.value)
 
 class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)

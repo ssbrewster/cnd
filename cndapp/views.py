@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, DeleteView, RedirectView
 from django.utils.decorators import method_decorator
 from django.contrib.sites.models import get_current_site
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
+
 from cndapp.forms import *
 from cndapp.models import Patient, PreOpAssessment, OpNote, FollowUp
 
@@ -111,3 +112,37 @@ class PreOpAssessmentCreateView(CreateView):
             self.get_context_data(form=form,
                                   va_form=va_form))
 
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        va_form = PreOpAssessmentVisualAcuityReadingFormSet(self.request.POST)
+        if (form.is_valid() and va_form.is_valid()):
+            return self.form_valid(form, va_form)
+        else:
+            return self.form_invalid(form, va_form)
+
+    def form_valid(self, form, va_form):
+        """
+        Called if all forms are valid. Creates a Recipe instance along with
+        associated Ingredients and Instructions and then redirects to a
+        success page.
+        """
+        self.object = form.save()
+        va_form.instance = self.object
+        va_form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, va_form):
+        """
+        Called if a form is invalid. Re-renders the context data with the
+        data-filled forms and errors.
+        """
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  va_form=va_form))

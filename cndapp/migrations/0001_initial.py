@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='AdditionalProcedure',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=64)),
+                ('name', models.CharField(max_length=85)),
                 ('sort', models.IntegerField()),
             ],
             options={
@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
             name='DifficultyFactor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=64)),
+                ('name', models.CharField(max_length=85)),
                 ('sort', models.IntegerField()),
             ],
             options={
@@ -94,6 +94,16 @@ class Migration(migrations.Migration):
                 ('date', models.DateField()),
                 ('left_refraction', jsonfield.fields.JSONField()),
                 ('right_refraction', jsonfield.fields.JSONField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='FollowUpVisualAcuityReading',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('value', models.DecimalField(max_digits=3, decimal_places=2)),
             ],
             options={
             },
@@ -231,6 +241,16 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='PreOpAssessmentVisualAcuityReading',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('value', models.DecimalField(max_digits=3, decimal_places=2)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='SurgeonGrade',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -267,18 +287,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='VisualAcuityReading',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('value', models.DecimalField(max_digits=3, decimal_places=2)),
-                ('correction', models.ForeignKey(to='cndapp.VisualAcuityCorrection')),
-                ('eye', models.ForeignKey(to='cndapp.Eye')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='VisualAcuityScale',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -291,15 +299,27 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='visualacuityreading',
-            name='scale',
-            field=models.ForeignKey(to='cndapp.VisualAcuityScale'),
+            model_name='preopassessmentvisualacuityreading',
+            name='correction',
+            field=models.ForeignKey(to='cndapp.VisualAcuityCorrection'),
             preserve_default=True,
         ),
         migrations.AddField(
-            model_name='preopassessment',
-            name='visual_acuity',
-            field=models.ManyToManyField(to='cndapp.VisualAcuityReading'),
+            model_name='preopassessmentvisualacuityreading',
+            name='eye',
+            field=models.ForeignKey(to='cndapp.Eye'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='preopassessmentvisualacuityreading',
+            name='preopassessment',
+            field=models.ForeignKey(to='cndapp.PreOpAssessment'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='preopassessmentvisualacuityreading',
+            name='scale',
+            field=models.ForeignKey(to='cndapp.VisualAcuityScale'),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -321,6 +341,30 @@ class Migration(migrations.Migration):
             preserve_default=True,
         ),
         migrations.AddField(
+            model_name='followupvisualacuityreading',
+            name='correction',
+            field=models.ForeignKey(to='cndapp.VisualAcuityCorrection'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followupvisualacuityreading',
+            name='eye',
+            field=models.ForeignKey(to='cndapp.Eye'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followupvisualacuityreading',
+            name='followup',
+            field=models.ForeignKey(to='cndapp.FollowUp'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followupvisualacuityreading',
+            name='scale',
+            field=models.ForeignKey(to='cndapp.VisualAcuityScale'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
             model_name='followup',
             name='complications',
             field=models.ManyToManyField(to='cndapp.PostOpComplication'),
@@ -330,12 +374,6 @@ class Migration(migrations.Migration):
             model_name='followup',
             name='patient',
             field=models.ForeignKey(to='cndapp.Patient', unique=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='followup',
-            name='visual_acuity',
-            field=models.ManyToManyField(to='cndapp.VisualAcuityReading'),
             preserve_default=True,
         ),
         migrations.AddField(

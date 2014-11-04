@@ -1,7 +1,0 @@
-# Gender
-- fields: {name: Male}
-  model: cndapp.gender
-  pk: 1
-- fields: {name: Female}
-  model: cndapp.gender
-  pk: 2

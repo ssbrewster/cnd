@@ -1,0 +1,534 @@
+[
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Intraoperative phenylephrine", "sort": 10}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Insertion of sustained release device into posterior segment of eye", "sort": 20}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Peripheral iridectomy", "sort": 30}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Broad iridectomy", "sort": 40}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Pupil stretch", "sort": 50}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Insertion of iris hooks", "sort": 60}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Vision blue capsule staining", "sort": 70}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "IOL exchange", "sort": 80}
+	},
+	{
+		"model": "cndapp.additionalprocedure",
+		"fields": {"name": "Other", "sort": 90}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "General", "sort": 10}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Retrobulbar", "sort": 20}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Peribulbar", "sort": 30}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Subtenons", "sort": 40}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Subconjunctival", "sort": 50}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Topical", "sort": 60}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Intracameral", "sort": 70}
+	},
+	{
+		"model": "cndapp.anaesthetictype",
+		"fields": {"name": "Other", "sort": 80}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Phaco wound burn", "sort": 10}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Corneal oedema", "sort": 20}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Iris damage/trauma", "sort": 30}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Iris prolapse", "sort": 40}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Hyphaema", "sort": 50}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Simple Zonule dialysis", "sort": 60}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Zonule rupture no vitreous loss", "sort": 70}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Zonule rupture with vitreous loss", "sort": 80}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "PC rupture no vitreous loss", "sort": 90}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "PC rupture with vitreous loss", "sort": 100}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Lens fragments into vitreous", "sort": 110}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Decentred IOL", "sort": 120}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "IOL into vitreous", "sort": 130}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "IOL exchange", "sort": 140}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Other IOL problem", "sort": 150}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Choroidal / expulsive haemorrhage", "sort": 160}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Operation cancelled", "sort": 170}
+	},
+	{
+		"model": "cndapp.complication",
+		"fields": {"name": "Other", "sort": 180}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Uncooperative patient", "sort": 10}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Uncontrolled eye movement", "sort": 20}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Deep-set eye", "sort": 30}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Shallow anterior chamber", "sort": 40}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Pupil - Medium (manipulation not required but increased surgical difficulty)", "sort": 50}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Pupil - Small (surgical manipulation necessary)", "sort": 60}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Posterior Synechiae ", "sort": 70}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Atonic pupil", "sort": 80}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Floppy Iris", "sort": 90}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Pseudoexfoliation", "sort": 100}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Phacodonesis", "sort": 110}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Corneal Opacity", "sort": 120}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Poor View", "sort": 130}
+	},
+	{
+		"model": "cndapp.difficultyfactor",
+		"fields": {"name": "Other", "sort": 140}
+	},
+	{
+		"model": "cndapp.eye",
+		"fields": {"name": "Left"}
+	},
+	{
+		"model": "cndapp.eye",
+		"fields": {"name": "Right"}
+	},
+	{
+		"model": "cndapp.gender",
+		"fields": {"name": "Female"}
+	},
+	{
+		"model": "cndapp.gender",
+		"fields": {"name": "Male"}
+	},
+	{
+		"model": "cndapp.gender",
+		"fields": {"name": "Other"}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "In the bag", "sort": 10}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Partly in the bag", "sort": 20}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "In the sulcus", "sort": 30}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Anterior Chamber", "sort": 40}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Sutured posterior chamber", "sort": 50}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Iris fixated", "sort": 60}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Aphakic", "sort": 70}
+	},
+	{
+		"model": "cndapp.iolposition",
+		"fields": {"name": "Other", "sort": 80}
+	},
+	{
+		"model": "cndapp.keratomyunit",
+		"fields": {"name": "Dioptres", "sort": 10}
+	},
+	{
+		"model": "cndapp.keratomyunit",
+		"fields": {"name": "mm", "sort": 10}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Corneal pathology", "sort": 10}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Glaucoma", "sort": 20}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Uveitis", "sort": 30}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Pseudoexfoliation", "sort": 40}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Phacodonesis", "sort": 50}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Vitreous opacification", "sort": 60}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Diabetic retinopathy", "sort": 70}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "AMD - Geographic atrophy / dry ", "sort": 80}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "AMD - Neovascular / wet", "sort": 90}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Epiretinal Membrane (ERM)", "sort": 100}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Other macular pathology", "sort": 110}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Retinal vascular occlusion", "sort": 120}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Previous vitreoretinal procedures for retinal detachment", "sort": 130}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Previous vitreoretinal procedures for EMR", "sort": 140}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Previous vitreoretinal procedures for other indication", "sort": 150}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "No view of fundus", "sort": 160}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Optic nerve / CNS disease", "sort": 170}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Amblyopia (in eye for surgery)", "sort": 180}
+	},
+	{
+		"model": "cndapp.ocularcopathology",
+		"fields": {"name": "Other", "sort": 190}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Ptosis", "sort": 10}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "External eye infection", "sort": 20}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Hypotony", "sort": 30}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Raised intraocular pressure", "sort": 40}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Corneal oedema / striae", "sort": 50}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Wound leak", "sort": 60}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Wound Dehiscence", "sort": 70}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Shallow anterior chamber", "sort": 80}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Uveitis", "sort": 90}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Hypopyon ", "sort": 100}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Endophthalmitis", "sort": 110}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Hyphaema", "sort": 120}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Vitreous to section", "sort": 130}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Vitreous in Chamber", "sort": 140}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Iris prolapse", "sort": 150}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Pupil block", "sort": 160}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "IOL decentered / subluxed", "sort": 170}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "IOL dislocated into vitreous", "sort": 180}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Anterior capsulophimosis", "sort": 190}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Posterior capsule opacity ", "sort": 200}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Retained soft lens matter", "sort": 210}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Cystoid macular oedema", "sort": 220}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Retinal tear", "sort": 230}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Retinal detachment", "sort": 240}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Choroidal haemorrhage", "sort": 250}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Globe perforation", "sort": 260}
+	},
+	{
+		"model": "cndapp.postopcomplication",
+		"fields": {"name": "Other", "sort": 270}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Consultant ", "sort": 10}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Associate Specialist", "sort": 20}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Staff Grade", "sort": 30}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Trust doctor", "sort": 40}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Fellow", "sort": 50}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Specialist registrar", "sort": 60}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Foundation Year 2 Trainee (formerly SHO)", "sort": 70}
+	},
+	{
+		"model": "cndapp.surgeongrade",
+		"fields": {"name": "Other", "sort": 80}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract removal for visual improvement", "sort": 10}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract removal for improvement of fundus view", "sort": 20}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract/clear lens removal as part of planned PPV", "sort": 30}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Clear lens extraction for glaucoma", "sort": 40}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract/clear lens extraction for anisometropia", "sort": 50}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract/clear lens extraction for refractive reasons", "sort": 60}
+	},
+	{
+		"model": "cndapp.surgeryreason",
+		"fields": {"name": "Cataract/clear lens extraction for other reasons", "sort": 70}
+	},
+	{
+		"model": "cndapp.visualacuitycorrection",
+		"fields": {"name": "Best corrected", "sort": 10}
+	},
+	{
+		"model": "cndapp.visualacuitycorrection",
+		"fields": {"name": "Habitual", "sort": 20}
+	},
+	{
+		"model": "cndapp.visualacuitycorrection",
+		"fields": {"name": "Pinhole", "sort": 30}
+	},
+	{
+		"model": "cndapp.visualacuitycorrection",
+		"fields": {"name": "Unaided", "sort": 40}
+	},
+	{
+		"model": "cndapp.visualacuityscale",
+		"fields": {"name": "Snellen", "sort": 10}
+	},
+	{
+		"model": "cndapp.visualacuityscale",
+		"fields": {"name": "Log MAR ", "sort": 20}
+	},
+	{
+		"model": "cndapp.visualacuityscale",
+		"fields": {"name": "LogMAR single letter scoring", "sort": 30}
+	},
+	{
+		"model": "cndapp.visualacuityscale",
+		"fields": {"name": "Decimal", "sort": 40}
+	}
+]

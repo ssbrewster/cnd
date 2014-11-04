@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block nav-create %}
+<li class="active"><a href="{% url 'create' %}"><strong>Create</strong> Datasets</a></li>
+{% endblock %}
+{% block title %}Create Pre-op Assessment{% endblock %}
+{% block content %}
+<h1>Create Pre-op Assessment</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <ul>
+        {% for field in form %}
+            <li>
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </li>
+        {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend>Visual Acuity</legend>
+            {{ va_form.management_form }}
+            {{ va_form.non_form_errors }}
+            {% for form in va_form %}
+                {{ form.id }}
+                <ul class="inline {{ va_form.prefix }}">
+                    {% for field in form %}
+                    <li>
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+    </fieldset>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+{% block body-end %}
+    <script type="text/javascript">
+        $(function() {
+            $('.inline.{{ va_form.prefix }}').formset({
+                prefix: '{{ va_form.prefix }}',
+            });
+        })
+    </script>
+{% endblock %}

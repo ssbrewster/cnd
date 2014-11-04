@@ -8,13 +8,15 @@
 <form action="" method="post">
     {% csrf_token %}
     <fieldset>
-    {% for field in form %}
-        <li>
-            {{ field.errors }}
-            {{ field.label_tag }}
-            {{ field }}
-        </li>
-    {% endfor %}
+        <ul>
+        {% for field in form %}
+            <li>
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </li>
+        {% endfor %}
+        </ul>
     </fieldset>
     <input type="submit" value="Submit" />
 </form>

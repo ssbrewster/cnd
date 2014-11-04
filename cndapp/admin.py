@@ -4,7 +4,7 @@ from models import *
 
 admin.site.register(Country)
 admin.site.register(Patient)
-admin.site.register(PreOpAsssessment)
+admin.site.register(PreOpAssessment)
 admin.site.register(OpNote)
 admin.site.register(FollowUp)
 admin.site.register(AdditionalProcedure)

@@ -103,7 +103,7 @@ class Migration(migrations.Migration):
             name='Gender',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=5)),
+                ('name', models.CharField(max_length=12)),
             ],
             options={
             },
@@ -205,7 +205,7 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='PreOpAsssessment',
+            name='PreOpAssessment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date', models.DateField()),
@@ -297,7 +297,7 @@ class Migration(migrations.Migration):
             preserve_default=True,
         ),
         migrations.AddField(
-            model_name='preopasssessment',
+            model_name='preopassessment',
             name='visual_acuity',
             field=models.ManyToManyField(to='cndapp.VisualAcuityReading'),
             preserve_default=True,

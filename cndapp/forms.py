@@ -4,6 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
+from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading
 
 
 class ContactForm(forms.Form):
@@ -19,3 +20,10 @@ class ContactForm(forms.Form):
 
 class CaptchaContactForm(ContactForm):
     captcha = ReCaptchaField()
+
+class PreOpAssessmentForm(forms.ModelForm):
+    class Meta:
+        model = PreOpAssessment
+        exclude = ( 'created_by', 'updated_by', )
+
+PreOpAssessmentVisualAcuityReadingFormSet = forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading)

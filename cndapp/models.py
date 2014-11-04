@@ -160,15 +160,6 @@ class VisualAcuityScale(models.Model):
 
 # Form data
 
-class VisualAcuityReading(models.Model):
-    eye = models.ForeignKey(Eye)
-    scale = models.ForeignKey(VisualAcuityScale)
-    correction = models.ForeignKey(VisualAcuityCorrection)
-    value = models.DecimalField(max_digits = 3, decimal_places = 2)
-
-    def __unicode__(self):
-        return self.pk
-
 class Patient(models.Model):
     uuid = UUIDField(auto = True, unique = True)
     created_by = models.ForeignKey(User, related_name='patient_created_set', blank=True, null=True, on_delete=models.SET_NULL)
@@ -183,14 +174,13 @@ class Patient(models.Model):
         return reverse('detail', kwargs={'pk': self.pk})
 
     def __unicode__(self):
-        return self.uuid
+        return self.uuid.hex
 
-class PreOpAsssessment(models.Model):
+class PreOpAssessment(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
     date = models.DateField()
 
-    visual_acuity = models.ManyToManyField(VisualAcuityReading)
     morphology = JSONField()
     diabetes = models.BooleanField()
     alpha_blockers = models.BooleanField()
@@ -214,6 +204,16 @@ class PreOpAsssessment(models.Model):
 
     def __unicode__(self):
         return self.pk
+
+class PreOpAssessmentVisualAcuityReading(models.Model):
+    preopassessment = models.ForeignKey(PreOpAssessment)
+    eye = models.ForeignKey(Eye)
+    scale = models.ForeignKey(VisualAcuityScale)
+    correction = models.ForeignKey(VisualAcuityCorrection)
+    value = models.DecimalField(max_digits = 3, decimal_places = 2)
+
+    def __unicode__(self):
+        return self.value
 
 class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
@@ -246,7 +246,6 @@ class FollowUp(models.Model):
 
     date = models.DateField()
 
-    visual_acuity = models.ManyToManyField(VisualAcuityReading)
     left_refraction = JSONField()
     right_refraction = JSONField()
     complications = models.ManyToManyField(PostOpComplication)
@@ -256,3 +255,14 @@ class FollowUp(models.Model):
 
     def __unicode__(self):
         return self.pk
+
+class FollowUpVisualAcuityReading(models.Model):
+    followup = models.ForeignKey(FollowUp)
+    eye = models.ForeignKey(Eye)
+    scale = models.ForeignKey(VisualAcuityScale)
+    correction = models.ForeignKey(VisualAcuityCorrection)
+    value = models.DecimalField(max_digits = 3, decimal_places = 2)
+
+    def __unicode__(self):
+        return self.value
+

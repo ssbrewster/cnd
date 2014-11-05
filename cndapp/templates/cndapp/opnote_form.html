@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block nav-create %}
+<li class="active"><a href="{% url 'create' %}"><strong>Create</strong> Datasets</a></li>
+{% endblock %}
+{% block title %}Create Operation Note{% endblock %}
+{% block content %}
+<h1>Create Operation Note</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <ul>
+        {% for field in form %}
+            <li>
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </li>
+        {% endfor %}
+        </ul>
+    </fieldset>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

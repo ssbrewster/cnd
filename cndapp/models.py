@@ -182,12 +182,16 @@ class PreOpAssessment(models.Model):
     date = models.DateField()
 
     morphology = JSONField()
-    diabetes = models.BooleanField()
-    alpha_blockers = models.BooleanField()
-    able_to_cooperate = models.BooleanField()
-    able_to_lie_flat = models.BooleanField()
+    STATE_CHOICES = (
+        (True, u'Yes'),
+        (False, u'No'),
+    )
+    diabetes = models.BooleanField(default=None, choices=STATE_CHOICES)
+    alpha_blockers = models.BooleanField(default=None, choices=STATE_CHOICES)
+    able_to_cooperate = models.BooleanField(default=None, choices=STATE_CHOICES)
+    able_to_lie_flat = models.BooleanField(default=None, choices=STATE_CHOICES)
     ocular_copathology = models.ManyToManyField(OcularCopathology)
-    guarded_prognosis = models.BooleanField()
+    guarded_prognosis = models.BooleanField(default=None, choices=STATE_CHOICES)
 
     # Biometry
     keratomy_unit = models.ForeignKey(KeratomyUnit)
@@ -213,7 +217,7 @@ class PreOpAssessmentVisualAcuityReading(models.Model):
     value = models.DecimalField(max_digits = 3, decimal_places = 2)
 
     def __unicode__(self):
-        return str(self.eye) + " " + str(self.scale) + " " + str(self.value)
+        return str(self.pk)
 
 class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
@@ -223,9 +227,13 @@ class OpNote(models.Model):
 
     anaesthetic = models.ManyToManyField(AnaestheticType)
     surgeon_grade = models.ForeignKey(SurgeonGrade)
-    first_eye = models.BooleanField()
+    STATE_CHOICES = (
+        (True, u'Yes'),
+        (False, u'No'),
+    )
+    first_eye = models.BooleanField(default=None, choices=STATE_CHOICES)
     primary_reason = models.ForeignKey(SurgeryReason)
-    lens_inserted = models.BooleanField()
+    lens_inserted = models.BooleanField(default=None, choices=STATE_CHOICES)
 
     # The cut-down dataset doesn't require this but Bill thinks we should include it because it looks cool
     eyedraw = JSONField()
@@ -239,7 +247,7 @@ class OpNote(models.Model):
         return reverse('list')
 
     def __unicode__(self):
-        return self.pk
+        return str(self.pk)
 
 class FollowUp(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
@@ -254,7 +262,7 @@ class FollowUp(models.Model):
         return reverse('list')
 
     def __unicode__(self):
-        return self.pk
+        return str(self.pk)
 
 class FollowUpVisualAcuityReading(models.Model):
     followup = models.ForeignKey(FollowUp)
@@ -264,5 +272,5 @@ class FollowUpVisualAcuityReading(models.Model):
     value = models.DecimalField(max_digits = 3, decimal_places = 2)
 
     def __unicode__(self):
-        return self.value
+        return str(self.pk)
 

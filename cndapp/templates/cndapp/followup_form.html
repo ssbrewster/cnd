@@ -2,9 +2,9 @@
 {% block nav-create %}
 <li class="active"><a href="{% url 'create' %}"><strong>Create</strong> Datasets</a></li>
 {% endblock %}
-{% block title %}Create Pre-op Assessment{% endblock %}
+{% block title %}Create Follow Up{% endblock %}
 {% block content %}
-<h1>Create Pre-op Assessment</h1>
+<h1>Create Follow Up</h1>
 <form action="" method="post">
     {% csrf_token %}
     <fieldset>

@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
-from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading
+from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading, FollowUp, FollowUpVisualAcuityReading, OpNote
 
 
 class ContactForm(forms.Form):
@@ -25,5 +25,34 @@ class PreOpAssessmentForm(forms.ModelForm):
     class Meta:
         model = PreOpAssessment
         exclude = ( 'created_by', 'updated_by', )
+        widgets = {
+            'diabetes': forms.RadioSelect(),
+            'alpha_blockers': forms.RadioSelect(),
+            'able_to_cooperate': forms.RadioSelect(),
+            'able_to_lie_flat': forms.RadioSelect(),
+            'guarded_prognosis': forms.RadioSelect(),
+        }
 
-PreOpAssessmentVisualAcuityReadingFormSet = forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading)
+PreOpAssessmentVisualAcuityReadingFormSet = forms.models.inlineformset_factory(PreOpAssessment,
+                                                                               PreOpAssessmentVisualAcuityReading,
+                                                                               extra = 1,
+                                                                               can_delete = False)
+
+class OpNoteForm(forms.ModelForm):
+    class Meta:
+        model = OpNote
+        exclude = ( 'created_by', 'updated_by', )
+        widgets = {
+            'first_eye': forms.RadioSelect(),
+            'lens_inserted': forms.RadioSelect(),
+        }
+
+class FollowUpForm(forms.ModelForm):
+    class Meta:
+        model = FollowUp
+        exclude = ( 'created_by', 'updated_by', )
+
+FollowUpVisualAcuityReadingFormSet = forms.models.inlineformset_factory(FollowUp,
+                                                                               FollowUpVisualAcuityReading,
+                                                                               extra = 1,
+                                                                               can_delete = False)

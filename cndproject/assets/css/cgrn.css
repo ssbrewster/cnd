@@ -177,6 +177,20 @@ form ul li {
 	*zoom: 1;
 }
 
+form ul li ul {
+    display: inline-block;
+    margin: 0;
+}
+
+form ul li ul li {
+    display: inline-block;
+    margin: 0;
+}
+
+form ul li ul li label {
+    width: auto;
+}
+
 form label,
 form .label {
 	width: 180px;

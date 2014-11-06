@@ -16,8 +16,11 @@ body {
 	font-weight: bold;
 	padding: 5px;
 	text-align: center;
-	position: fixed;
 	width: 100%;
+}
+
+.header-banner.stuck {
+    position: fixed;
 	z-index: 999;
 }
 

@@ -50,6 +50,7 @@
 					Logged in as <strong><a href="#">{{ user.username }}</a></strong>
 					(<a href="{% url 'accounts_logout' %}">Log Out</a>)
 					{% else %}
+					<a href="/accounts/register/">Register</a>
 					<a href="{% url 'accounts_login' %}?next=/">Log In</a>
 					{% endif %}
 			</div>

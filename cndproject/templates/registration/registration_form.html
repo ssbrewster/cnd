@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h1>Register</h1>
+<form method="POST" action=".">
+{{form.non_field_errors}}
+{% csrf_token %}
+<fieldset style="clear:both;">
+    <ul>
+    {% for field in form %}
+        <li>
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        </li>
+    {% endfor %}
+    </ul>
+</fieldset>
+
+    <input type="submit" value="Register " />
+</form>
+
+{% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'captcha',
     'etc',
     'cndapp',
+    'registration'
 )
 
 MIDDLEWARE_CLASSES = (

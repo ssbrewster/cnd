@@ -8,3 +8,4 @@ django-recaptcha
 python-dateutil
 django-form-utils
 django-etc
+django-registration-redux

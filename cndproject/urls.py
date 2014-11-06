@@ -6,6 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', RedirectView.as_view(url="cndapp")),
     url(r'^cndapp/', include('cndapp.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name = 'accounts_login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name = 'accounts_logout'),
     url(r'^admin/password_reset/$', 'django.contrib.auth.views.password_reset', name='admin_password_reset'),

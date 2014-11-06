@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core import validators
 from django.core.urlresolvers import reverse
 from django.db import models
+from django import forms
 from jsonfield import JSONField
 from uuidfield import UUIDField
 
@@ -176,12 +177,22 @@ class Patient(models.Model):
     def __unicode__(self):
         return self.uuid.hex
 
+class EyedrawField(models.TextField):
+
+    def __init__(self, *args, **kwargs):
+        super(EyedrawField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {'widget': forms.HiddenInput}
+        defaults.update(kwargs)
+        return super(EyedrawField, self).formfield(**defaults)
+
 class PreOpAssessment(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
     date = models.DateField()
 
-    morphology = models.TextField()
+    morphology = EyedrawField()
     STATE_CHOICES = (
         (True, u'Yes'),
         (False, u'No'),
@@ -242,7 +253,7 @@ class OpNote(models.Model):
     lens_inserted = models.BooleanField(default=None, choices=STATE_CHOICES)
 
     # The cut-down dataset doesn't require this but Bill thinks we should include it because it looks cool
-    eyedraw = JSONField()
+    eyedraw = EyedrawField()
 
     difficulty_factors = models.ManyToManyField(DifficultyFactor)
     iol_position = models.ForeignKey(IolPosition)

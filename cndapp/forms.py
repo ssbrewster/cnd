@@ -32,6 +32,12 @@ class PreOpAssessmentForm(forms.ModelForm):
             'guarded_prognosis': forms.RadioSelect(),
             'morphology': forms.HiddenInput(),
         }
+    morphology_tools = [
+        {'name': 'PI', 'label': 'Peripheral Iridectomy'},
+        {'name': 'NuclearCataract', 'label': 'Nuclear Cataract'},
+        {'name': 'CorticalCataract', 'label': 'Cortical Cataract'},
+        {'name': 'PostSubcapCataract', 'label': 'Posterior Subcapsular Cataract'},
+    ]
 
 PreOpAssessmentVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading, extra = 1, can_delete = False)

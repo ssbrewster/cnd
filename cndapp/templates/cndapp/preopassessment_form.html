@@ -13,7 +13,29 @@
             <li>
                 {{ field.label_tag }}
                 {% if field.name = 'morphology' %}
-                <canvas id="{{ form.morphology.id_for_label}}_canvas" class="ed-canvas" width="300" height="300"></canvas>
+                <div class="eyedraw-row">
+                    <div class="EyeDrawWidget ed-widget edit">
+                        <div class="ed-body">
+                            <div class="ed-editor-container">
+                                <div class="ed-toolbar">
+                                    <ul class="ed-toolbar-panel ed-main-toolbar">
+                                        {% for tool in form.morphology_tools %}
+                                        <li id="{{ form.morphology.id_for_label}}_{{ tool.name }}">
+                                            <a class="ed-button" href="#" data-function="addDoodle" data-arg="{{ tool.name }}">
+                                                <span class="icon-ed-{{ tool.name }}"></span>
+                                                <span class="label">{{ tool.label }}</span>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="ed-editor">
+                                    <canvas id="{{ form.morphology.id_for_label}}_canvas" class="ed-canvas-edit" width="300" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% endif %}
                 {{ field }}
                 {{ field.errors }}
@@ -58,7 +80,8 @@
             'graphicsPath': '/static/eyedraw/img',
             'inputId': '{{ form.morphology.id_for_label}}',
             'onReadyCommandArray': [
-                ['addDoodle',['AntSeg']]
+                ['addDoodle',['AntSeg']],
+                //['addDoodle',['Lens']]
             ],
         });
     });

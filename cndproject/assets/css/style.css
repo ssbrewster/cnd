@@ -610,3 +610,8 @@ form .iopagents label {
 .treated-eye {
 	background-color: #ffc;
 }
+
+.eyedraw-row {
+    width: 300px;
+    display: inline-block;
+}

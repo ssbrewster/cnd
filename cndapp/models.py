@@ -119,6 +119,16 @@ class PostOpComplication(models.Model):
     def __unicode__(self):
         return self.name
 
+class RefractionType(models.Model):
+    class Meta:
+        ordering = ['sort']
+
+    name = models.CharField(max_length = 64)
+    sort = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
 class SurgeonGrade(models.Model):
     class Meta:
         ordering = ['sort']
@@ -271,8 +281,6 @@ class FollowUp(models.Model):
 
     date = models.DateField()
 
-    left_refraction = JSONField()
-    right_refraction = JSONField()
     complications = models.ManyToManyField(PostOpComplication)
 
     def get_absolute_url(self):
@@ -297,3 +305,15 @@ class FollowUpVisualAcuityReading(models.Model):
     def __unicode__(self):
         return str(self.pk)
 
+class FollowUpRefraction(models.Model):
+    class Meta:
+        unique_together = ("followup", "eye")
+
+    followup = models.ForeignKey(FollowUp)
+    eye = models.ForeignKey(Eye)
+
+    eyedraw = EyedrawField()
+    type = models.ForeignKey(RefractionType)
+    sphere = models.DecimalField(max_digits = 4, decimal_places = 2)
+    cylinder = models.DecimalField(max_digits = 4, decimal_places = 2)
+    axis = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])

@@ -31,15 +31,15 @@
 	<tbody>
 	    <tr>
 		<th>Per-operative factors increasing the difficulty of surgery</th>
-		<td>{% with factors=opnote.difficulty_factors.all %}{% if factors|length %}{{ factors|join:", " }}{% else %}None{% endif %}{% endwith %}</td>
+		<td>{{ opnote.difficulty_factors.all|join:", "|default:"None" }}</td>
 	    </tr>
 	    <tr>
 		<th>Additional surgical procedures</th>
-		<td>{% with procs=opnote.additional_procedures.all %}{% if procs|length %}{{ procs|join:", " }}{% else %}None{% endif %}{% endwith %}</td>
+		<td>{{ opnote.additional_procedures.all|join:", "|default:"None" }}</td>
 	    </tr>
 	    <tr>
 		<th>Operative incidental events / complications</th>
-		<td>{% with comps=opnote.complications.all %}{% if comps|length %}{{ comps|join:", " }}{% else %}None{% endif %}{% endwith %}</td>
+		<td>{{ opnote.complications.all|join:", "|default:"None" }}</td>
 	    </tr>
 	</tbody>
     </table>

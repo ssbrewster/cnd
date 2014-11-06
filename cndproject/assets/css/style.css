@@ -18,6 +18,7 @@ body {
 	text-align: center;
 	position: fixed;
 	width: 100%;
+	z-index: 999;
 }
 
 .header-container {
@@ -50,6 +51,7 @@ body {
 .header-container nav ul {
 	padding: 0;
 	margin: 0 0 -1px 0;
+	list-style: none;
 }
 
 .header-container nav li {
@@ -58,6 +60,7 @@ body {
 	margin-right: 5px;
 	border-bottom: 1px solid #ddd;
 	padding: 1px 1px 0;
+	list-style: none;
 }
 
 .header-container nav li a {
@@ -157,6 +160,7 @@ form fieldset p {
 
 form ul {
 	padding: 0;
+	list-style: none;
 }
 
 form ul li {

@@ -1,0 +1,8 @@
+<div class="data-section">
+    <h2>Operation Note</h2>
+    {% if patient.opnote_set.count %}
+    <p>Operation Note completed</p>
+    {% else %}
+    <p><a href="{% url 'create_opnote' patient.id %}">Add Operation Note</a></p>
+    {% endif %}
+</div>

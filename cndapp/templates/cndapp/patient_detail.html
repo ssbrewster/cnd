@@ -27,83 +27,9 @@
         <dd>{{ patient.treated_eye }}</dd>
     </dl>
 </div>
-<div class="data-section">
-    <h2>Pre-Op Assessment</h2>
-    {% for preopassessment in patient.preopassessment_set.all %}
-    <dl>
-        <dt>Date</dt>
-        <dd>{{ preopassessment.date }}</dd>
-        <dt>Morphology</dt>
-        <dd>
-            <canvas id="morphology_canvas" class="ed-canvas" width="300" height="300"></canvas>
-            <input type="hidden" id="morphology" value="{{ preopassessment.morphology }}">
-        </dd>
-        <dt>Diabetes</dt>
-        <dd>{{ preopassessment.diabetes }}</dd>
-        <dt>Alpha Blockers</dt>
-        <dd>{{ preopassessment.alpha_blockers }}</dd>
-        <dt>Able to Co-operate</dt>
-        <dd>{{ preopassessment.able_to_cooperate }}</dd>
-        <dt>Able to Lie Flat</dt>
-        <dd>{{ preopassessment.able_to_lie_flat }}</dd>
-        <dt>Ocular Copathology</dt>
-        <dd>{{ preopassessment.ocular_copathology.all|join:", " }}</dd>
-        <dt>Guarded Prognosis</dt>
-        <dd>{{ preopassessment.guarded_prognosis }}</dd>
-        <dt>Keratomy Unit</dt>
-        <dd>{{ preopassessment.keratomy_unit }}</dd>
-        <dt>K1</dt>
-        <dd>{{ preopassessment.k1 }}</dd>
-        <dt>K2</dt>
-        <dd>{{ preopassessment.k2 }}</dd>
-        <dt>Axis K1</dt>
-        <dd>{{ preopassessment.axis_k1 }}</dd>
-        <dt>Axial Length</dt>
-        <dd>{{ preopassessment.axial_length }}</dd>
-        <dt>Desired Refraction</dt>
-        <dd>{{ preopassessment.desired_refraction }}</dd>
-        <dt>Predicted Refraction</dt>
-        <dd>{{ preopassessment.predicted_refraction }}</dd>
-        <dt>Desired Refraction</dt>
-        <dd>{{ preopassessment.desired_refraction }}</dd>
-        <dt>IOL Power</dt>
-        <dd>{{ preopassessment.iol_power }}</dd>
-    </dl>
-    <h3>Visual Acuity</h3>
-    {% for reading in preopassessment.preopassessmentvisualacuityreading_set.all %}
-    <dl>
-        <dt>Eye</dt>
-        <dd>{{ reading.eye }}</dd>
-        <dt>Scale</dt>
-        <dd>{{ reading.scale }}</dd>
-        <dt>Correction</dt>
-        <dd>{{ reading.correction }}</dd>
-        <dt>Value</dt>
-        <dd>{{ reading.value }}</dd>
-    </dl>
-    {% empty %}
-    <p>None</p>
-    {% endfor %}
-    {% empty %}
-    <p><a href="{% url 'create_preop' patient.id %}">Add Pre-Op Assessment</a></p>
-    {% endfor %}
-</div>
-<div class="data-section">
-    <h2>Operation Note</h2>
-    {% if patient.opnote_set.count %}
-    <p>Operation Note completed</p>
-    {% else %}
-    <p><a href="{% url 'create_opnote' patient.id %}">Add Operation Note</a></p>
-    {% endif %}
-</div>
-<div class="data-section">
-    <h2>Follow Up</h2>
-    {% if patient.followup_set.count %}
-    <p>Follow Up completed</p>
-    {% else %}
-    <p><a href="{% url 'create_followup' patient.id %}">Add Follow Up</a></p>
-    {% endif %}
-</div>
+{% include "cndapp/preopassessment_view.html" %}
+{% include "cndapp/opnote_view.html" %}
+{% include "cndapp/followup_view.html" %}
 <div class="actions clearfix">
     <ul>
         <li><a href="#">Update</a></li>

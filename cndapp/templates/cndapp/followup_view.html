@@ -1,0 +1,8 @@
+<div class="data-section">
+    <h2>Follow Up</h2>
+    {% if patient.followup_set.count %}
+    <p>Follow Up completed</p>
+    {% else %}
+    <p><a href="{% url 'create_followup' patient.id %}">Add Follow Up</a></p>
+    {% endif %}
+</div>

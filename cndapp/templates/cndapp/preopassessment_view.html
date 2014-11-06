@@ -41,20 +41,14 @@
         <dd>{{ preopassessment.iol_power }}</dd>
     </dl>
     <h3>Visual Acuity</h3>
-    {% for reading in preopassessment.preopassessmentvisualacuityreading_set.all %}
-    <dl>
-        <dt>Eye</dt>
-        <dd>{{ reading.eye }}</dd>
-        <dt>Scale</dt>
-        <dd>{{ reading.scale }}</dd>
-        <dt>Correction</dt>
-        <dd>{{ reading.correction }}</dd>
-        <dt>Value</dt>
-        <dd>{{ reading.value }}</dd>
-    </dl>
-    {% empty %}
-    <p>None</p>
-    {% endfor %}
+    <div class="eyes">
+        <div class="right-eye {% if preopassessment.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
+	    {% with readings=preopassessment.right_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
+        </div>
+        <div class="left-eye {% if preopassessment.patient.treated_eye.name == "Left" %}treated-eye{% endif %}">
+	    {% with readings=preopassessment.left_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
+	</div>
+    </div>
     {% empty %}
     <p><a href="{% url 'create_preop' patient.id %}">Add Pre-Op Assessment</a></p>
     {% endfor %}

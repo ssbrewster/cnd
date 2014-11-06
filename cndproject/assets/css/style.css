@@ -606,3 +606,7 @@ form .iopagents label {
 .left-eye {
 	flex: 1;
 }
+
+.treated-eye {
+	background-color: #ffc;
+}

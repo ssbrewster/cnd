@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import jsonfield.fields
-import django.db.models.deletion
 from django.conf import settings
+import django.db.models.deletion
+import cndapp.models
 import uuidfield.fields
 import django.core.validators
 
@@ -92,8 +92,21 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date', models.DateField()),
-                ('left_refraction', jsonfield.fields.JSONField()),
-                ('right_refraction', jsonfield.fields.JSONField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='FollowUpRefraction',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('eyedraw', cndapp.models.EyedrawField()),
+                ('sphere', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('cylinder', models.DecimalField(max_digits=4, decimal_places=2)),
+                ('axis', models.DecimalField(max_digits=4, decimal_places=1, validators=[django.core.validators.MinValueValidator(0.5), django.core.validators.MaxValueValidator(180)])),
+                ('eye', models.ForeignKey(to='cndapp.Eye')),
+                ('followup', models.ForeignKey(to='cndapp.FollowUp')),
             ],
             options={
             },
@@ -163,7 +176,7 @@ class Migration(migrations.Migration):
                 ('age', models.IntegerField()),
                 ('first_eye', models.BooleanField(default=None, choices=[(True, 'Yes'), (False, 'No')])),
                 ('lens_inserted', models.BooleanField(default=None, choices=[(True, 'Yes'), (False, 'No')])),
-                ('eyedraw', jsonfield.fields.JSONField()),
+                ('eyedraw', cndapp.models.EyedrawField()),
                 ('additional_procedures', models.ManyToManyField(to='cndapp.AdditionalProcedure')),
                 ('anaesthetic', models.ManyToManyField(to='cndapp.AnaestheticType')),
                 ('complications', models.ManyToManyField(to='cndapp.Complication')),
@@ -219,7 +232,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date', models.DateField()),
-                ('morphology', models.TextField()),
+                ('morphology', cndapp.models.EyedrawField()),
                 ('diabetes', models.BooleanField(default=None, choices=[(True, 'Yes'), (False, 'No')])),
                 ('alpha_blockers', models.BooleanField(default=None, choices=[(True, 'Yes'), (False, 'No')])),
                 ('able_to_cooperate', models.BooleanField(default=None, choices=[(True, 'Yes'), (False, 'No')])),
@@ -247,6 +260,18 @@ class Migration(migrations.Migration):
                 ('value', models.DecimalField(max_digits=3, decimal_places=2)),
             ],
             options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='RefractionType',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=64)),
+                ('sort', models.IntegerField()),
+            ],
+            options={
+                'ordering': ['sort'],
             },
             bases=(models.Model,),
         ),
@@ -363,6 +388,16 @@ class Migration(migrations.Migration):
             name='scale',
             field=models.ForeignKey(to='cndapp.VisualAcuityScale'),
             preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='followuprefraction',
+            name='type',
+            field=models.ForeignKey(to='cndapp.RefractionType'),
+            preserve_default=True,
+        ),
+        migrations.AlterUniqueTogether(
+            name='followuprefraction',
+            unique_together=set([('followup', 'eye')]),
         ),
         migrations.AddField(
             model_name='followup',

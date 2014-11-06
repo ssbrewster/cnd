@@ -440,6 +440,22 @@
 		"fields": {"name": "Other", "sort": 270}
 	},
 	{
+		"model": "cndapp.refractiontype",
+		"fields": {"name": "Subjective", "sort": 10}
+	},
+	{
+		"model": "cndapp.refractiontype",
+		"fields": {"name": "Focimetry", "sort": 20}
+	},
+	{
+		"model": "cndapp.refractiontype",
+		"fields": {"name": "Autorefraction", "sort": 30}
+	},
+	{
+		"model": "cndapp.refractiontype",
+		"fields": {"name": "Retinoscopy", "sort": 40}
+	},
+	{
 		"model": "cndapp.surgeongrade",
 		"fields": {"name": "Consultant ", "sort": 10}
 	},

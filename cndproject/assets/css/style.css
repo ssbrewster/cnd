@@ -169,7 +169,7 @@ form ul {
 
 form ul li {
 	list-style: none;
-	margin: 10px 0;
+	margin: 10px 0 15px;
 }
 
 form ul li:before,form ul li:after {
@@ -626,6 +626,21 @@ form .iopagents label {
 .eyedraw-row {
     width: 300px;
     display: inline-block;
+}
+
+.ms-container {
+    margin-right: 8px;
+    float: left;
+    width: 500px;
+}
+
+.ms-container .ms-selectable {
+    margin-right: 10%;
+}
+
+.ms-container li, .ms-container ul {
+    display: block;
+    margin: auto;
 }
 
 .ui-datepicker {

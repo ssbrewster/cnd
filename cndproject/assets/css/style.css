@@ -641,3 +641,7 @@ form .iopagents label {
     display: block;
     margin: auto;
 }
+
+.ui-datepicker {
+	z-index: 100 !important;
+}

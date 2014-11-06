@@ -45,7 +45,7 @@ PreOpAssessmentVisualAcuityReadingFormSet = \
 class OpNoteForm(forms.ModelForm):
     class Meta:
         model = OpNote
-        exclude = ( 'patient', 'created_by', 'updated_by', )
+        exclude = ( 'patient', 'created_by', 'updated_by' )
         widgets = {
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),

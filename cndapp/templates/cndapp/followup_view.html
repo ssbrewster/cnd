@@ -1,8 +1,20 @@
 <div class="data-section">
-    <h2>Follow Up</h2>
-    {% if patient.followup_set.count %}
-    <p>Follow Up completed</p>
-    {% else %}
+    {% for followup in patient.followup_set.all %}
+    <h2>Follow Up {{ followup.date }} </h2>
+    <h3>Visual Acuity</h3>
+    <div class="eyes">
+        <div class="right-eye {% if followup.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
+	    {% with readings=followup.right_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
+        </div>
+        <div class="left-eye {% if followup.patient.treated_eye.name == "Left" %}treated-eye{% endif %}">
+	    {% with readings=followup.left_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
+	</div>
+    </div>
+    <h3>Refraction</h3>
+    <b>TODO</b>
+    <h3>Post-operative complications</h3>
+    {{ followup.complications.all|join:", "|default:"None" }}
+    {% empty %}
     <p><a href="{% url 'create_followup' patient.id %}">Add Follow Up</a></p>
-    {% endif %}
+    {% endfor %}
 </div>

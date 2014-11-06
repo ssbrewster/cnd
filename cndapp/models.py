@@ -209,6 +209,12 @@ class PreOpAssessment(models.Model):
     def __unicode__(self):
         return str(self.patient)
 
+    def left_va_readings(self):
+        return self.preopassessmentvisualacuityreading_set.filter(eye__name = "Left")
+
+    def right_va_readings(self):
+        return self.preopassessmentvisualacuityreading_set.filter(eye__name = "Right")
+
 class PreOpAssessmentVisualAcuityReading(models.Model):
     preopassessment = models.ForeignKey(PreOpAssessment)
     eye = models.ForeignKey(Eye)
@@ -263,6 +269,12 @@ class FollowUp(models.Model):
 
     def __unicode__(self):
         return str(self.pk)
+
+    def left_va_readings(self):
+        return self.followupvisualacuityreading_set.filter(eye__name = "Left")
+
+    def right_va_readings(self):
+        return self.followupvisualacuityreading_set.filter(eye__name = "Right")
 
 class FollowUpVisualAcuityReading(models.Model):
     followup = models.ForeignKey(FollowUp)

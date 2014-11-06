@@ -591,3 +591,15 @@ form .iopagents label {
 	bottom: 0;
 	right: 0;
 }
+
+.eyes {
+	display: flex;
+}
+
+.right-eye {
+	flex: 1;
+}
+
+.left-eye {
+	flex: 1;
+}

@@ -1,5 +1,5 @@
+{% for preopassessment in patient.preopassessment_set.all %}
 <div class="data-section">
-    {% for preopassessment in patient.preopassessment_set.all %}
     <h2>Pre-Op Assessment {{ preopassessment.date }}</h2>
     <h3>Visual Acuity</h3>
     <div class="eyes">
@@ -87,7 +87,10 @@
 	    </table>
 	</div>
     </div>
-    {% empty %}
-    <p><a href="{% url 'create_preop' patient.id %}">Add Pre-Op Assessment</a></p>
-    {% endfor %}
 </div>
+{% include "cndapp/opnote_view.html" %}
+{% empty %}
+<div class="data-section">
+    <p><a href="{% url 'create_preop' patient.id %}">Add Pre-Op Assessment</a></p>
+</div>
+{% endfor %}

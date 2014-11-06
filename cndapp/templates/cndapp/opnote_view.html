@@ -1,8 +1,11 @@
+{% for opnote in patient.opnote_set.all %}
 <div class="data-section">
-    <h2>Operation Note</h2>
-    {% if patient.opnote_set.count %}
+    <h2>Operation Note {{ opnote.date }}</h2>
     <p>Operation Note completed</p>
-    {% else %}
-    <p><a href="{% url 'create_opnote' patient.id %}">Add Operation Note</a></p>
-    {% endif %}
 </div>
+{% include "cndapp/followup_view.html" %}
+{% empty %}
+<div class="data-section">
+    <p><a href="{% url 'create_opnote' patient.id %}">Add Operation Note</a></p>
+</div>
+{% endfor %}

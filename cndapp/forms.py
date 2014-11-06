@@ -21,9 +21,19 @@ class CaptchaContactForm(ContactForm):
     captcha = ReCaptchaField()
 
 class PreOpAssessmentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PreOpAssessmentForm, self).__init__(*args, **kwargs)
+        self.fields['diabetes'].required = True
+        self.fields['alpha_blockers'].required = True
+        self.fields['able_to_cooperate'].required = True
+        self.fields['able_to_lie_flat'].required = True
+        self.fields['guarded_prognosis'].required = True
+
     class Meta:
         model = PreOpAssessment
-        exclude = ( 'patient', 'created_by', 'updated_by', )
+        fields = ('date', 'morphology', 'diabetes', 'alpha_blockers', 'able_to_cooperate', 'able_to_lie_flat',
+                  'ocular_copathology', 'guarded_prognosis', 'keratomy_unit', 'k1', 'k2', 'axis_k1', 'axial_length',
+                  'desired_refraction', 'predicted_refraction', 'iol_power')
         widgets = {
             'diabetes': forms.RadioSelect(),
             'alpha_blockers': forms.RadioSelect(),
@@ -43,7 +53,6 @@ PreOpAssessmentVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading, extra = 1, can_delete = False)
 
 class OpNoteForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(OpNoteForm, self).__init__(*args, **kwargs)
         self.fields['first_eye'].required = True

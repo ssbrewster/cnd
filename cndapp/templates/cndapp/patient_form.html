@@ -15,13 +15,21 @@
     </div>
     <fieldset>
         <ul>
-        {% for field in form %}
             <li>
-                {{ field.errors }}
-                {{ field.label_tag }}
-                {{ field }}
+                {{ form.gender.label_tag }}
+                {{ form.gender }}
+                {{ form.gender.errors }}
             </li>
-        {% endfor %}
+            <li>
+                {{ form.postcode.label_tag }}
+                {{ form.postcode }}
+                {{ form.postcode.errors }}
+            </li>
+            <li>
+                {{ form.treated_eye.label_tag }}
+                {{ form.treated_eye }}
+                {{ form.treated_eye.errors }}
+            </li>
         </ul>
     </fieldset>
     <div class="actions clearfix">

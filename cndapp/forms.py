@@ -15,8 +15,7 @@ class ContactForm(forms.Form):
     def send_email(self):
         message = get_template('cndapp/message.txt')
         d = Context(self.cleaned_data)
-        send_mail('Message from CND contact form', message.render(d), settings.CONTACT_SENDER,
-                  settings.CONTACT_RECIPIENTS)
+        send_mail('Message from CND contact form', message.render(d), settings.CONTACT_SENDER, settings.CONTACT_RECIPIENTS)
 
 class CaptchaContactForm(ContactForm):
     captcha = ReCaptchaField()
@@ -24,19 +23,18 @@ class CaptchaContactForm(ContactForm):
 class PreOpAssessmentForm(forms.ModelForm):
     class Meta:
         model = PreOpAssessment
-        exclude = ( 'created_by', 'updated_by', )
+        exclude = ( 'patient', 'created_by', 'updated_by', )
         widgets = {
             'diabetes': forms.RadioSelect(),
             'alpha_blockers': forms.RadioSelect(),
             'able_to_cooperate': forms.RadioSelect(),
             'able_to_lie_flat': forms.RadioSelect(),
             'guarded_prognosis': forms.RadioSelect(),
+            'morphology': forms.HiddenInput(),
         }
 
-PreOpAssessmentVisualAcuityReadingFormSet = forms.models.inlineformset_factory(PreOpAssessment,
-                                                                               PreOpAssessmentVisualAcuityReading,
-                                                                               extra = 1,
-                                                                               can_delete = False)
+PreOpAssessmentVisualAcuityReadingFormSet = \
+    forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading, extra = 1, can_delete = False)
 
 class OpNoteForm(forms.ModelForm):
     class Meta:
@@ -52,7 +50,5 @@ class FollowUpForm(forms.ModelForm):
         model = FollowUp
         exclude = ( 'created_by', 'updated_by', )
 
-FollowUpVisualAcuityReadingFormSet = forms.models.inlineformset_factory(FollowUp,
-                                                                               FollowUpVisualAcuityReading,
-                                                                               extra = 1,
-                                                                               can_delete = False)
+FollowUpVisualAcuityReadingFormSet = \
+    forms.models.inlineformset_factory(FollowUp, FollowUpVisualAcuityReading, extra = 1, can_delete = False)

@@ -181,7 +181,7 @@ class PreOpAssessment(models.Model):
 
     date = models.DateField()
 
-    morphology = JSONField()
+    morphology = models.TextField()
     STATE_CHOICES = (
         (True, u'Yes'),
         (False, u'No'),
@@ -201,10 +201,10 @@ class PreOpAssessment(models.Model):
     axial_length = models.DecimalField(max_digits = 4, decimal_places = 2)
     desired_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
     predicted_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
-    iol_power = models.DecimalField(max_digits = 4, decimal_places = 2)
+    iol_power = models.DecimalField(verbose_name='IOL power', max_digits = 4, decimal_places = 2)
 
     def get_absolute_url(self):
-        return reverse('list')
+        return reverse('detail', kwargs={'pk': self.patient.id})
 
     def __unicode__(self):
         return str(self.patient)
@@ -244,7 +244,7 @@ class OpNote(models.Model):
     complications = models.ManyToManyField(Complication)
 
     def get_absolute_url(self):
-        return reverse('list')
+        return reverse('detail', kwargs={'pk': self.patient.id})
 
     def __unicode__(self):
         return str(self.pk)
@@ -259,7 +259,7 @@ class FollowUp(models.Model):
     complications = models.ManyToManyField(PostOpComplication)
 
     def get_absolute_url(self):
-        return reverse('list')
+        return reverse('detail', kwargs={'pk': self.patient.id})
 
     def __unicode__(self):
         return str(self.pk)

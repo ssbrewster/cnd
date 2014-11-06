@@ -5,17 +5,20 @@
 {% block title %}Create Pre-op Assessment{% endblock %}
 {% block content %}
 <h1>Create Pre-op Assessment</h1>
-<form action="" method="post">
+<form action="{% url 'create_preop' patient.id %}" method="post">
     {% csrf_token %}
     <fieldset>
         <ul>
-        {% for field in form %}
+            {% for field in form %}
             <li>
                 {{ field.label_tag }}
+                {% if field.name = 'morphology' %}
+                <canvas id="{{ form.morphology.id_for_label}}_canvas" class="ed-canvas" width="300" height="300"></canvas>
+                {% endif %}
                 {{ field }}
                 {{ field.errors }}
             </li>
-        {% endfor %}
+            {% endfor %}
         </ul>
     </fieldset>
     <fieldset>
@@ -39,11 +42,25 @@
 </form>
 {% endblock %}
 {% block body-end %}
-    <script type="text/javascript">
-        $(function() {
-            $('.inline.{{ va_form.prefix }}').formset({
-                prefix: '{{ va_form.prefix }}',
-            });
-        })
-    </script>
+<script type="text/javascript">
+    $(function() {
+        $('.inline.{{ va_form.prefix }}').formset({
+            prefix: '{{ va_form.prefix }}',
+        });
+    })
+    $(document).ready(function() {
+        ED.init({
+            'drawingName': '{{ form.morphology.id_for_label}}_drawing',
+            'canvasId': '{{ form.morphology.id_for_label}}_canvas',
+            'eye': 0,
+            'scale': 1,
+            'isEditable': true,
+            'graphicsPath': '/static/eyedraw/img',
+            'inputId': '{{ form.morphology.id_for_label}}',
+            'onReadyCommandArray': [
+                ['addDoodle',['AntSeg']]
+            ],
+        });
+    });
+</script>
 {% endblock %}

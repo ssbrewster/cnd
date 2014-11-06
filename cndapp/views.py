@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.utils.decorators import method_decorator
 from django.contrib.sites.models import get_current_site
 from django.http import Http404, HttpResponseRedirect
-
+from django.shortcuts import get_object_or_404
 from cndapp.forms import *
 from cndapp.models import Patient, PreOpAssessment, OpNote, FollowUp
 
@@ -104,12 +104,13 @@ class PreOpAssessmentCreateView(CreateView):
         Handles GET requests and instantiates blank versions of the form
         and its inline formsets.
         """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         va_form = PreOpAssessmentVisualAcuityReadingFormSet()
         return self.render_to_response(
-            self.get_context_data(form=form, va_form=va_form))
+            self.get_context_data(patient=self.patient, form=form, va_form=va_form))
 
     def post(self, request, *args, **kwargs):
         """
@@ -117,6 +118,7 @@ class PreOpAssessmentCreateView(CreateView):
         formsets with the passed POST variables and then checking them for
         validity.
         """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -132,6 +134,7 @@ class PreOpAssessmentCreateView(CreateView):
         associated Ingredients and Instructions and then redirects to a
         success page.
         """
+        form.instance.patient = self.patient
         self.object = form.save()
         va_form.instance = self.object
         va_form.save()
@@ -143,7 +146,7 @@ class PreOpAssessmentCreateView(CreateView):
         data-filled forms and errors.
         """
         return self.render_to_response(
-            self.get_context_data(form=form, va_form=va_form))
+            self.get_context_data(patient=self.patient, form=form, va_form=va_form))
 
 class OpNoteCreateView(CreateView):
     model = OpNote

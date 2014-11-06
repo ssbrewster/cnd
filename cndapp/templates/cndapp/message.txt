@@ -3,4 +3,4 @@ From: {{ name }} {{ email }}
 {{ message }}
 
 ---
-This message was sent via the CGRN website contact form
+This message was sent via the CND website contact form

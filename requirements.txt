@@ -7,3 +7,4 @@ django-compressor
 django-recaptcha
 python-dateutil
 django-form-utils
+django-etc

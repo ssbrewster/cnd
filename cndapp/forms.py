@@ -43,9 +43,16 @@ PreOpAssessmentVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(PreOpAssessment, PreOpAssessmentVisualAcuityReading, extra = 1, can_delete = False)
 
 class OpNoteForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(OpNoteForm, self).__init__(*args, **kwargs)
+        self.fields['first_eye'].required = True
+        self.fields['lens_inserted'].required = True
+
     class Meta:
         model = OpNote
-        exclude = ( 'patient', 'created_by', 'updated_by', )
+        fields = ('date', 'age', 'anaesthetic', 'surgeon_grade', 'first_eye', 'primary_reason', 'lens_inserted',
+                  'eyedraw', 'difficulty_factors', 'iol_position', 'additional_procedures', 'complications')
         widgets = {
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),

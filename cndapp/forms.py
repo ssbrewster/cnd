@@ -52,6 +52,19 @@ class OpNoteForm(forms.ModelForm):
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),
         }
+    eyedraw_tools = [
+        {'name': 'PhakoIncision', 'label': 'Phako Incision'},
+        {'name': 'SidePort', 'label': 'Side Port'},
+        {'name': 'IrisHook', 'label': 'Iris Hook'},
+        {'name': 'PCIOL', 'label': 'PCIOL'},
+        {'name': 'ACIOL', 'label': 'ACIOL'},
+        {'name': 'PI', 'label': 'PI'},
+        {'name': 'MattressSuture', 'label': 'Mattress Suture'},
+        {'name': 'CapsularTensionRing', 'label': 'Capsular Tension Ring'},
+        {'name': 'CornealSuture', 'label': 'Corneal Suture'},
+        {'name': 'ToricPCIOL', 'label': 'Toric PCIOL'},
+        {'name': 'LimbalRelaxingIncision', 'label': 'Limbal Relaxing Incision'}
+    ]
 
 class FollowUpForm(forms.ModelForm):
     class Meta:

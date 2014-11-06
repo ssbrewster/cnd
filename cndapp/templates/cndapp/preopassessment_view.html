@@ -86,7 +86,8 @@
 		</tbody>
 	    </table>
 	</div>
-	{% empty %}
+    </div>
+    {% empty %}
     <p><a href="{% url 'create_preop' patient.id %}">Add Pre-Op Assessment</a></p>
     {% endfor %}
 </div>

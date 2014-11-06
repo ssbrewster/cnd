@@ -39,7 +39,7 @@ PreOpAssessmentVisualAcuityReadingFormSet = \
 class OpNoteForm(forms.ModelForm):
     class Meta:
         model = OpNote
-        exclude = ( 'created_by', 'updated_by', )
+        exclude = ( 'patient', 'created_by', 'updated_by', )
         widgets = {
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),
@@ -48,7 +48,7 @@ class OpNoteForm(forms.ModelForm):
 class FollowUpForm(forms.ModelForm):
     class Meta:
         model = FollowUp
-        exclude = ( 'created_by', 'updated_by', )
+        exclude = ( 'patient', 'created_by', 'updated_by', )
 
 FollowUpVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(FollowUp, FollowUpVisualAcuityReading, extra = 1, can_delete = False)

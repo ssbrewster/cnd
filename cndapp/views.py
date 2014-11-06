@@ -152,6 +152,51 @@ class OpNoteCreateView(CreateView):
     model = OpNote
     form_class = OpNoteForm
 
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        return self.render_to_response(
+            self.get_context_data(patient=self.patient, form=form))
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if (form.is_valid()):
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        """
+        Called if all forms are valid. Creates a Recipe instance along with
+        associated Ingredients and Instructions and then redirects to a
+        success page.
+        """
+        form.instance.patient = self.patient
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, va_form):
+        """
+        Called if a form is invalid. Re-renders the context data with the
+        data-filled forms and errors.
+        """
+        return self.render_to_response(
+            self.get_context_data(patient=self.patient, form=form))
+
 class FollowUpCreateView(CreateView):
     model = FollowUp
     form_class = FollowUpForm
@@ -161,12 +206,13 @@ class FollowUpCreateView(CreateView):
         Handles GET requests and instantiates blank versions of the form
         and its inline formsets.
         """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         va_form = FollowUpVisualAcuityReadingFormSet()
         return self.render_to_response(
-            self.get_context_data(form=form, va_form=va_form))
+            self.get_context_data(patient=self.patient, form=form, va_form=va_form))
 
     def post(self, request, *args, **kwargs):
         """
@@ -174,6 +220,7 @@ class FollowUpCreateView(CreateView):
         formsets with the passed POST variables and then checking them for
         validity.
         """
+        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -189,6 +236,7 @@ class FollowUpCreateView(CreateView):
         associated Ingredients and Instructions and then redirects to a
         success page.
         """
+        form.instance.patient = self.patient
         self.object = form.save()
         va_form.instance = self.object
         va_form.save()
@@ -200,4 +248,4 @@ class FollowUpCreateView(CreateView):
         data-filled forms and errors.
         """
         return self.render_to_response(
-            self.get_context_data(form=form, va_form=va_form))
+            self.get_context_data(patient=self.patient, form=form, va_form=va_form))

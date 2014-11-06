@@ -472,7 +472,7 @@ function initDatepicker() {
 		$(this).datepicker({
 			changeMonth : true,
 			changeYear : true,
-			dateFormat : 'yy-mm-dd',
+			dateFormat : 'dd/mm/yy',
 		});
 	});
 	$(".datepicker.past").datepicker("option", "maxDate", "+0D");

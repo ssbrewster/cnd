@@ -5,7 +5,7 @@ from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
 from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading, FollowUp, FollowUpVisualAcuityReading, OpNote
-
+import datetime
 
 class ContactForm(forms.Form):
     name = forms.CharField()
@@ -25,6 +25,7 @@ class PreOpAssessmentForm(forms.ModelForm):
         model = PreOpAssessment
         exclude = ( 'patient', 'created_by', 'updated_by', )
         widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
             'diabetes': forms.RadioSelect(),
             'alpha_blockers': forms.RadioSelect(),
             'able_to_cooperate': forms.RadioSelect(),
@@ -47,6 +48,7 @@ class OpNoteForm(forms.ModelForm):
         model = OpNote
         exclude = ( 'patient', 'created_by', 'updated_by' )
         widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),
         }
@@ -55,6 +57,9 @@ class FollowUpForm(forms.ModelForm):
     class Meta:
         model = FollowUp
         exclude = ( 'patient', 'created_by', 'updated_by', )
+        widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
+        }
 
 FollowUpVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(FollowUp, FollowUpVisualAcuityReading, extra = 1, can_delete = False)

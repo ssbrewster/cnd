@@ -626,3 +626,7 @@ form .iopagents label {
     width: 300px;
     display: inline-block;
 }
+
+.ui-datepicker {
+	z-index: 100 !important;
+}

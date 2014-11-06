@@ -189,7 +189,7 @@ class OpNoteCreateView(CreateView):
         self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_invalid(self, form, va_form):
+    def form_invalid(self, form):
         """
         Called if a form is invalid. Re-renders the context data with the
         data-filled forms and errors.

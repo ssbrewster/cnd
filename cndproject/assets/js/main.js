@@ -25,6 +25,11 @@ $(document).ready(function() {
 		}
 	});
 	
+	// Multiselect widget application
+	$('form select[multiple="multiple"]').multiselect({
+		selectedList: 3
+	});
+
 	// Visual Acuity scale changes
 	$('.visualacuityscale').each(function() {
 		if($('option', this).length <= 2) {

@@ -521,7 +521,7 @@
 	},
 	{
 		"model": "cndapp.visualacuityscale",
-		"fields": {"name": "Log MAR ", "sort": 20}
+		"fields": {"name": "LogMAR ", "sort": 20}
 	},
 	{
 		"model": "cndapp.visualacuityscale",

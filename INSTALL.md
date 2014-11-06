@@ -10,6 +10,7 @@ INSTALL
 - git clone git@github.com:openeyes/cnd.git
 - cd cnd
 - pip install -r requirements.txt
-- ./manage migrate
-- ./manage createsuperuser
-- ./manage runserver
+- ./manage.py migrate
+- ./manage.py loaddata initial_data
+- ./manage.py createsuperuser
+- ./manage.py runserver

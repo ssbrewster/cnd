@@ -595,6 +595,17 @@ form .iopagents label {
 	right: 0;
 }
 
+.row {
+	display: flex;
+	flex: 1;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
 .eyes {
 	display: flex;
 }

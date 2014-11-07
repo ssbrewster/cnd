@@ -53,6 +53,17 @@
             {% endfor %}
     </fieldset>
     <fieldset>
+	<legend>Refraction</legend>
+	<div class="eyes">
+            <div class="right-eye {% if patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
+		{% with form=refr_form_r %}{% include "cndapp/refraction_form.html" %}{% endwith %}
+	    </div>
+            <div class="left-eye {% if patient.treated_eye.name == "Left" %}treated-eye{% endif %}">
+		{% with form=refr_form_l %}{% include "cndapp/refraction_form.html" %}{% endwith %}
+	    </div>
+	</div>
+    </fieldset>
+    <fieldset>
         <legend>Complications</legend>
         <ul>
             <li>
@@ -77,5 +88,35 @@
                 prefix: '{{ va_form.prefix }}',
             });
         })
+        $(document).ready(function() {
+            ED.init({
+                canvasId: '{{ refr_form_r.eyedraw.id_for_label}}_canvas',
+                isEditable: true,
+                graphicsPath: '/static/eyedraw/img',
+                inputId: '{{ refr_form_r.eyedraw.id_for_label}}',
+                onReadyCommandArray: [
+                    ['addDoodle',['TrialFrame']],
+                    ['addDoodle',['TrialLens']],
+                ],
+                bindingArray: {
+                    TrialLens: {axis: {id: "{{ refr_form_r.axis.auto_id }}"}}
+                }
+            });
+        });
+        $(document).ready(function() {
+            ED.init({
+                canvasId: '{{ refr_form_l.eyedraw.id_for_label}}_canvas',
+                isEditable: true,
+                graphicsPath: '/static/eyedraw/img',
+                inputId: '{{ refr_form_l.eyedraw.id_for_label}}',
+                onReadyCommandArray: [
+                    ['addDoodle',['TrialFrame']],
+                    ['addDoodle',['TrialLens']],
+                ],
+                bindingArray: {
+                    TrialLens: {axis: {id: "{{ refr_form_l.axis.auto_id }}"}}
+                }
+            });
+        });
     </script>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
-from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading, FollowUp, FollowUpVisualAcuityReading, OpNote
+from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading, FollowUp, FollowUpVisualAcuityReading, FollowUpRefraction, OpNote
 import datetime
 
 class ContactForm(forms.Form):
@@ -76,3 +76,11 @@ class FollowUpForm(forms.ModelForm):
 
 FollowUpVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(FollowUp, FollowUpVisualAcuityReading, extra = 1, can_delete = False)
+
+class FollowUpRefractionForm(forms.ModelForm):
+    class Meta:
+        model = FollowUpRefraction
+        exclude = ( 'followup', )
+        widgets = {
+            'eye': forms.HiddenInput(),
+        }

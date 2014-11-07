@@ -316,4 +316,4 @@ class FollowUpRefraction(models.Model):
     type = models.ForeignKey(RefractionType)
     sphere = models.DecimalField(max_digits = 4, decimal_places = 2)
     cylinder = models.DecimalField(max_digits = 4, decimal_places = 2)
-    axis = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+    axis = models.DecimalField(max_digits = 4, decimal_places = 1, default = 0, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])

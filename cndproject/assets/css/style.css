@@ -212,6 +212,10 @@ form label.inline {
 	margin-left: 10px;
 }
 
+form .column label {
+    width: 60px;
+}
+
 .inline_form {
 	margin: 10px 0;
 }

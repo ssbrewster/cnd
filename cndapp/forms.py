@@ -99,4 +99,5 @@ class FollowUpRefractionForm(forms.ModelForm):
         exclude = ( 'followup', )
         widgets = {
             'eye': forms.HiddenInput(),
+            'axis': forms.NumberInput(attrs={'step': 1}),
         }

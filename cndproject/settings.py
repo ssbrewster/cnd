@@ -110,4 +110,8 @@ TEMPLATE_DIRS = (
     os.path.normpath(os.path.join(PROJECT_DIR, 'templates')),
 )
 
+SEND_ACTIVATION_EMAIL = False
+REGISTRATION_AUTO_LOGIN = False
+ACCOUNT_ACTIVATION_DAYS = 7
+
 from settings_local import *

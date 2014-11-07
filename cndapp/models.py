@@ -3,7 +3,6 @@ from django.core import validators
 from django.core.urlresolvers import reverse
 from django.db import models
 from django import forms
-from jsonfield import JSONField
 from uuidfield import UUIDField
 import datetime
 

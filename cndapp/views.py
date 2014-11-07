@@ -4,6 +4,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.sites.models import get_current_site
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
+
 from cndapp.forms import *
 from cndapp.models import Patient, PreOpAssessment, OpNote, FollowUp
 
@@ -138,7 +140,11 @@ class PreOpAssessmentCreateView(CreateView):
         self.object = form.save()
         va_form.instance = self.object
         va_form.save()
-        return HttpResponseRedirect(self.get_success_url())
+        if 'save_and_next' in form.data:
+            redirect = reverse('create_opnote', kwargs={'patient': self.patient.id})
+        else:
+            redirect = self.get_success_url()
+        return HttpResponseRedirect(redirect)
 
     def form_invalid(self, form, va_form):
         """
@@ -187,7 +193,11 @@ class OpNoteCreateView(CreateView):
         """
         form.instance.patient = self.patient
         self.object = form.save()
-        return HttpResponseRedirect(self.get_success_url())
+        if 'save_and_next' in form.data:
+            redirect = reverse('create_followup', kwargs={'patient': self.patient.id})
+        else:
+            redirect = self.get_success_url()
+        return HttpResponseRedirect(redirect)
 
     def form_invalid(self, form):
         """

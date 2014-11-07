@@ -9,7 +9,7 @@
     {% csrf_token %}
     <div class="actions clearfix">
         <ul>
-            <li><input type="submit" value="Save" /></li>
+            <li><input type="submit" value="Save and Complete" /></li>
             <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>
@@ -51,7 +51,7 @@
     </fieldset>
     <div class="actions clearfix">
         <ul>
-            <li><input type="submit" value="Save" /></li>
+            <li><input type="submit" value="Save and Complete" /></li>
             <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>

@@ -10,7 +10,8 @@
     <div class="actions clearfix">
         <ul>
             <li><input type="submit" value="Save" /></li>
-            <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
+             <li><input type="submit" value="Save and Next" name="save_and_next"/></li>
+           <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>
     <fieldset>
@@ -150,6 +151,7 @@
     <div class="actions clearfix">
         <ul>
             <li><input type="submit" value="Save" /></li>
+            <li><input type="submit" value="Save and Next" name="save_and_next"/></li>
             <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>

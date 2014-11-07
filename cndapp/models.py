@@ -5,6 +5,7 @@ from django.db import models
 from django import forms
 from jsonfield import JSONField
 from uuidfield import UUIDField
+import datetime
 
 class PostcodeValidator(models.Model):
     pattern = models.CharField(max_length=64)
@@ -200,7 +201,7 @@ class EyedrawField(models.TextField):
 class PreOpAssessment(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
-    date = models.DateField()
+    date = models.DateField(default=datetime.date.today)
 
     morphology = EyedrawField()
     STATE_CHOICES = (
@@ -215,7 +216,7 @@ class PreOpAssessment(models.Model):
     guarded_prognosis = models.BooleanField(default=None, choices=STATE_CHOICES)
 
     # Biometry
-    keratomy_unit = models.ForeignKey(KeratomyUnit)
+    keratomy_unit = models.ForeignKey(KeratomyUnit, verbose_name='Keratometry unit')
     k1 = models.DecimalField(max_digits = 4, decimal_places = 2)
     k2 = models.DecimalField(max_digits = 4, decimal_places = 2)
     axis_k1 = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
@@ -249,7 +250,7 @@ class PreOpAssessmentVisualAcuityReading(models.Model):
 class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
-    date = models.DateField()
+    date = models.DateField(default=datetime.date.today)
     age = models.IntegerField()
 
     anaesthetic = models.ManyToManyField(AnaestheticType)
@@ -279,7 +280,7 @@ class OpNote(models.Model):
 class FollowUp(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
-    date = models.DateField()
+    date = models.DateField(default=datetime.date.today)
 
     complications = models.ManyToManyField(PostOpComplication)
 

@@ -26,9 +26,7 @@ $(document).ready(function() {
 	});
 	
 	// Multiselect widget application
-	$('form select[multiple="multiple"]').multiselect({
-		selectedList: 3
-	});
+	$('form select[multiple="multiple"]').multiSelect();
 
 	// Visual Acuity scale changes
 	$('.visualacuityscale').each(function() {
@@ -472,7 +470,7 @@ function initDatepicker() {
 		$(this).datepicker({
 			changeMonth : true,
 			changeYear : true,
-			dateFormat : 'yy-mm-dd',
+			dateFormat : 'dd/mm/yy',
 		});
 	});
 	$(".datepicker.past").datepicker("option", "maxDate", "+0D");

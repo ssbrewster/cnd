@@ -5,7 +5,7 @@ from django.template import Context
 from django.conf import settings
 from captcha.fields import ReCaptchaField
 from cndapp.models import PreOpAssessment, PreOpAssessmentVisualAcuityReading, FollowUp, FollowUpVisualAcuityReading, OpNote
-
+import datetime
 
 class ContactForm(forms.Form):
     name = forms.CharField()
@@ -35,6 +35,7 @@ class PreOpAssessmentForm(forms.ModelForm):
                   'ocular_copathology', 'guarded_prognosis', 'keratomy_unit', 'k1', 'k2', 'axis_k1', 'axial_length',
                   'desired_refraction', 'predicted_refraction', 'iol_power')
         widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
             'diabetes': forms.RadioSelect(),
             'alpha_blockers': forms.RadioSelect(),
             'able_to_cooperate': forms.RadioSelect(),
@@ -63,14 +64,31 @@ class OpNoteForm(forms.ModelForm):
         fields = ('date', 'age', 'anaesthetic', 'surgeon_grade', 'first_eye', 'primary_reason', 'lens_inserted',
                   'eyedraw', 'difficulty_factors', 'iol_position', 'additional_procedures', 'complications')
         widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
             'first_eye': forms.RadioSelect(),
             'lens_inserted': forms.RadioSelect(),
         }
+    eyedraw_tools = [
+        {'name': 'PhakoIncision', 'label': 'Phako Incision'},
+        {'name': 'SidePort', 'label': 'Side Port'},
+        {'name': 'IrisHook', 'label': 'Iris Hook'},
+        {'name': 'PCIOL', 'label': 'PCIOL'},
+        {'name': 'ACIOL', 'label': 'ACIOL'},
+        {'name': 'PI', 'label': 'PI'},
+        {'name': 'MattressSuture', 'label': 'Mattress Suture'},
+        {'name': 'CapsularTensionRing', 'label': 'Capsular Tension Ring'},
+        {'name': 'CornealSuture', 'label': 'Corneal Suture'},
+        {'name': 'ToricPCIOL', 'label': 'Toric PCIOL'},
+        {'name': 'LimbalRelaxingIncision', 'label': 'Limbal Relaxing Incision'}
+    ]
 
 class FollowUpForm(forms.ModelForm):
     class Meta:
         model = FollowUp
         exclude = ( 'patient', 'created_by', 'updated_by', )
+        widgets = {
+            'date': forms.DateInput(attrs={'class':'datepicker past'}),
+        }
 
 FollowUpVisualAcuityReadingFormSet = \
     forms.models.inlineformset_factory(FollowUp, FollowUpVisualAcuityReading, extra = 1, can_delete = False)

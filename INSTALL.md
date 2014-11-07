@@ -14,3 +14,5 @@ INSTALL
 - ./manage.py loaddata initial_data
 - ./manage.py createsuperuser
 - ./manage.py runserver
+- configure site setting through web admin
+

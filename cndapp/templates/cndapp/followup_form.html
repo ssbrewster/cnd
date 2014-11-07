@@ -7,15 +7,19 @@
 <h1>Create Follow Up</h1>
 <form action="" method="post">
     {% csrf_token %}
+    <div class="actions clearfix">
+        <ul>
+            <li><input type="submit" value="Save" /></li>
+            <li><a href="{% if patient.uuid %}{% url 'detail' patient.id %}{% else %}{% url 'list' %}{% endif %}">Cancel</a></li>
+        </ul>
+    </div>
     <fieldset>
         <ul>
-        {% for field in form %}
             <li>
-                {{ field.label_tag }}
-                {{ field }}
-                {{ field.errors }}
+                {{ form.date.label_tag }}
+                {{ form.date }}
+                {{ form.date.errors }}
             </li>
-        {% endfor %}
         </ul>
     </fieldset>
     <fieldset>
@@ -35,7 +39,22 @@
                 </ul>
             {% endfor %}
     </fieldset>
-    <input type="submit" value="Submit" />
+    <fieldset>
+        <legend>Complications</legend>
+        <ul>
+            <li>
+                {{ form.complications.label_tag }}
+                {{ form.complications }}
+                {{ form.complications.errors }}
+            </li>
+        </ul>
+    </fieldset>
+    <div class="actions clearfix">
+        <ul>
+            <li><input type="submit" value="Save" /></li>
+            <li><a href="{% if patient.uuid %}{% url 'detail' patient.id %}{% else %}{% url 'list' %}{% endif %}">Cancel</a></li>
+        </ul>
+    </div>
 </form>
 {% endblock %}
 {% block body-end %}

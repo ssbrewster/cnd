@@ -1,0 +1,689 @@
+body {
+	background: #fff;
+	color: #333;
+	font: 14px Helvetica, Arial, sans-serif;
+	line-height: 1.4;
+}
+
+.wrapper {
+	width: 1026px;
+	margin: 0 auto;
+}
+
+.header-banner {
+	background: #e00;
+	color: #fff;
+	font-weight: bold;
+	padding: 5px;
+	text-align: center;
+	width: 100%;
+}
+
+.header-banner.stuck {
+    position: fixed;
+	z-index: 999;
+}
+
+.header-container {
+	background: #eaf7ff;
+	border-bottom: 1px solid #ddd;
+	padding-top: 10px;
+}
+
+.header-container .logo {
+	margin: 0;
+	padding: 0 20px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 20px;
+	color: #333;
+	background: url(../img/anonymeyes-small.png) no-repeat left top;
+}
+
+.header-container .logo a {
+	padding-left: 40px;
+	text-decoration: none;
+	color: #000;
+}
+
+.header-container nav {
+	margin-top: 10px;
+	float: left;
+}
+
+.header-container nav ul {
+	padding: 0;
+	margin: 0 0 -1px 0;
+	list-style: none;
+}
+
+.header-container nav li {
+	float: left;
+	font-size: 14px;
+	margin-right: 5px;
+	border-bottom: 1px solid #ddd;
+	padding: 1px 1px 0;
+	list-style: none;
+}
+
+.header-container nav li a {
+	color: #fff;
+	padding: 3px 6px;
+	display: block;
+	background: #61a3cb;
+	text-decoration: none;
+}
+
+.header-container nav li.highlight a {
+	background: #cb7461;
+}
+
+.header-container nav li.active,
+.header-container nav li.hover {
+	border: 1px solid #ddd;
+	padding: 0;
+}
+.header-container nav li.active {
+	border-bottom-color: #fff;
+}
+
+.header-container nav li.active a,
+.header-container nav li.hover a {
+	background: #fff;
+	color: #666;
+}
+
+.header-container .user {
+	float: right;
+	margin-top: 15px;
+}
+
+.main-container {
+	min-height: 400px;
+}
+
+.footer-container {
+	border-top: 1px solid #ddd;
+	margin-top: 20px;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: normal;
+	margin: 20px 0 0;
+}
+
+h1 span {
+	font-size: 16px;
+	color: #666;
+}
+
+.messages li {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	padding: 10px;
+	list-style: none;
+}
+
+.messages li.error {
+	background: #f99;
+	border-color: #f33;
+}
+
+form fieldset {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	padding: 10px;
+	clear: both;
+}
+
+form fieldset legend {
+	padding: 0 10px;
+	margin: 0 0 -10px 10px;
+	font-size: 18px;
+}
+
+form fieldset fieldset {
+	background: #eee;
+	margin: 15px 10px;
+	position: relative;
+}
+
+form fieldset fieldset legend {
+	font-size: 16px;
+	padding: 0 5px;
+	margin: 0 0 -5px 5px;
+}
+
+form fieldset p {
+	margin: 10px 5px;
+}
+
+
+form ul {
+	padding: 0;
+	list-style: none;
+}
+
+form ul li {
+	list-style: none;
+	margin: 10px 0 15px;
+}
+
+form ul li:before,form ul li:after {
+	content: " ";
+	display: table;
+}
+
+form ul li:after {
+	clear: both;
+}
+
+form ul li {
+	*zoom: 1;
+}
+
+form ul li ul {
+    display: inline-block;
+    margin: 0;
+}
+
+form ul li ul li {
+    display: inline-block;
+    margin: 0;
+}
+
+form ul li ul li label {
+    width: auto;
+}
+
+form label,
+form .label {
+	width: 180px;
+	float: left;
+	text-align: right;
+	padding-right: 10px;
+}
+
+form label.inline {
+	width: auto;
+	margin-left: 10px;
+}
+
+form .column label {
+    width: 60px;
+}
+
+.inline_form {
+	margin: 10px 0;
+}
+
+form span.required,
+form .required label span,
+.inline_form th.required span {
+	font-weight: bold;
+}
+
+/* Various swift hacks to make the eyedraw stuff look a bit better in the demo layout */
+.ed-doodle-popup label {
+	width: auto;
+}
+
+.ed-selected-doodle-select {
+	width: 100%;
+}
+
+.ed-drawing-controls {
+	height: 19px;
+}
+
+
+form span.required:after,
+form .required label span:after,
+.inline_form th.required span:after {
+	content: "*";
+}
+
+form label.error {
+	color: #f33;
+}
+
+form input,
+form select,
+form textarea,
+form .data,
+form .inline_fields {
+	float: left;
+	max-width: 350px;
+	margin-right: 5px;
+}
+
+form .inline_fields input,
+form .inline_fields select,
+form .inline_fields textarea,
+form .inline_fields .data {
+	float: none;
+}
+
+form .inline_fields .errorlist {
+	float: none;
+	display: inline-block;
+}
+
+form .read-only {
+	color: #666;
+}
+
+form .errorlist {
+	margin: 0;
+	float: left;
+}
+
+form .errorlist li {
+	font-size: 12px;
+	color: #f33;
+	margin: 0;
+	line-height: 14px;
+	padding: 2px;
+}
+form td div {
+	margin-top: 4px;
+}
+
+form td div.first {
+	margin-top: 0;
+}
+
+form td label {
+	width: auto;
+	padding: 0 5px 0 0;
+	line-height: 20px;
+}
+
+div.actions {
+	margin: 15px 0;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background: #eaf7ff;
+}
+
+div.actions ul {
+	padding: 0;
+	margin: 0;
+}
+
+div.actions li {
+	float: left;
+	list-style: none;
+	padding: 0;
+	margin: 0 10px 0 0;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+div.actions li a {
+	padding: 0 5px;
+}
+
+div.actions input, div.actions button {
+	float: none;
+	font-size: 1.2em;
+}
+
+form input.datepicker {
+	width: 100px;
+}
+
+form input.small {
+	width: 50px;
+}
+
+input[type="number"] {
+	width: 64px;
+}
+
+#recaptcha_widget_div {
+	float: left;
+	max-width: 350px;
+}
+
+#recaptcha_response_field {
+	left: 0;
+}
+
+.data-section {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px 10px 10px;
+	margin: 30px 0;
+	position: relative;
+}
+
+.data-section h2 {
+	position: absolute;
+	top: -28px;
+	left: 15px;
+	background: #fff;
+	font-weight: normal;
+	padding: 0 10px;
+	font-size: 18px;
+}
+
+.data-section p {
+	margin: 10px 5px;
+}
+
+.data-section table {
+	margin: 10px 0;
+}
+
+.data-section .data-section {
+	background: #fefefe;
+	margin: 15px 10px;
+	position: relative;
+}
+
+.data-section h3 {
+	font-size: 16px;
+	margin: 0 5px 10px;
+	font-weight: normal;
+}
+
+dl {
+	
+}
+
+dl dt,dl dd {
+	float: left;
+	padding: 2px 8px;
+}
+
+dl dt {
+	clear: left;
+	width: 180px;
+	text-align: right;
+	font-weight: normal;
+	margin: 1px 0;
+}
+
+dl dd {
+	margin: 0;
+	line-height: 20px;
+}
+
+dl:before,dl:after {
+	content: " ";
+	display: table;
+}
+
+dl:after {
+	clear: both;
+}
+
+dl {
+	*zoom: 1;
+}
+
+.column dl dt {
+    width: 60px;
+}
+
+th {
+	font-weight: normal;
+	background: #eaf7ff;
+}
+
+th,td {
+	text-align: left;
+	padding: 8px;
+	line-height: 1em;
+	vertical-align: top;
+}
+
+td {
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #ddd;
+}
+
+abbr {
+	cursor: help;
+}
+
+span.help {
+	padding-left: 16px;
+	position: relative;
+	background: url(../img/glyphicons-halflings.png) no-repeat -120px -96px;
+	opacity: 0.6;
+}
+
+span.help span {
+	display: none;
+	width: 200px;
+	font-size: 12px;
+	text-align: left;
+}
+
+span.help.active {
+	cursor: help;
+	opacity: 1;
+}
+
+span.help.active span {
+	display: inline;
+	position: absolute;
+	z-index: 10;
+	top: 15px;
+	left: -100px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 5px 10px;
+	background: #eaf7ff;
+	box-shadow: 5px 5px 3px #999;
+	width: auto;
+	min-width: 150px;
+}
+
+.dataTables_wrapper {
+	margin: 10px 0;
+}
+
+.dataTables_wrapper .fg-toolbar {
+	font-size: 13px;
+	line-height: 1.4em;
+	padding: 6px;
+}
+
+.dataTables_info {
+	padding-top: 0;
+}
+
+table.dataTable td,
+table.dataTable th {
+	padding: 4px 10px;
+	line-height: 1.4em;
+}
+
+table.dataTable th {
+	padding-right: 0;
+}
+
+table.dataTable tr.even {
+}
+
+table.dataTable tr.odd {
+	background-color: #e2f4ff;
+}
+
+table.dataTable tr.even  td.sorting_1 {
+	background-color: #eaf7ff;
+}
+
+table.dataTable tr.odd  td.sorting_1 {
+	background-color: #d3efff;
+}
+
+table.dataTable tfoot {
+	font-size: 13px;
+	line-height: 1.4em;
+}
+
+table.dataTable tfoot input {
+	width: 60px;
+}
+
+table.dataTable tfoot input.search_init {
+	color: #999;
+}
+
+table.dataTable tfoot input.search_uuid {
+	width: 250px;
+}
+
+.row_actions a {
+	float: left;
+	text-indent: -9999px;
+	width: 14px;
+	height: 14px;
+	margin: 2px 2px 0 2px;
+	background: url(../img/glyphicons-halflings.png) no-repeat;
+	opacity: 0.7;
+}
+
+.row_actions a:hover {
+	opacity: 1;
+}
+
+.row_actions .update {
+	background-position: 0 -72px;
+}
+
+.row_actions .delete {
+	background-position: -456px 0;
+}
+
+.inline_form .visualacuitymethod {
+	width: 200px;
+}
+
+.inline_form .visualacuity {
+	max-width: 100px;
+}
+
+dd.uuid {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+form .dob input,
+form .dob select { float: none; display: inline; margin: 0; }
+form .dob .field_wrapper { float: left; margin-right: 5px; }
+form .dob #id_dob_day { width: 30px; }
+form .dob #id_dob_month { width: 50px; }
+form .dob #id_dob_year { width: 50px; }
+form .dob #dob_day_wrapper,
+form .dob #dob_month_wrapper { display: none; }
+form .dob.precision-day #dob_day_wrapper,
+form .dob.precision-day #dob_month_wrapper,
+form .dob.precision-month #dob_month_wrapper { display: inline; }
+form .inline_form input,
+form .inline_form select,
+form .inline_form textarea {
+	float: none;
+	margin: 0;
+}
+form .inline_form td ul,
+.data-section td ul  {
+	padding: 0;
+	margin: 0;
+}
+.data-section td ul li, 
+form .inline_form td ul li { 
+	margin: 0 0 10px;
+	list-style: none;
+}
+
+form .diagnosis_comment {
+	margin: 5px 0 0 190px;
+	clear: both;
+}
+
+form .iopagents {
+	float:left;
+}
+
+form .inline_form .iopagents {
+	float: none;
+	display:inline-block;
+	margin: 0;
+}
+
+form .iopagents ul,
+form .iopagents ul li,
+form .inline_form td .iopagents ul li {
+	margin: 0;
+}
+
+form .iopagents label {
+	text-align: left;
+}
+
+.qrcode {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.row {
+	display: flex;
+	flex: 1;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.eyes {
+	display: flex;
+}
+
+.right-eye {
+	flex: 1;
+}
+
+.left-eye {
+	flex: 1;
+}
+
+.treated-eye {
+	background-color: #ffc;
+}
+
+.eyedraw-row {
+    width: 300px;
+    display: inline-block;
+}
+
+.ms-container {
+    margin-right: 8px;
+    float: left;
+    width: 500px;
+}
+
+.ms-container .ms-selectable {
+    margin-right: 10%;
+}
+
+.ms-container li, .ms-container ul {
+    display: block;
+    margin: auto;
+}
+
+.ui-datepicker {
+	z-index: 100 !important;
+}

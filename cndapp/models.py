@@ -250,7 +250,7 @@ class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
     date = models.DateField(default=datetime.date.today)
-    age = models.IntegerField()
+    age = models.PositiveIntegerField()
 
     anaesthetic = models.ManyToManyField(AnaestheticType)
     surgeon_grade = models.ForeignKey(SurgeonGrade)

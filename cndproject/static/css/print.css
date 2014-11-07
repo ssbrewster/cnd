@@ -9,7 +9,8 @@ abbr[title]:after { content: none; }
 
 nav,
 .user,
-.actions { display: none; }
+.actions,
+.header-banner { display: none; }
 
 .header-container { padding-top: 0; }
 .header-container .logo a { padding-left: 0; }

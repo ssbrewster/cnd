@@ -632,9 +632,9 @@ form .iopagents label {
 }
 
 .qrcode {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+    float:right;
+    margin: 0;
+    padding: 0;
 }
 
 .row {

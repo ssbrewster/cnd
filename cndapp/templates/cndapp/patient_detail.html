@@ -9,10 +9,10 @@
         <li><a href="#" class="print_page">Print</a>
     </ul>
 </div>
-<div class="data-section">
+<div class="data-section patient-demographics">
     <h2>Patient</h2>
-    {% load qrcode %}
-    <div class="qrcode">{{ patient_url|qrcode }}</div>
+    {% load qr_tags %}
+    <div class="qrcode">{% qr_from_text patient_url 150 %}</div>
     <dl>
         <dt><span class="help"><span><strong>U</strong>niversally <strong>U</strong>nique <strong>ID</strong>entifier for this dataset. When
 						printed and kept with patient notes, it allows the dataset to be
@@ -47,6 +47,27 @@
             'isEditable': false,
             'graphicsPath': '/static/eyedraw/img',
             'inputId': 'morphology',
+        });
+        ED.init({
+            'drawingName': 'eyedraw_drawing',
+            'canvasId': 'eyedraw_canvas',
+            'eye': 0,
+            'scale': 1,
+            'isEditable': false,
+            'graphicsPath': '/static/eyedraw/img',
+            'inputId': 'eyedraw',
+        });
+        ED.init({
+            'canvasId': 'right_refraction_eyedraw_canvas',
+            'isEditable': false,
+            'graphicsPath': '/static/eyedraw/img',
+            'inputId': 'right_refraction_eyedraw',
+        });
+        ED.init({
+            'canvasId': 'left_refraction_eyedraw_canvas',
+            'isEditable': false,
+            'graphicsPath': '/static/eyedraw/img',
+            'inputId': 'left_refraction_eyedraw',
         });
     });
 </script>

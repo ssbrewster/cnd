@@ -10,7 +10,8 @@
     <div class="actions clearfix">
         <ul>
             <li><input type="submit" value="Save" /></li>
-            <li><a href="{% if patient.uuid %}{% url 'detail' patient.id %}{% else %}{% url 'list' %}{% endif %}">Cancel</a></li>
+            <li><input type="submit" value="Save and Next" name="save_and_next"/></li>
+            <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>
     <fieldset>
@@ -34,6 +35,25 @@
                                     </ul>
                                 </div>
                                 <div class="ed-editor">
+                                    <div class="ed-drawing-controls">
+                                        <!-- DRAWING TOOLBAR -->
+                                        <ul class="ed-toolbar-panel ed-drawing-toolbar">
+                                            <li>
+                                                <a class="ed-button" href="#" data-function="resetEyedraw">
+                                                    <span class="icon-ed-reset"></span>
+                                                    <span class="label">Reset eyedraw</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- SELECTED DOODLE -->
+                                        <div class="ed-selected-doodle">
+                                            <select class="ed-selected-doodle-select" id="ed_example_selected_doodle" class="ed-selected-doodle-select">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- DOODLE POPUP -->
+                                    <div class="ed-doodle-popup closed">
+                                    </div>
                                     <canvas id="{{ form.eyedraw.id_for_label}}_canvas" class="ed-canvas-edit" width="300" height="300"></canvas>
                                 </div>
                             </div>
@@ -57,7 +77,8 @@
     <div class="actions clearfix">
         <ul>
             <li><input type="submit" value="Save" /></li>
-            <li><a href="{% if patient.uuid %}{% url 'detail' patient.id %}{% else %}{% url 'list' %}{% endif %}">Cancel</a></li>
+            <li><input type="submit" value="Save and Next" name="save_and_next"/></li>
+            <li><a href="{% url 'detail' patient.id %}">Cancel</a></li>
         </ul>
     </div>
 </form>

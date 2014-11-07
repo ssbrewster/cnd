@@ -1,6 +1,6 @@
 {% for opnote in patient.opnote_set.all %}
 <div class="data-section">
-    <h2>Operation Note {{ opnote.date }}</h2>
+    <h2>Operation Note ({{ opnote.date }})</h2>
     <div class="row">
 	<div class="column">
 	    <h3>Anaesthetic</h3>
@@ -12,7 +12,8 @@
 	</div>
     </div>
     <h3>Operation</h3>
-    <b>TODO: eyedraw?</b>
+    <canvas id="eyedraw_canvas" class="ed-canvas" width="300" height="300"></canvas>
+    <input type="hidden" id="eyedraw" value="{{ opnote.eyedraw }}">
     <table>
 	<thead>
 	    <th>First / second eye</th>

@@ -3,7 +3,6 @@ from django.core import validators
 from django.core.urlresolvers import reverse
 from django.db import models
 from django import forms
-from jsonfield import JSONField
 from uuidfield import UUIDField
 import datetime
 
@@ -252,7 +251,7 @@ class OpNote(models.Model):
     patient = models.ForeignKey(Patient, unique = True)
 
     date = models.DateField(default=datetime.date.today)
-    age = models.IntegerField()
+    age = models.PositiveIntegerField()
 
     anaesthetic = models.ManyToManyField(AnaestheticType)
     surgeon_grade = models.ForeignKey(SurgeonGrade)
@@ -298,6 +297,12 @@ class FollowUp(models.Model):
     def right_va_readings(self):
         return self.followupvisualacuityreading_set.filter(eye__name = "Right")
 
+    def left_refraction(self):
+        return self.followuprefraction_set.get(eye__name = "Left")
+
+    def right_refraction(self):
+        return self.followuprefraction_set.get(eye__name = "Right")
+
 class FollowUpVisualAcuityReading(models.Model):
     followup = models.ForeignKey(FollowUp)
     eye = models.ForeignKey(Eye)
@@ -319,4 +324,4 @@ class FollowUpRefraction(models.Model):
     type = models.ForeignKey(RefractionType)
     sphere = models.DecimalField(max_digits = 4, decimal_places = 2)
     cylinder = models.DecimalField(max_digits = 4, decimal_places = 2)
-    axis = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+    axis = models.DecimalField(max_digits = 4, decimal_places = 1, default = 0, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])

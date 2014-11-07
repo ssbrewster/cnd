@@ -1,6 +1,6 @@
 <div class="data-section">
     {% for followup in patient.followup_set.all %}
-    <h2>Follow Up {{ followup.date }} </h2>
+    <h2>Follow Up ({{ followup.date }}) </h2>
     <h3>Visual Acuity</h3>
     <div class="eyes">
         <div class="right-eye {% if followup.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
@@ -11,7 +11,14 @@
 	</div>
     </div>
     <h3>Refraction</h3>
-    <b>TODO</b>
+    <div class="eyes">
+        <div class="right-eye {% if followup.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
+	    {% with refr=followup.right_refraction side="right" %}{% include "cndapp/refraction_view.html" %}{% endwith %}
+	</div>
+        <div class="left-eye {% if followup.patient.treated_eye.name == "Left" %}treated-eye{% endif %}">
+	    {% with refr=followup.left_refraction side="left" %}{% include "cndapp/refraction_view.html" %}{% endwith %}
+	</div>
+    </div>
     <h3>Post-operative complications</h3>
     {{ followup.complications.all|join:", "|default:"None" }}
     {% empty %}

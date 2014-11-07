@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'qrcode',
     'compressor',
     'captcha',
     'etc',
@@ -108,5 +109,9 @@ SITE_ID = 1
 TEMPLATE_DIRS = (
     os.path.normpath(os.path.join(PROJECT_DIR, 'templates')),
 )
+
+SEND_ACTIVATION_EMAIL = False
+REGISTRATION_AUTO_LOGIN = False
+ACCOUNT_ACTIVATION_DAYS = 7
 
 from settings_local import *

@@ -45,9 +45,6 @@ class PreOpAssessmentForm(forms.ModelForm):
         }
     morphology_tools = [
         {'name': 'PI', 'label': 'Peripheral Iridectomy'},
-        {'name': 'NuclearCataract', 'label': 'Nuclear Cataract'},
-        {'name': 'CorticalCataract', 'label': 'Cortical Cataract'},
-        {'name': 'PostSubcapCataract', 'label': 'Posterior Subcapsular Cataract'},
     ]
 
 PreOpAssessmentVisualAcuityReadingFormSet = \

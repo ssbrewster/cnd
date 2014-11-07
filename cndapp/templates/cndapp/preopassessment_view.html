@@ -22,8 +22,8 @@
 		    <th>Alpha blockers</th>
 		</thead>
 		<tbody>
-		    <td>{{ preopassessment.diabetes }}</td>
-		    <td>{{ preopassessment.alpha_blockers }}</td>
+		    <td>{{ preopassessment.get_diabetes_display }}</td>
+		    <td>{{ preopassessment.get_alpha_blockers_display }}</td>
 		</tbody>
 	    </table>
 	</div>
@@ -35,8 +35,8 @@
 		    <th>Able to lie flat</th>
 		</thead>
 		<tbody>
-		    <td>{{ preopassessment.able_to_cooperate }}</td>
-		    <td>{{ preopassessment.able_to_lie_flat }}</td>
+		    <td>{{ preopassessment.get_able_to_cooperate_display }}</td>
+		    <td>{{ preopassessment.get_able_to_lie_flat_display }}</td>
 		</tbody>
 	    </table>
 	</div>
@@ -46,7 +46,7 @@
     {% if cps|length > 0 %}
     <div class="row">
 	<div class="column">{{ preopassessment.ocular_copathology.all|join:", " }}</div>
-	<div class="column">Co-pathology reason for guarded prognosis? {{ preopassessment.guarded_prognosis }}</div>
+	<div class="column">Co-pathology reason for guarded prognosis? {{ preopassessment.get_guarded_prognosis_display }}</div>
     </div>
     {% else %}
     None

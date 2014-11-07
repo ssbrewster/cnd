@@ -18,13 +18,13 @@
 	    <th>First / second eye</th>
 	    <th>Primary reason for surgery</th>
 	    <th>IOL inserted?</th>
-	    {% if opnote.lens_inserted %}<th>IOL position</th>{% endif %}
+	    {% if opnote.get_lens_inserted_display %}<th>IOL position</th>{% endif %}
 	</thead>
 	<tbody>
-	    <td>{% if opnote.first_eye %}First{% else %}Second{% endif %}</td>
+	    <td>{% if opnote.get_first_eye_display %}First{% else %}Second{% endif %}</td>
 	    <td>{{ opnote.primary_reason.name }}</td>
-	    <td>{{ opnote.lens_inserted }}</td>
-	    {% if opnote.lens_inserted %}<td>{{ opnote.iol_position.name }}</td>{% endif %}
+	    <td>{{ opnote.get_lens_inserted_display }}</td>
+	    {% if opnote.get_lens_inserted_display %}<td>{{ opnote.iol_position.name }}</td>{% endif %}
 	</tbody>
     </table>
     <table>

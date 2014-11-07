@@ -237,6 +237,7 @@ class PreOpAssessment(models.Model):
     def right_va_readings(self):
         return self.preopassessmentvisualacuityreading_set.filter(eye__name = "Right")
 
+
 class PreOpAssessmentVisualAcuityReading(models.Model):
     preopassessment = models.ForeignKey(PreOpAssessment)
     eye = models.ForeignKey(Eye)
@@ -276,6 +277,7 @@ class OpNote(models.Model):
 
     def __unicode__(self):
         return str(self.pk)
+
 
 class FollowUp(models.Model):
     patient = models.ForeignKey(Patient, unique = True)

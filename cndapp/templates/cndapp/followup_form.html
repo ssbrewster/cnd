@@ -29,13 +29,26 @@
             {% for form in va_form %}
                 {{ form.id }}
                 <ul class="inline {{ va_form.prefix }}">
-                    {% for field in form %}
                     <li>
-                        {% if not field.is_hidden %}{{ field.label_tag }}{% endif %}
-                        {{ field }}
-                        {{ field.errors }}
+                        {{ form.eye.label_tag }}
+                        {{ form.eye }}
+                        {{ form.eye.errors }}
                     </li>
-                    {% endfor %}
+                    <li>
+                        {{ form.scale.label_tag }}
+                        {{ form.scale }}
+                        {{ form.scale.errors }}
+                    </li>
+                    <li>
+                        <label for="{{ form.correction.id_for_label }}"><span class="help"><span>List is in preferred order</span></span>Correction</label>
+                        {{ form.correction }}
+                        {{ form.correction.errors }}
+                    </li>
+                    <li>
+                        {{ form.value.label_tag }}
+                        {{ form.value }}
+                        {{ form.value.errors }}
+                    </li>
                 </ul>
             {% endfor %}
     </fieldset>

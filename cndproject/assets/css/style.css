@@ -442,6 +442,7 @@ span.help span {
 	display: none;
 	width: 200px;
 	font-size: 12px;
+	text-align: left;
 }
 
 span.help.active {
@@ -457,9 +458,11 @@ span.help.active span {
 	left: -100px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 5px 10px;
 	background: #eaf7ff;
 	box-shadow: 5px 5px 3px #999;
+	width: auto;
+	min-width: 150px;
 }
 
 .dataTables_wrapper {

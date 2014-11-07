@@ -226,6 +226,20 @@ form .required label span,
 	font-weight: bold;
 }
 
+/* Various swift hacks to make the eyedraw stuff look a bit better in the demo layout */
+.ed-doodle-popup label {
+	width: auto;
+}
+
+.ed-selected-doodle-select {
+	width: 100%;
+}
+
+.ed-drawing-controls {
+	height: 19px;
+}
+
+
 form span.required:after,
 form .required label span:after,
 .inline_form th.required span:after {

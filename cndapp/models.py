@@ -216,7 +216,7 @@ class PreOpAssessment(models.Model):
     guarded_prognosis = models.BooleanField(default=None, choices=STATE_CHOICES)
 
     # Biometry
-    keratomy_unit = models.ForeignKey(KeratomyUnit)
+    keratomy_unit = models.ForeignKey(KeratomyUnit, verbose_name='Keratometry unit')
     k1 = models.DecimalField(max_digits = 4, decimal_places = 2)
     k2 = models.DecimalField(max_digits = 4, decimal_places = 2)
     axis_k1 = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])

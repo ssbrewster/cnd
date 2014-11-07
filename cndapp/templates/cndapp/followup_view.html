@@ -1,6 +1,6 @@
 <div class="data-section">
     {% for followup in patient.followup_set.all %}
-    <h2>Follow Up {{ followup.date }} </h2>
+    <h2>Follow Up ({{ followup.date }}) </h2>
     <h3>Visual Acuity</h3>
     <div class="eyes">
         <div class="right-eye {% if followup.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">

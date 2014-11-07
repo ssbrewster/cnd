@@ -1,91 +1,110 @@
 {% for preopassessment in patient.preopassessment_set.all %}
 <div class="data-section">
-    <h2>Pre-Op Assessment {{ preopassessment.date }}</h2>
-    <h3>Visual Acuity</h3>
-    <div class="eyes">
-        <div class="right-eye {% if preopassessment.patient.treated_eye.name == "Right" %}treated-eye{% endif %}">
-	    {% with readings=preopassessment.right_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
+    <h2>Pre-Op Assessment ({{ preopassessment.date }})</h2>
+
+    <div class="data-section">
+        <h3>Visual Acuity</h3>
+
+        <div class="eyes">
+            <div class="right-eye
+            {% if preopassessment.patient.treated_eye.name == 'Right' %}treated-eye{% endif %}">
+                {% with readings=preopassessment.right_va_readings %}
+                {% include "cndapp/va_readings.html" %}
+                {% endwith %}
+            </div>
+            <div class="left-eye
+        {% if preopassessment.patient.treated_eye.name == 'Left' %}treated-eye{% endif %}">
+                {% with readings=preopassessment.left_va_readings %}
+                {% include "cndapp/va_readings.html" %}
+                {% endwith %}
+            </div>
         </div>
-        <div class="left-eye {% if preopassessment.patient.treated_eye.name == "Left" %}treated-eye{% endif %}">
-	    {% with readings=preopassessment.left_va_readings %}{% include "cndapp/va_readings.html" %}{% endwith %}
-	</div>
     </div>
-    <h3>Cataract morphology</h3>
-    <canvas id="morphology_canvas" class="ed-canvas" width="300" height="300"></canvas>
-    <input type="hidden" id="morphology" value="{{ preopassessment.morphology }}">
-    <div class="row">
-	<div class="column">
-	    <h3>General health</h3>
-	    <table>
-		<thead>
-		    <th>Diabetes</th>
-		    <th>Alpha blockers</th>
-		</thead>
-		<tbody>
-		    <td>{{ preopassessment.diabetes }}</td>
-		    <td>{{ preopassessment.alpha_blockers }}</td>
-		</tbody>
-	    </table>
-	</div>
-	<div class="column">
-	    <h3>Ability to co-operate with procedure</h3>
-	    <table>
-		<thead>
-		    <th>Able to co-operate</th>
-		    <th>Able to lie flat</th>
-		</thead>
-		<tbody>
-		    <td>{{ preopassessment.able_to_cooperate }}</td>
-		    <td>{{ preopassessment.able_to_lie_flat }}</td>
-		</tbody>
-	    </table>
-	</div>
+    <div class="data-section">
+        <h3>Cataract morphology</h3>
+        <canvas id="morphology_canvas" class="ed-canvas" width="300" height="300"></canvas>
+        <input type="hidden" id="morphology" value="{{ preopassessment.morphology }}">
+
+        <div class="row">
+            <div class="column">
+                <h3>General health</h3>
+                <table>
+                    <thead>
+                    <th>Diabetes</th>
+                    <th>Alpha blockers</th>
+                    </thead>
+                    <tbody>
+                    <td>{{ preopassessment.diabetes }}</td>
+                    <td>{{ preopassessment.alpha_blockers }}</td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column">
+                <h3>Ability to co-operate with procedure</h3>
+                <table>
+                    <thead>
+                    <th>Able to co-operate</th>
+                    <th>Able to lie flat</th>
+                    </thead>
+                    <tbody>
+                    <td>{{ preopassessment.able_to_cooperate }}</td>
+                    <td>{{ preopassessment.able_to_lie_flat }}</td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <h3>Ocular Co-pathologies</h3>
-    {% with cps=preopassessment.ocular_copathology.all %}
-    {% if cps|length > 0 %}
-    <div class="row">
-	<div class="column">{{ preopassessment.ocular_copathology.all|join:", " }}</div>
-	<div class="column">Co-pathology reason for guarded prognosis? {{ preopassessment.guarded_prognosis }}</div>
+    <div class="data-section">
+        <h3>Ocular Co-pathologies</h3>
+        {% with cps=preopassessment.ocular_copathology.all %}
+        {% if cps|length > 0 %}
+        <div class="row">
+            <div class="column">{{ preopassessment.ocular_copathology.all|join:", " }}</div>
+            <div class="column">Co-pathology reason for guarded prognosis? {{ preopassessment.guarded_prognosis }}
+            </div>
+        </div>
+        {% else %}
+        None
+        {% endif %}
+        {% endwith %}
     </div>
-    {% else %}
-    None
-    {% endif %}
-    {% endwith %}
-    <h3>Biometry</h3>
-    <div class="row">
-	<div class="column">
-	    <table>
-		<thead>
-		    <th>Keratometry units</th>
-		    <th>K1</th>
-		    <th>Axis K1</th>
-		    <th>K2</th>
-		    <th>Axial length</th>
-		</thead>
-		<tbody>
-		    <td>{{ preopassessment.keratomy_unit }}</td>
-		    <td>{{ preopassessment.k1 }}</td>
-		    <td>{{ preopassessment.axis_k1 }}&deg;</td>
-		    <td>{{ preopassessment.k2 }}</td>
-		    <td>{{ preopassessment.axial_length }} mm</td>
-		</tbody>
-	    </table>
-	</div>
-	<div class="column">
-	    <table>
-		<thead>
-		    <th>Desired post-operative spherical error</th>
-		    <th>Predicted post-operative spherical error</th>
-		    <th>IOL power</th>
-		</thead>
-		<tbody>
-		    <td>{{ preopassessment.desired_refraction }} dpt</td>
-		    <td>{{ preopassessment.predicted_refraction }} dpt</td>
-		    <td>{{ preopassessment.iol_power }} dpt</td>
-		</tbody>
-	    </table>
-	</div>
+    <div class="data-section">
+        <h3>Biometry</h3>
+
+        <div class="row">
+            <div class="column">
+                <table>
+                    <thead>
+                    <th>Keratometry units</th>
+                    <th>K1</th>
+                    <th>Axis K1</th>
+                    <th>K2</th>
+                    <th>Axial length</th>
+                    </thead>
+                    <tbody>
+                    <td>{{ preopassessment.keratomy_unit }}</td>
+                    <td>{{ preopassessment.k1 }}</td>
+                    <td>{{ preopassessment.axis_k1 }}&deg;</td>
+                    <td>{{ preopassessment.k2 }}</td>
+                    <td>{{ preopassessment.axial_length }} mm</td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column">
+                <table>
+                    <thead>
+                    <th>Desired post-operative spherical error</th>
+                    <th>Predicted post-operative spherical error</th>
+                    <th>IOL power</th>
+                    </thead>
+                    <tbody>
+                    <td>{{ preopassessment.desired_refraction }} dpt</td>
+                    <td>{{ preopassessment.predicted_refraction }} dpt</td>
+                    <td>{{ preopassessment.iol_power }} dpt</td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% include "cndapp/opnote_view.html" %}

@@ -362,6 +362,18 @@ input[type="number"] {
 	margin: 10px 0;
 }
 
+.data-section .data-section {
+	background: #fefefe;
+	margin: 15px 10px;
+	position: relative;
+}
+
+.data-section h3 {
+	font-size: 16px;
+	margin: 0 5px 10px;
+	font-weight: normal;
+}
+
 dl {
 	
 }

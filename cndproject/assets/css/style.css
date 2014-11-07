@@ -632,9 +632,15 @@ form .iopagents label {
 }
 
 .qrcode {
-    float:right;
+    position: absolute;
     margin: 0;
     padding: 0;
+    bottom: 2px;
+    right: 2px;
+}
+
+.patient-demographics {
+    min-height: 180px;
 }
 
 .row {

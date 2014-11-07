@@ -295,6 +295,12 @@ class FollowUp(models.Model):
     def right_va_readings(self):
         return self.followupvisualacuityreading_set.filter(eye__name = "Right")
 
+    def left_refraction(self):
+        return self.followuprefraction_set.get(eye__name = "Left")
+
+    def right_refraction(self):
+        return self.followuprefraction_set.get(eye__name = "Right")
+
 class FollowUpVisualAcuityReading(models.Model):
     followup = models.ForeignKey(FollowUp)
     eye = models.ForeignKey(Eye)

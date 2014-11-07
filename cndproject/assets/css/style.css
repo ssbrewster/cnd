@@ -427,6 +427,10 @@ dl {
 	*zoom: 1;
 }
 
+.column dl dt {
+    width: 60px;
+}
+
 th {
 	font-weight: normal;
 	background: #eaf7ff;

@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'etc',
     'cndapp',
     'registration'
+    'rest_framework'
 )
 
 MIDDLEWARE_CLASSES = (

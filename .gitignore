@@ -5,3 +5,5 @@
 .idea
 .vagrant
 .DS_Store
+settings_local.py
+settings_local.py.example

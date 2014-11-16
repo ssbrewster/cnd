@@ -36,13 +36,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'qrcode',
     'compressor',
     'captcha',
     'etc',
     'cndapp',
-    'registration'
-    'rest_framework'
+    'registration',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (

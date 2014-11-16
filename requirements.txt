@@ -1,4 +1,4 @@
-Django>=1.7.1
+Django==1.7.1
 django-uuidfield
 jsonfield
 MySQL-python
@@ -11,3 +11,4 @@ django-etc
 django-registration-redux
 django-qrcode
 djangorestframework
+django-debug-toolbar==1.2.2

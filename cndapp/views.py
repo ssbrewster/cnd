@@ -5,18 +5,30 @@ from django.contrib.sites.models import get_current_site
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
-
+from rest_framework import renderers
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework import viewsets
+from rest_framework.decorators import detail_route
+from rest_framework.views import APIView
+from rest_framework import status
 from cndapp.forms import *
-from cndapp.models import Eye, Patient, PreOpAssessment, OpNote, FollowUp
+from .models import Eye, Patient, PreOpAssessment, OpNote, FollowUp, Gender
+from .serializers import PatientSerializer, GenderSerializer
+
 
 class IndexView(TemplateView):
     template_name = 'cndapp/index.html'
 
+
 class AboutView(TemplateView):
     template_name = 'cndapp/about.html'
 
+
 class HelpView(TemplateView):
     template_name = 'cndapp/help.html'
+
 
 class ContactView(FormView):
     template_name = 'cndapp/contact.html'
@@ -32,70 +44,19 @@ class ContactView(FormView):
         form.send_email()
         return super(ContactView, self).form_valid(form)
 
+
 class ThanksView(TemplateView):
     template_name = 'cndapp/thanks.html'
 
-class PatientListView(ListView):
-     context_object_name = 'patients'
 
-     def get_queryset(self):
-          return Patient.objects.filter(created_by=self.request.user)
+class PatientViewSet(viewsets.ModelViewSet):
+    """
+    This endpoint represents the patients that have been added to the database.
 
-     @method_decorator(login_required)
-     def dispatch(self, request, *args, **kwargs):
-         return super(PatientListView, self).dispatch(request, *args, **kwargs)
+    """
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
 
-class PatientDetailView(DetailView):
-    context_object_name = 'patient'
-
-    def get_queryset(self):
-          return Patient.objects.filter(created_by=self.request.user)
-
-    def get_context_data(self, **kwargs):
-        context = super(PatientDetailView, self).get_context_data(**kwargs)
-        context['patient_url'] = 'http://' + get_current_site(self.request).domain + '/cndapp/uuid/' + str(self.get_object().uuid)
-        return context
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(PatientDetailView, self).dispatch(request, *args, **kwargs)
-
-class PatientUUIDView(RedirectView):
-    def get_redirect_url(self, **kwargs):
-        try:
-            patient = Patient.objects.get(uuid=kwargs['uuid'])
-            return '/cndapp/detail/' + str(patient.pk)
-        except:
-            raise Http404
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(PatientUUIDView, self).dispatch(request, *args, **kwargs)
-
-class PatientCreateView(CreateView):
-    model = Patient
-    fields = ['gender', 'postcode', 'treated_eye']
-
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        form.instance.updated_by = self.request.user
-        response = super(PatientCreateView, self).form_valid(form)
-        return response
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(PatientCreateView, self).dispatch(request, *args, **kwargs)
-
-class PatientDeleteView(DeleteView):
-    context_object_name = 'patient'
-    success_url = '/cndapp/list/'
-
-    def get_queryset(self):
-        return Patient.objects.filter(created_by=self.request.user)
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(PatientDeleteView, self).dispatch(request, *args, **kwargs)
 
 class PreOpAssessmentCreateView(CreateView):
     model = PreOpAssessment
@@ -154,6 +115,7 @@ class PreOpAssessmentCreateView(CreateView):
         return self.render_to_response(
             self.get_context_data(patient=self.patient, form=form, va_form=va_form))
 
+
 class OpNoteCreateView(CreateView):
     model = OpNote
     form_class = OpNoteForm
@@ -206,6 +168,7 @@ class OpNoteCreateView(CreateView):
         """
         return self.render_to_response(
             self.get_context_data(patient=self.patient, form=form))
+
 
 class FollowUpCreateView(CreateView):
     model = FollowUp
@@ -269,3 +232,11 @@ class FollowUpCreateView(CreateView):
         print refr_form_l.errors
         return self.render_to_response(
             self.get_context_data(patient=self.patient, form=form, va_form=va_form, refr_form_r = refr_form_r, refr_form_l = refr_form_l))
+
+
+class GenderViewSet(viewsets.ModelViewSet):
+    """
+    Lists all genders and users for each gender
+    """
+    queryset = Gender.objects.all()
+    serializer_class = GenderSerializer

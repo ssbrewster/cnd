@@ -73,11 +73,12 @@ class Eye(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Gender(models.Model):
-    name = models.CharField(max_length = 12)
+    gender = models.CharField(max_length = 12)
 
     def __unicode__(self):
-        return self.name
+        return self.gender
 
 class IolPosition(models.Model):
     class Meta:
@@ -181,11 +182,9 @@ class Patient(models.Model):
     postcode = models.CharField(max_length = 4)  # TODO validation
     treated_eye = models.ForeignKey(Eye)
 
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'pk': self.pk})
+    def save(self, *args, **kwargs):
+        super(Patient, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return self.uuid.hex
 
 class EyedrawField(models.TextField):
 

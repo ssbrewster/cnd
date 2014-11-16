@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 # Create a router and register the viewsets with it
 router = DefaultRouter()
 router.register(r'patients', views.PatientViewSet)
+router.register(r'preopassements', views.PreOpAssessmentViewSet)
+router.register(r'opnotes', views.OpNoteViewSet)
 router.register(r'gender', views.GenderViewSet)
 
 urlpatterns = [

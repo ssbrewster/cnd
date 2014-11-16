@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from cndapp.forms import *
 from .models import Eye, Patient, PreOpAssessment, OpNote, FollowUp, Gender
-from .serializers import PatientSerializer, GenderSerializer
+from .serializers import PatientSerializer, PreOpAssessmentSerializer, OpNoteSerializer, GenderSerializer
 
 
 class IndexView(TemplateView):
@@ -58,116 +58,20 @@ class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
 
 
-class PreOpAssessmentCreateView(CreateView):
-    model = PreOpAssessment
-    form_class = PreOpAssessmentForm
-
-    def get(self, request, *args, **kwargs):
-        """
-        Handles GET requests and instantiates blank versions of the form
-        and its inline formsets.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        va_form = PreOpAssessmentVisualAcuityReadingFormSet()
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form, va_form=va_form))
-
-    def post(self, request, *args, **kwargs):
-        """
-        Handles POST requests, instantiating a form instance and its inline
-        formsets with the passed POST variables and then checking them for
-        validity.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        va_form = PreOpAssessmentVisualAcuityReadingFormSet(self.request.POST)
-        if (form.is_valid() and va_form.is_valid()):
-            return self.form_valid(form, va_form)
-        else:
-            return self.form_invalid(form, va_form)
-
-    def form_valid(self, form, va_form):
-        """
-        Called if all forms are valid. Creates a Recipe instance along with
-        associated Ingredients and Instructions and then redirects to a
-        success page.
-        """
-        form.instance.patient = self.patient
-        self.object = form.save()
-        va_form.instance = self.object
-        va_form.save()
-        if 'save_and_next' in form.data:
-            redirect = reverse('create_opnote', kwargs={'patient': self.patient.id})
-        else:
-            redirect = self.get_success_url()
-        return HttpResponseRedirect(redirect)
-
-    def form_invalid(self, form, va_form):
-        """
-        Called if a form is invalid. Re-renders the context data with the
-        data-filled forms and errors.
-        """
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form, va_form=va_form))
+class PreOpAssessmentViewSet(viewsets.ModelViewSet):
+    """
+    This endpoint represents the pre-op assessments in the database.
+    """
+    queryset = PreOpAssessment.objects.all()
+    serializer_class = PreOpAssessmentSerializer
 
 
-class OpNoteCreateView(CreateView):
-    model = OpNote
-    form_class = OpNoteForm
-
-    def get(self, request, *args, **kwargs):
-        """
-        Handles GET requests and instantiates blank versions of the form
-        and its inline formsets.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form))
-
-    def post(self, request, *args, **kwargs):
-        """
-        Handles POST requests, instantiating a form instance and its inline
-        formsets with the passed POST variables and then checking them for
-        validity.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        if (form.is_valid()):
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        """
-        Called if all forms are valid. Creates a Recipe instance along with
-        associated Ingredients and Instructions and then redirects to a
-        success page.
-        """
-        form.instance.patient = self.patient
-        self.object = form.save()
-        if 'save_and_next' in form.data:
-            redirect = reverse('create_followup', kwargs={'patient': self.patient.id})
-        else:
-            redirect = self.get_success_url()
-        return HttpResponseRedirect(redirect)
-
-    def form_invalid(self, form):
-        """
-        Called if a form is invalid. Re-renders the context data with the
-        data-filled forms and errors.
-        """
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form))
+class OpNoteViewSet(viewsets.ModelViewSet):
+    """
+    This endpoint represents the op-notes in the database.
+    """
+    queryset = OpNote.objects.all()
+    serializer_class = OpNoteSerializer
 
 
 class FollowUpCreateView(CreateView):

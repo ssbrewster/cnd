@@ -262,7 +262,6 @@ class OpNote(models.Model):
     primary_reason = models.ForeignKey(SurgeryReason)
     lens_inserted = models.BooleanField(default=None, choices=STATE_CHOICES)
 
-    # The cut-down dataset doesn't require this but Bill thinks we should include it because it looks cool
     eyedraw = EyedrawField()
 
     difficulty_factors = models.ManyToManyField(DifficultyFactor)

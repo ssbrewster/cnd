@@ -1,21 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, DeleteView, RedirectView
-from django.utils.decorators import method_decorator
-from django.contrib.sites.models import get_current_site
-from django.http import Http404, HttpResponseRedirect
+
+from django.views.generic import TemplateView,  CreateView, FormView
+from django.http import  HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.core.urlresolvers import reverse
-from rest_framework import renderers
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
 from rest_framework import viewsets
-from rest_framework.decorators import detail_route
-from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import generics
 from cndapp.forms import *
-from .models import Eye, Patient, PreOpAssessment, OpNote, FollowUp, Gender
-from .serializers import PatientSerializer, PreOpAssessmentSerializer, OpNoteSerializer, GenderSerializer
+from .models import  Patient, PreOpAssessment, OpNote, FollowUp,  Eye
+from .serializers import PatientSerializer, PreOpAssessmentSerializer, OpNoteSerializer
+
 
 
 class IndexView(TemplateView):
@@ -138,9 +130,18 @@ class FollowUpCreateView(CreateView):
             self.get_context_data(patient=self.patient, form=form, va_form=va_form, refr_form_r = refr_form_r, refr_form_l = refr_form_l))
 
 
-class GenderViewSet(viewsets.ModelViewSet):
+class PatientByGenderList(generics.ListAPIView):
     """
-    Lists all genders and users for each gender
+    This endpoint lists all patients by gender
     """
-    queryset = Gender.objects.all()
-    serializer_class = GenderSerializer
+    serializer_class = PatientSerializer
+
+    def get_queryset(self):
+        """
+        :return: queryset of patients restricted by gender.
+        """
+        queryset = Patient.objects.all()
+        gender = self.request.QUERY_PARAMS.get('gender', None)
+        if gender is not None:
+            queryset = queryset.filter(gender__name=gender)
+        return queryset

@@ -6,6 +6,7 @@ from django import forms
 from uuidfield import UUIDField
 import datetime
 
+
 class PostcodeValidator(models.Model):
     pattern = models.CharField(max_length=64)
     error = models.CharField(max_length=255)
@@ -13,173 +14,189 @@ class PostcodeValidator(models.Model):
     def __unicode__(self):
         return self.pattern
 
-class Country(models.Model):
-    class Meta:
-        ordering = ['sort', 'name']
 
+class Country(models.Model):
     name = models.CharField(max_length=64)
     sort = models.IntegerField(default=10)
     iso = models.CharField(max_length=2)
     postcode_validator = models.ForeignKey(PostcodeValidator)
+
+    class Meta:
+        ordering = ['sort', 'name']
 
     def __unicode__(self):
         return self.name
 
 # Lookup tables
 
+
 class AdditionalProcedure(models.Model):
+    name = models.CharField(max_length=85)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 85)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class AnaestheticType(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class Complication(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class DifficultyFactor(models.Model):
+    name = models.CharField(max_length=85)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
-
-    name = models.CharField(max_length = 85)
-    sort = models.IntegerField()
 
     def __unicode__(self):
         return self.name
 
+
 class Eye(models.Model):
-    name = models.CharField(max_length = 5)
+    name = models.CharField(max_length=5)
 
     def __unicode__(self):
         return self.name
 
 
 class Gender(models.Model):
-    gender = models.CharField(max_length = 12)
+    name = models.CharField(max_length=12)
 
     def __unicode__(self):
-        return self.gender
+        return self.name
+
 
 class IolPosition(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class KeratomyUnit(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class OcularCopathology(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class PostOpComplication(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class RefractionType(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class SurgeonGrade(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class SurgeryReason(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
 
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
-
     def __unicode__(self):
         return self.name
+
 
 class VisualAcuityCorrection(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
-
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
 
     def __unicode__(self):
         return self.name
 
+
 class VisualAcuityScale(models.Model):
+    name = models.CharField(max_length=64)
+    sort = models.IntegerField()
+
     class Meta:
         ordering = ['sort']
-
-    name = models.CharField(max_length = 64)
-    sort = models.IntegerField()
 
     def __unicode__(self):
         return self.name
 
 # Form data
 
+
 class Patient(models.Model):
-    uuid = UUIDField(auto = True, unique = True)
+    uuid = UUIDField(auto=True, unique=True)
     created_by = models.ForeignKey(User, related_name='patient_created_set', blank=True, null=True, on_delete=models.SET_NULL)
     updated_by = models.ForeignKey(User, related_name='patient_updated_set', blank=True, null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     gender = models.ForeignKey(Gender)
-    postcode = models.CharField(max_length = 4)  # TODO validation
+    postcode = models.CharField(max_length=4)  # TODO validation
     treated_eye = models.ForeignKey(Eye)
 
     def save(self, *args, **kwargs):
@@ -196,8 +213,9 @@ class EyedrawField(models.TextField):
         defaults.update(kwargs)
         return super(EyedrawField, self).formfield(**defaults)
 
+
 class PreOpAssessment(models.Model):
-    patient = models.ForeignKey(Patient, unique = True)
+    patient = models.ForeignKey(Patient, unique=True)
 
     date = models.DateField(default=datetime.date.today)
 
@@ -215,25 +233,25 @@ class PreOpAssessment(models.Model):
 
     # Biometry
     keratomy_unit = models.ForeignKey(KeratomyUnit, verbose_name='Keratometry unit')
-    k1 = models.DecimalField(max_digits = 4, decimal_places = 2)
-    k2 = models.DecimalField(max_digits = 4, decimal_places = 2)
-    axis_k1 = models.DecimalField(max_digits = 4, decimal_places = 1, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
-    axial_length = models.DecimalField(max_digits = 4, decimal_places = 2)
-    desired_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
-    predicted_refraction = models.DecimalField(max_digits = 4, decimal_places = 2)
-    iol_power = models.DecimalField(verbose_name='IOL power', max_digits = 4, decimal_places = 2)
-
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'pk': self.patient.id})
+    k1 = models.DecimalField(max_digits=4, decimal_places=2)
+    k2 = models.DecimalField(max_digits=4, decimal_places=2)
+    axis_k1 = models.DecimalField(max_digits=4, decimal_places=1, validators=[validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+    axial_length = models.DecimalField(max_digits=4, decimal_places=2)
+    desired_refraction = models.DecimalField(max_digits=4, decimal_places=2)
+    predicted_refraction = models.DecimalField(max_digits=4, decimal_places=2)
+    iol_power = models.DecimalField(verbose_name='IOL power', max_digits=4, decimal_places=2)
 
     def __unicode__(self):
         return str(self.patient)
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.patient.id})
+
     def left_va_readings(self):
-        return self.preopassessmentvisualacuityreading_set.filter(eye__name = "Left")
+        return self.preopassessmentvisualacuityreading_set.filter(eye__name="Left")
 
     def right_va_readings(self):
-        return self.preopassessmentvisualacuityreading_set.filter(eye__name = "Right")
+        return self.preopassessmentvisualacuityreading_set.filter(eye__name="Right")
 
 
 class PreOpAssessmentVisualAcuityReading(models.Model):
@@ -241,13 +259,14 @@ class PreOpAssessmentVisualAcuityReading(models.Model):
     eye = models.ForeignKey(Eye)
     scale = models.ForeignKey(VisualAcuityScale)
     correction = models.ForeignKey(VisualAcuityCorrection)
-    value = models.DecimalField(max_digits = 3, decimal_places = 2)
+    value = models.DecimalField(max_digits=3, decimal_places=2)
 
     def __unicode__(self):
         return str(self.pk)
 
+
 class OpNote(models.Model):
-    patient = models.ForeignKey(Patient, unique = True)
+    patient = models.ForeignKey(Patient, unique=True)
 
     date = models.DateField(default=datetime.date.today)
     age = models.PositiveIntegerField()
@@ -269,57 +288,56 @@ class OpNote(models.Model):
     additional_procedures = models.ManyToManyField(AdditionalProcedure)
     complications = models.ManyToManyField(Complication)
 
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'pk': self.patient.id})
-
     def __unicode__(self):
         return str(self.pk)
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.patient.id})
 
 
 class FollowUp(models.Model):
-    patient = models.ForeignKey(Patient, unique = True)
-
+    patient = models.ForeignKey(Patient, unique=True)
     date = models.DateField(default=datetime.date.today)
-
     complications = models.ManyToManyField(PostOpComplication)
-
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'pk': self.patient.id})
 
     def __unicode__(self):
         return str(self.pk)
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.patient.id})
+
     def left_va_readings(self):
-        return self.followupvisualacuityreading_set.filter(eye__name = "Left")
+        return self.followupvisualacuityreading_set.filter(eye__name="Left")
 
     def right_va_readings(self):
-        return self.followupvisualacuityreading_set.filter(eye__name = "Right")
+        return self.followupvisualacuityreading_set.filter(eye__name="Right")
 
     def left_refraction(self):
-        return self.followuprefraction_set.get(eye__name = "Left")
+        return self.followuprefraction_set.get(eye__name="Left")
 
     def right_refraction(self):
-        return self.followuprefraction_set.get(eye__name = "Right")
+        return self.followuprefraction_set.get(eye__name="Right")
+
 
 class FollowUpVisualAcuityReading(models.Model):
     followup = models.ForeignKey(FollowUp)
     eye = models.ForeignKey(Eye)
     scale = models.ForeignKey(VisualAcuityScale)
     correction = models.ForeignKey(VisualAcuityCorrection)
-    value = models.DecimalField(max_digits = 3, decimal_places = 2)
+    value = models.DecimalField(max_digits=3, decimal_places=2)
 
     def __unicode__(self):
         return str(self.pk)
 
-class FollowUpRefraction(models.Model):
-    class Meta:
-        unique_together = ("followup", "eye")
 
+class FollowUpRefraction(models.Model):
     followup = models.ForeignKey(FollowUp)
     eye = models.ForeignKey(Eye)
-
     eyedraw = EyedrawField()
     type = models.ForeignKey(RefractionType)
-    sphere = models.DecimalField(max_digits = 4, decimal_places = 2)
-    cylinder = models.DecimalField(max_digits = 4, decimal_places = 2)
-    axis = models.DecimalField(max_digits = 4, decimal_places = 1, default = 0, validators = [validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+    sphere = models.DecimalField(max_digits=4, decimal_places=2)
+    cylinder = models.DecimalField(max_digits=4, decimal_places=2)
+    axis = models.DecimalField(max_digits=4, decimal_places=1, default=0, validators=[validators.MinValueValidator(0.5), validators.MaxValueValidator(180)])
+
+    class Meta:
+        unique_together = ("followup", "eye")

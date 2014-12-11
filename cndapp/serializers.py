@@ -1,6 +1,6 @@
 from django.forms import widgets
 from rest_framework import serializers
-from .models import Patient, PreOpAssessment, OpNote, Gender, Eye
+from .models import Patient, PreOpAssessment, OpNote, Gender, Eye, FollowUp
 
 
 class PatientSerializer(serializers.HyperlinkedModelSerializer):
@@ -40,6 +40,16 @@ class OpNoteSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'patient', 'date', 'age', 'anaesthetic', 'surgeon_grade', 'first_eye', 'primary_reason', 'lens_inserted',
                     #'eyedraw',
                     'difficulty_factors', 'iol_position', 'additional_procedures', 'complications')
+
+
+class FollowUpSerializer(serializers.HyperlinkedRelatedField):
+    patient = serializers.HyperlinkedRelatedField(view_name='patient-detail')
+    complications = serializers.SlugRelatedField(read_only=False, many=True, slug_field='name')
+
+    class Meta:
+        model = FollowUp
+        fields = ('url', 'patient', 'date', 'complications')
+
 
 
 class GenderSerializer(serializers.HyperlinkedModelSerializer):

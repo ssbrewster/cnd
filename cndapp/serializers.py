@@ -42,14 +42,13 @@ class OpNoteSerializer(serializers.HyperlinkedModelSerializer):
                     'difficulty_factors', 'iol_position', 'additional_procedures', 'complications')
 
 
-class FollowUpSerializer(serializers.HyperlinkedRelatedField):
+class FollowUpSerializer(serializers.HyperlinkedModelSerializer):
     patient = serializers.HyperlinkedRelatedField(view_name='patient-detail')
     complications = serializers.SlugRelatedField(read_only=False, many=True, slug_field='name')
 
     class Meta:
         model = FollowUp
         fields = ('url', 'patient', 'date', 'complications')
-
 
 
 class GenderSerializer(serializers.HyperlinkedModelSerializer):

@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework import generics
 from cndapp.forms import *
 from .models import  Patient, PreOpAssessment, OpNote, FollowUp,  Eye
-from .serializers import PatientSerializer, PreOpAssessmentSerializer, OpNoteSerializer
+from .serializers import PatientSerializer, PreOpAssessmentSerializer, OpNoteSerializer, FollowUpSerializer
 
 
 
@@ -66,68 +66,12 @@ class OpNoteViewSet(viewsets.ModelViewSet):
     serializer_class = OpNoteSerializer
 
 
-class FollowUpCreateView(CreateView):
-    model = FollowUp
-    form_class = FollowUpForm
-
-    def get(self, request, *args, **kwargs):
-        """
-        Handles GET requests and instantiates blank versions of the form
-        and its inline formsets.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        va_form = FollowUpVisualAcuityReadingFormSet()
-        refr_form_r = FollowUpRefractionForm(initial = {'eye': Eye.objects.get(name = 'Right')}, prefix = 'r')
-        refr_form_l = FollowUpRefractionForm(initial = {'eye': Eye.objects.get(name = 'Left')}, prefix = 'l')
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form, va_form=va_form, refr_form_r = refr_form_r, refr_form_l = refr_form_l))
-
-    def post(self, request, *args, **kwargs):
-        """
-        Handles POST requests, instantiating a form instance and its inline
-        formsets with the passed POST variables and then checking them for
-        validity.
-        """
-        self.patient = get_object_or_404(Patient, pk=self.kwargs['patient'])
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        va_form = FollowUpVisualAcuityReadingFormSet(self.request.POST)
-        refr_form_r = FollowUpRefractionForm(self.request.POST, initial = {'eye': Eye.objects.get(name = 'Right')}, prefix = 'r')
-        refr_form_l = FollowUpRefractionForm(self.request.POST, initial = {'eye': Eye.objects.get(name = 'Left')}, prefix = 'l')
-
-        if (form.is_valid() and va_form.is_valid() and refr_form_r.is_valid() and refr_form_l.is_valid()):
-            return self.form_valid(form, va_form, [refr_form_r, refr_form_l])
-        else:
-            return self.form_invalid(form, va_form, refr_form_r, refr_form_l)
-
-    def form_valid(self, form, va_form, refr_forms):
-        """
-        Called if all forms are valid. Creates a Recipe instance along with
-        associated Ingredients and Instructions and then redirects to a
-        success page.
-        """
-        form.instance.patient = self.patient
-        self.object = form.save()
-        va_form.instance = self.object
-        va_form.save()
-        for refr_form in refr_forms:
-            refr_form.instance.followup = self.object
-            refr_form.save()
-        return HttpResponseRedirect(self.get_success_url())
-
-    def form_invalid(self, form, va_form, refr_form_r, refr_form_l):
-        """
-        Called if a form is invalid. Re-renders the context data with the
-        data-filled forms and errors.
-        """
-        print refr_form_r.errors
-        print refr_form_l.errors
-        return self.render_to_response(
-            self.get_context_data(patient=self.patient, form=form, va_form=va_form, refr_form_r = refr_form_r, refr_form_l = refr_form_l))
+class FollowUpViewSet(viewsets.ModelViewSet):
+    """
+    This endpoint represents the follow-ups in the database.
+    """
+    queryset = FollowUp.objects.all()
+    serializer_class = FollowUpSerializer
 
 
 class PatientByGenderList(generics.ListAPIView):

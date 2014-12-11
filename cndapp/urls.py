@@ -8,6 +8,7 @@ router = DefaultRouter()
 router.register(r'patients', views.PatientViewSet)
 router.register(r'preopassements', views.PreOpAssessmentViewSet)
 router.register(r'opnotes', views.OpNoteViewSet)
+router.register(r'follow-up', views.FollowUpViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
